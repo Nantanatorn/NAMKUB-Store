@@ -1,7 +1,7 @@
 
 
 .form-container {
-    background-image:url(/FontEnd/NamKUB-Store/public/login.jpg) ;
+    background-color: rgb(36, 71, 145);
     background-size: auto;
     display: flex;
     align-items: center;
