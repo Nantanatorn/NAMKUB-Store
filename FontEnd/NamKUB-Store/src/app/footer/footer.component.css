@@ -1,0 +1,10 @@
+.footer {
+    background-color: #AFD5F0;
+    background-size: cover;
+}
+.footer li{
+    list-style-type: none;
+}
+.footer .row .col-3 .content ul li:hover{
+    color: #fff;
+}
