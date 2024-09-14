@@ -1,15 +1,18 @@
 <div class="form-container">
-    <form action="" method="post" enctype="multipart/form-data" class="login">
+    <form (submit)="onLogin()">
         <h1 style="text-align: center">Login</h1>
         <div class="input-field">
             
-            <input type="email" name="email" placeholder="@email" maxlength="50" required class="box">
+            <input type="text" id="username" name="username" placeholder="@username" [(ngModel)]="username" maxlength="50" required class="box">
         </div>
 
         <div class="input-field">
             
-            <input type="password" name="pass" placeholder="@password" maxlength="50" required class="box">
+            <input type="password" id="password" [(ngModel)]="password" placeholder="@password" maxlength="50" required class="box">
         </div> 
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
         <button type="submit" class="btn" style="background-color:#6fb9fa;border-radius: 50px; color: #fff;">Login</button>
         <hr >
         <p style="text-align: center">or login with...</p>
