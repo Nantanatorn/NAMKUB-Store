@@ -3,24 +3,32 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UserLoginComponent } from './User/user-login/user-login.component';
-import { UserRegComponent } from './User/user-reg/user-reg.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
-import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderUserComponent } from './header-user/header-user.component';
+
+import { AppComponent } from './app.component';
+import { AboutUsComponent } from './UserSite/about-us/about-us.component';
+import { ContactComponent } from './UserSite/contact/contact.component';
+import { FooterComponent } from './UserSite/footer/footer.component';
+import { HeaderUserComponent } from './UserSite/header-user/header-user.component';
+import { HomeComponent } from './UserSite/home/home.component';
+import { ProductComponent } from './UserSite/product/product.component';
+import { UserLoginComponent } from './UserSite/user-login/user-login.component';
+import { UserRegComponent } from './UserSite/user-reg/user-reg.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
     UserRegComponent,
-    AdminLoginComponent,
-    HomeComponent,
+    AboutUsComponent,
+    ProductComponent,
+    ContactComponent,
     FooterComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    HomeComponent
+
   ],
   imports: [
     BrowserModule,

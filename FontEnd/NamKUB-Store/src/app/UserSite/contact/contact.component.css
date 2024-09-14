@@ -1,0 +1,20 @@
+.bi-facebook {
+    color: #3b5998;
+  }
+  
+  .bi-instagram {
+    color: #e4405f;
+  }
+  
+  .bi-line {
+    color: #00b900;
+  }
+  
+  .bi-twitter {
+    color: #1da1f2;
+  }
+  
+  .social-icons i:hover {
+    opacity: 0.7;
+  }
+  
