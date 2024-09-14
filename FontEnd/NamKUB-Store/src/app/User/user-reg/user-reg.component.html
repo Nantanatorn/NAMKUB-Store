@@ -1,36 +1,43 @@
-<div class="form-container">
-    <form action="" method="post" enctype="multipart/form-data" class="login">
-     <h1 style="text-align: center">Register</h1>
-        <div class="input-field">
-            
-            <input type="text" name="Firstname" placeholder="Firstname" maxlength="50" required class="box">&nbsp;
-            <input type="text" name="Lastname" placeholder="Lastname" maxlength="50" required class="box">
-        </div>
-
-        <div class="input-field">
-            <input type="int" name="phone number" placeholder="your phone" maxlength="10" required class="box" style="width: 500px;">&nbsp;
-            
-        </div>
-        <div class="input-field">
-            <input type="email" name="email" placeholder="@email" maxlength="50" required class="box" style="width: 500px;">
-        </div>
-        <div class="input-field">
-            <input type="password" name="email" placeholder="@password" maxlength="50" required class="box"style="width: 500px;">
-        </div>
-        <div class="input-field">
-            <input type="password" name="cpass" placeholder="@confirm password" maxlength="50" required class="box"style="width: 500px;">
-        </div>
-        <button type="submit" class="btn" style="color:#fff;background-color:#6fb9fa;border-radius: 50px;">Register</button>
-       <a routerLink=''>Already have account? sign in </a>
-        <hr>
-
-        <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com%3Fhl%3Dth&ec=GAlA8wE&hl=th&flowName=GlifWebSignIn&flowEntry=AddSession&dsh=S757724325%3A1725108461935861&ddm=0" target="_blank">
-            <button type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;width: 500px;"><i class="bi bi-google" style="margin-right: 10px;"></i>Google</button><br>
-        </a>
-        <a href="https://www.facebook.com" target="_blank">
-            <button type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;width: 500px;"><i class="bi bi-facebook" style="color: blue;margin-right: 10px;" ></i>Facebook</button><br>
-        </a>
-        <button routerLink="/adminreg" type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;width: 500px;">Admin</button>
-    </form>
-</div>
-
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login">
+    <h1 style="text-align: center">Register</h1>
+    
+    <div class="input-field">
+      <input formControlName="firstname" placeholder="Firstname" maxlength="50" required class="box" />
+      <input formControlName="lastname" placeholder="Lastname" maxlength="50" required class="box" />
+    </div>
+  
+    <div class="input-field">
+      <input formControlName="phone" placeholder="Your phone" maxlength="10" required class="box" style="width: 500px;" />
+    </div>
+    
+    <div class="input-field">
+      <input type="email" formControlName="email" placeholder="Email" maxlength="50" required class="box" style="width: 500px;" />
+    </div>
+    
+    <div class="input-field">
+      <input type="password" formControlName="password" placeholder="Password" maxlength="50" required class="box" style="width: 500px;" />
+    </div>
+    
+    <div class="input-field">
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" maxlength="50" required class="box" style="width: 500px;" />
+    </div>
+  
+    <button type="submit" class="btn" style="color:#fff; background-color:#6fb9fa; border-radius: 50px;">Register</button>
+    
+    <a routerLink='/login'>Already have an account? Sign in</a>
+    <hr>
+  
+    <a href="https://accounts.google.com/v3/signin/identifier" target="_blank">
+      <button type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">
+        <i class="bi bi-google" style="margin-right: 10px;"></i> Google
+      </button><br>
+    </a>
+  
+    <a href="https://www.facebook.com" target="_blank">
+      <button type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">
+        <i class="bi bi-facebook" style="color: blue; margin-right: 10px;"></i> Facebook
+      </button><br>
+    </a>
+  
+    <button routerLink="/adminreg" type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">Admin</button>
+  </form>
