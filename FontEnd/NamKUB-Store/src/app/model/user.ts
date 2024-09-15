@@ -1,4 +1,4 @@
-export class User {
+export interface User {
     fname? : string ;
     lname? : string;
     phone? : string;

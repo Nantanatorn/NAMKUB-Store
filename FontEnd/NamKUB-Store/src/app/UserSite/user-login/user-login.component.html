@@ -1,30 +1,67 @@
 <div class="form-container">
-    <form (submit)="onLogin()">
-        <h1 style="text-align: center">Login</h1>
-        <div class="input-field">
-            
-            <input class="box"  maxlength="50" placeholder="@username" type="text" id="username" [(ngModel)]="username" name="username" required >
-        </div>
-      
-        <div class="input-field">
-            
-            <input class="box" placeholder="@password" maxlength="50" type="password" id="password" [(ngModel)]="password" name="password" required >
-        </div> 
-        <div *ngIf="errorMessage" class="error-message">
-            {{ errorMessage }}
-          </div>
-        <button type="submit" class="btn" style="background-color:#6fb9fa;border-radius: 50px; color: #fff;">Login</button>
-        <hr >
-        <p style="text-align: center">or login with...</p>
-        <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com%3Fhl%3Dth&ec=GAlA8wE&hl=th&flowName=GlifWebSignIn&flowEntry=AddSession&dsh=S757724325%3A1725108461935861&ddm=0" target="_blank">
-        <button type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;width: 500px;"><i class="bi bi-google" style="margin-right: 10px;"></i>Google</button><br>
-    </a>
-        
-        
-        <a href="https://www.facebook.com" target="_blank">
-        <button type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;width: 500px;"><i class="bi bi-facebook" style="color: blue;margin-right: 10px;" ></i>Facebook</button><br>
-    </a>
-        <button routerLink="/register"  type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;" >Register</button>&nbsp;
-        <button type="button" style="background-color: #fff ;border-radius: 50px; height: 30px;">Admin</button>
+    <form (ngSubmit)="onLogin()">
+      <h1 style="text-align: center">Login</h1>
+      <div class="input-field">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="@username"
+          [(ngModel)]="username"
+          maxlength="50"
+          required
+          class="box"
+        />
+      </div>
+  
+      <div class="input-field">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="@password"
+          maxlength="50"
+          [(ngModel)]="password"
+          required
+          class="box"
+        />
+      </div> 
+  
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  
+      <button
+        type="submit"
+        class="btn"
+        style="background-color:#6fb9fa;border-radius: 50px; color: #fff;"
+      >
+        Login
+      </button>
+      <hr>
+      <p style="text-align: center">or login with...</p>
+      <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com%3Fhl%3Dth&ec=GAlA8wE&hl=th&flowName=GlifWebSignIn&flowEntry=AddSession&dsh=S757724325%3A1725108461935861&ddm=0" target="_blank">
+        <button
+          type="button"
+          style="background-color: #fff; border-radius: 50px; height: 30px;width: 500px;"
+        >
+          <i class="bi bi-google" style="margin-right: 10px;"></i>Google
+        </button><br>
+      </a>
+      <a href="https://www.facebook.com" target="_blank">
+        <button
+          type="button"
+          style="background-color: #fff; border-radius: 50px; height: 30px;width: 500px;"
+        >
+          <i class="bi bi-facebook" style="color: blue;margin-right: 10px;"></i>Facebook
+        </button><br>
+      </a>
+      <button routerLink="/register" type="button" style="background-color: #fff; border-radius: 50px; height: 30px;">
+        Register
+      </button>&nbsp;
+      <button type="button" style="background-color: #fff; border-radius: 50px; height: 30px;">
+        Admin
+      </button>
     </form>
-</div>
+  </div>
+  

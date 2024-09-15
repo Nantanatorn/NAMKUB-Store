@@ -1,0 +1,50 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-5 ps-5">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Cart</li>
+    </ol>
+</nav>
+
+<h2 class="hed2">รายละเอียดคำสั่งซื้อ</h2>
+
+<div class="container mt-4 mb-5">
+    <!-- ใช้ Flexbox เพื่อจัดให้อยู่ในบรรทัดเดียวกัน -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="selectAllBtn">
+            <label class="form-check-label" for="selectAllBtn" style="font-size: 20px;">
+                เลือกสินค้าทั้งหมด
+            </label>
+        </div>
+        <h5>สินค้า 1 ชิ้นในรถเข็น</h5>
+    </div>
+
+<div class="row ">
+    <div class="col-3">
+        <p>สินค้า</p>
+    </div>
+    <div class="col-3">
+        <p>ราคาต่อแพ็ค (บาท)</p>
+    </div>
+    <div class="col-3">
+        <p>จำนวน</p>
+    </div>
+    <div class="col-3">
+        <p>ราคารวม (บาท) </p>
+    </div>
+    <hr>
+</div>
+
+<!--ต้องเชื่อมกับ database Cart-->
+</div>
+
+<script>
+    // ฟังก์ชันสำหรับเลือกสินค้าทั้งหมด
+    document.getElementById('selectAllBtn').addEventListener('click', function() {
+        var checkboxes = document.querySelectorAll('.product-checkbox');
+        var isChecked = this.checked; // เช็คว่าปุ่มถูกเลือกหรือไม่
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = isChecked; // เลือกหรือยกเลิกการเลือกสินค้าทั้งหมด
+        });
+    });
+</script>

@@ -26,13 +26,13 @@ export class UserLoginComponent {
       .subscribe({
         next: (response) => {
           console.log(response.message);
-          this.router.navigate(['/']); // Navigate to the home page after successful login
+          this.router.navigate(['/home']); // Navigate to the home page after successful login
         },
         error: (error) => {
           if (error.status === 401) {
             this.errorMessage = 'Invalid username or password';
           } else {
-            this.errorMessage = 'Server error';
+            this.errorMessage = 'Server errorrrrrrrrrr';
           }
         }
       });
