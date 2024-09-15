@@ -14,8 +14,22 @@ import { ProductComponent } from './UserSite/product/product.component';
 import { UserLoginComponent } from './UserSite/user-login/user-login.component';
 import { UserRegComponent } from './UserSite/user-reg/user-reg.component';
 import { CartComponent } from './UserSite/cart/cart.component';
-
-
+import { AdminHomeComponent } from './AdminSite/admin-home/admin-home.component';
+import { EditproductComponent } from './AdminSite/editproduct/editproduct.component';
+import { OrderComponent } from './AdminSite/order/order.component';
+import { MemberlistComponent } from './AdminSite/memberlist/memberlist.component';
+import { Singha1Component } from './UserSite/Product-details/singha1/singha1.component';
+import { Singha2Component } from './UserSite/Product-details/singha2/singha2.component';
+import { Singha3Component } from './UserSite/Product-details/singha3/singha3.component';
+import { Crystal1Component } from './UserSite/Product-details/crystal1/crystal1.component';
+import { Crystal2Component } from './UserSite/Product-details/crystal2/crystal2.component';
+import { Crystal3Component } from './UserSite/Product-details/crystal3/crystal3.component';
+import { Nestle1Component } from './UserSite/Product-details/nestle1/nestle1.component';
+import { Nestle2Component } from './UserSite/Product-details/nestle2/nestle2.component';
+import { Nestle3Component } from './UserSite/Product-details/nestle3/nestle3.component';
+import { Minere1Component } from './UserSite/Product-details/minere1/minere1.component';
+import { Minere2Component } from './UserSite/Product-details/minere2/minere2.component';
+import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +42,23 @@ import { CartComponent } from './UserSite/cart/cart.component';
     FooterComponent,
     HeaderUserComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    AdminHomeComponent,
+    EditproductComponent,
+    OrderComponent,
+    MemberlistComponent,
+    Singha1Component,
+    Singha2Component,
+    Singha3Component,
+    Crystal1Component,
+    Crystal2Component,
+    Crystal3Component,
+    Nestle1Component,
+    Nestle2Component,
+    Nestle3Component,
+    Minere1Component,
+    Minere2Component,
+    ProductBoxComponent,
 
   ],
   imports: [

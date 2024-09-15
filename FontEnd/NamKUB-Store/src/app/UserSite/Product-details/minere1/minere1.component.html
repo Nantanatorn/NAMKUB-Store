@@ -1,0 +1,55 @@
+<div class="container mt-4">
+    <div class="container ml-4">
+        <router-outlet></router-outlet>
+
+        <div class="container mt-4" style="margin-bottom: 100px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card text-center">
+                        <img src="/มิเนเร่500มล.png" class="card-img-top" alt="Product 1" style="width: 550px; height: 500px;">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center" style="position: absolute; top: 30%; right: 16%; ">น้ำดื่มธรรมชาติมิเนเร่ 350 มล.<br>(แพ็ค 12+3 ขวด) 100 บาท</h2>
+
+                    <div class="quantity-container" style="position: absolute; top: 50%; right: 25%;">
+                        <h3 style="position: absolute; top: 2%; right: 150%;">จำนวน</h3>
+                        <button 
+                          class="quantity-btn" 
+                          [disabled]="quantity <= 1" 
+                          (click)="decrease()">-</button>
+                        
+                        <input 
+                          class="quantity-input" 
+                          type="number" 
+                          [value]="quantity" 
+                          (input)="onInputChange($event)">
+                        
+                        <button 
+                          class="quantity-btn" 
+                          [disabled]="quantity >= maxQuantity" 
+                          (click)="increase()">+</button>
+                      </div>
+                      <a href="#" class="btn btn-primary" style="position: absolute; top: 60%; right: 26%;">เพิ่มตะกร้า</a>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4" style="margin-bottom: 100px;">
+        <h2>สินค้าใกล้เคียง</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <img src="/มิเนเร่1500มล.png" class="card-img-top" alt="Product 1">
+                    <div class="card-body-sm">
+                        <p class="card-text">น้ำดื่มธรรมชาติมิเนเร่ 1500 มล.(แพ็ค 6+2 ขวด) 100 บาท</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="padding-bottom: 50px;">

@@ -1,9 +1,11 @@
-// config.js
+require('dotenv').config();
+
+
 const config = {
-    user: 'sa',
-    password: '12345678',
-    server: '127.0.0.1', 
-    database: 'testlogin',
+    user: process.env.DBuser,
+    password: process.env.DBpassword,
+    server: process.env.DBserver, 
+    database: process.env.databaseName,
     synchronize: true,
     options: {
         encrypt: false, 
