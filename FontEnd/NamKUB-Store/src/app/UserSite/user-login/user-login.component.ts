@@ -32,7 +32,7 @@ export class UserLoginComponent {
           if (error.status === 401) {
             this.errorMessage = 'Invalid username or password';
           } else {
-            this.errorMessage = 'Server error';
+            this.errorMessage = 'Server errorrrrrrrrrr';
           }
         }
       });

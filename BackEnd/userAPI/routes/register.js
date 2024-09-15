@@ -6,10 +6,10 @@ const config = require('../config'); // Referring to your config.js
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-    const { firstname, lastname, email, password, confirmPassword, phone } = req.body;
+    const { firstname, lastname, username,email, password, confirmPassword, phone } = req.body;
 
     // Simple validation
-    if (!firstname || !lastname || !email || !password || !confirmPassword || !phone) {
+    if (!firstname || !lastname || !username||!email || !password || !confirmPassword || !phone) {
         return res.status(400).json({ message: 'Please provide all required fields.' });
     }
 
@@ -36,10 +36,11 @@ router.post('/register', async (req, res) => {
         await pool.request()
             .input('firstname', sql.VarChar, firstname)
             .input('lastname', sql.VarChar, lastname)
+            .input('username', sql.VarChar,username)
             .input('email', sql.VarChar, email)
             .input('password', sql.VarChar, hashedPassword) // Store hashed password
             .input('phone', sql.VarChar, phone)
-            .query('INSERT INTO Users (firstname, lastname, email, password, phone) VALUES (@firstname, @lastname, @email, @password, @phone)');
+            .query('INSERT INTO Users (firstname, lastname, username, email, password, phone) VALUES (@firstname, @lastname, @username, @email, @password, @phone)');
 
         res.status(201).json({ message: 'User registered successfully.' });
     } catch (error) {
