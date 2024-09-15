@@ -8,3 +8,10 @@
 .footer .row .col-3 .content ul li:hover{
     color: #fff;
 }
+.footer a{
+    text-decoration: none;
+    color: black;
+}
+.footer .custom-icon{
+    color: rgb(0, 0, 0);
+}

@@ -1,17 +1,17 @@
-// config.js
+require('dotenv').config();
+
 const config = {
-    user: 'sa',
-    password: '12345678',
-    server: '127.0.0.1', 
-    database: 'testlogin',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER, 
+    database: process.env.DB_NAME,
     synchronize: true,
     options: {
         encrypt: false, 
         trustServerCertificate: true,
         enableArithAbort: true
     },
-    port: 1433, 
+    port: parseInt(process.env.DB_PORT, 10),
 };
-
 
 module.exports = config;

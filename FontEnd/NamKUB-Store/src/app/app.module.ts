@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,6 +17,7 @@ import { HomeComponent } from './UserSite/home/home.component';
 import { ProductComponent } from './UserSite/product/product.component';
 import { UserLoginComponent } from './UserSite/user-login/user-login.component';
 import { UserRegComponent } from './UserSite/user-reg/user-reg.component';
+import { CartComponent } from './UserSite/cart/cart.component';
 
 
 
@@ -27,7 +31,8 @@ import { UserRegComponent } from './UserSite/user-reg/user-reg.component';
     ContactComponent,
     FooterComponent,
     HeaderUserComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
 
   ],
   imports: [
