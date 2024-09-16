@@ -22,10 +22,13 @@ export class UserLoginComponent {
 
     const loginData = { username: this.username, password: this.password };
 
-    this.http.post<{ message: string }>('http://localhost:3000/api/login', loginData)
+    this.http.post<{ message: string }>('http://localhost:3000/login', loginData)
       .subscribe({
         next: (response) => {
-          
+          console.log('API Response:',response);
+         // if(reaponse.token){
+
+          //}
           console.log(response.message);
           this.router.navigate(['/home']); // Navigate to the home page after successful login
         },

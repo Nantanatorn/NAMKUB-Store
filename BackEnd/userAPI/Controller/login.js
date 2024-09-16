@@ -11,13 +11,14 @@ module.exports.loginUser = async(req,res)=>{
     try {
         // Query to check if user exists with the given username and password
         const result = await pool.request()
-        .input('username', sql.VarChar, username)
-        .query('SELECT * FROM Users WHERE username = @username');
+
+        .input('username', sql.VarChar, username)//bind username
+        .query('SELECT * FROM Users WHERE username = @username'); //query
+
         if (result.recordset.length === 0) {
             // Username not found
             return res.status(401).json({ message: 'Invalid username or password' });
         }
-
         if (result.recordset.length > 0) {
             const user = result.recordset[0];
             const storedHashedPassword = user.password;
