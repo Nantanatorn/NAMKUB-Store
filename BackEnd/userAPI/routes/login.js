@@ -3,6 +3,7 @@ const config = require("../config");
 const sql = require("mssql");
 const router = express.Router();
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 //http://localhost:3000/api/login
 router.post('/login', async (req, res) => {

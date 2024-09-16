@@ -2,6 +2,7 @@ const express = require('express');
 const sql = require('mssql');
 const bcrypt = require('bcrypt');
 const config = require('../config'); // Referring to your config.js
+require('dotenv').config();
 
 const router = express.Router();
 
