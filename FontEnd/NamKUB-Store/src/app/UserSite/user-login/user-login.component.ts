@@ -25,6 +25,7 @@ export class UserLoginComponent {
     this.http.post<{ message: string }>('http://localhost:3000/api/login', loginData)
       .subscribe({
         next: (response) => {
+          
           console.log(response.message);
           this.router.navigate(['/home']); // Navigate to the home page after successful login
         },

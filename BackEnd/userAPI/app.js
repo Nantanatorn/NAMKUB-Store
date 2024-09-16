@@ -9,6 +9,7 @@ const loginroute = require('./routes/login');
 const registerroute =require('./routes/register');
 const productsRoute = require('./routes/product');
 
+const testroute= require('./routes/test')
 
 app.use(cors());
 app.use(express.json());
@@ -20,7 +21,7 @@ const port = 3000;
 app.use('/', loginroute);
 app.use('/',registerroute);
 app.use('/', productsRoute);
-
+app.use('/',testroute);
 
 async function connectToDatabase() {
     try{
