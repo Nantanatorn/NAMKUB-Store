@@ -30,16 +30,16 @@ export class UserRegComponent {  // Make sure the class name matches the import
         return;
       }
 
-      this.authService.register(formValues).subscribe(
-        response => {
-          alert('Registration successful.');
-          // Handle success (e.g., redirect to login page)
-        },
-        error => {
-          alert('Registration failed: ' + error.message);
-          // Handle error
-        }
-      );
+      // this.authService.register(formValues).subscribe(
+      //   response => {
+      //     alert('Registration successful.');
+      //     // Handle success (e.g., redirect to login page)
+      //   },
+      //   error => {
+      //     alert('Registration failed: ' + error.message);
+      //     // Handle error
+      //   }
+      // );
     }
   }
 }

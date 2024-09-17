@@ -24,17 +24,18 @@ import { Nestle3Component } from './UserSite/Product-details/nestle3/nestle3.com
 import { Minere1Component } from './UserSite/Product-details/minere1/minere1.component';
 import { Minere2Component } from './UserSite/Product-details/minere2/minere2.component';
 import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},
   {path: 'AdminRegister',component: AdminLoginComponent},
-  {path: 'home',component:HomeComponent},
+  {path: 'home',component:HomeComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
   {path: 'products',component:ProductComponent},
   {path: 'contact',component:ContactComponent},
-  {path: 'about-us',component:AboutUsComponent},
-  {path: 'home',component:HomeComponent},
+  {path: 'about-us',component:AboutUsComponent, canActivate: [AuthGuard]},
+//{path: 'home',component:HomeComponent},
   {path: 'cart',component:CartComponent},
   {path: 'AdminHome',component:AdminHomeComponent},
   {path: 'order',component:OrderComponent},
