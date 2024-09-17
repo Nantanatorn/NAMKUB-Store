@@ -48,7 +48,7 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบแล้วหรือยัง
+    // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบยัง
     if (this.authService.isAuthenticated()) {
       const requiredRoles: string[] = route.data['roles'] || []; // รับ roles ที่จำเป็นจาก route
 

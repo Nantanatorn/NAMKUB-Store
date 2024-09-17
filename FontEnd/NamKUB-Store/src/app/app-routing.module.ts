@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from './AdminSite/admin-login/admin-login.component';
+
 import { AboutUsComponent } from './UserSite/about-us/about-us.component';
 import { ContactComponent } from './UserSite/contact/contact.component';
 import { HomeComponent } from './UserSite/home/home.component';
@@ -25,17 +26,19 @@ import { Minere1Component } from './UserSite/Product-details/minere1/minere1.com
 import { Minere2Component } from './UserSite/Product-details/minere2/minere2.component';
 import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
 import { AuthGuard } from './auth.guard';
+import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 
 
+//http://localhost:4200/AdminRegister
 const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},
-  {path: 'AdminRegister',component: AdminLoginComponent},
+  //{path: 'AdminRegister',component: AdminLoginComponent},
   {path: 'home',component:HomeComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
   {path: 'products',component:ProductComponent},
   {path: 'contact',component:ContactComponent},
   {path: 'about-us',component:AboutUsComponent, canActivate: [AuthGuard]},
-//{path: 'home',component:HomeComponent},
+  {path: 'adminRegister',component:AdminRegComponent},
   {path: 'cart',component:CartComponent},
   {path: 'AdminHome',component:AdminHomeComponent},
   {path: 'order',component:OrderComponent},

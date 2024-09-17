@@ -7,9 +7,9 @@ const jwt = require('jsonwebtoken');
 
 
 
-module.exports.enrollment=async (req, res) => {
+module.exports.deliver_enrollment=async (req, res) => {
     const { firstname, lastname, username,email, password, confirmPassword, phone } = req.body;
-    const defaultRole ='customer';
+    const defaultRole ='Deliver';
     // Simple validation
     if (!firstname || !lastname || !username||!email || !password || !confirmPassword || !phone) {
         return res.status(400).json({ message: 'Please provide all required fields.' });
@@ -45,7 +45,7 @@ module.exports.enrollment=async (req, res) => {
             .input('role',sql.VarChar,defaultRole)
             .query('INSERT INTO Users (firstname, lastname, username, email, password, phone,role) VALUES (@firstname, @lastname, @username, @email, @password, @phone,@role)');
 
-        res.status(201).json({ message: 'User registered successfully.' });
+        res.status(201).json({ message: 'Deliver registered successfully.' });
     } catch (error) {
         console.error('Error during registration:', error);
         res.status(500).json({ message: 'Server error, please try again later.' });

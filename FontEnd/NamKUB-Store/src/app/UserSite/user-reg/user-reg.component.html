@@ -1,43 +1,47 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login">
+<div class="form-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login">
     <h1 style="text-align: center">Register</h1>
-    
+
     <div class="input-field">
       <input formControlName="firstname" placeholder="Firstname" maxlength="50" required class="box" />
       <input formControlName="lastname" placeholder="Lastname" maxlength="50" required class="box" />
     </div>
-  
+
     <div class="input-field">
       <input formControlName="phone" placeholder="Your phone" maxlength="10" required class="box" style="width: 500px;" />
     </div>
-    
+    <div class="input-field">
+      <input type="text" formControlName="username" placeholder="Username" maxlength="50" required class="box" style="width: 500px;" />
+    </div>
     <div class="input-field">
       <input type="email" formControlName="email" placeholder="Email" maxlength="50" required class="box" style="width: 500px;" />
     </div>
-    
+
     <div class="input-field">
       <input type="password" formControlName="password" placeholder="Password" maxlength="50" required class="box" style="width: 500px;" />
     </div>
-    
+
     <div class="input-field">
       <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" maxlength="50" required class="box" style="width: 500px;" />
     </div>
-  
+
     <button type="submit" class="btn" style="color:#fff; background-color:#6fb9fa; border-radius: 50px;">Register</button>
-    
+
     <a routerLink='/login'>Already have an account? Sign in</a>
     <hr>
-  
-    <a href="https://accounts.google.com/v3/signin/identifier" target="_blank">
+
+    <!-- <a href="https://accounts.google.com/v3/signin/identifier" target="_blank">
       <button type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">
         <i class="bi bi-google" style="margin-right: 10px;"></i> Google
       </button><br>
     </a>
-  
+
     <a href="https://www.facebook.com" target="_blank">
       <button type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">
         <i class="bi bi-facebook" style="color: blue; margin-right: 10px;"></i> Facebook
       </button><br>
-    </a>
-  
-    <button routerLink="/adminreg" type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">Admin</button>
+    </a> -->
+
+    <!-- <button routerLink="/adminreg" type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">Admin</button> -->
   </form>
+</div>
