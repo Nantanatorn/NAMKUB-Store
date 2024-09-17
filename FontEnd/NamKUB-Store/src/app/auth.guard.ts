@@ -54,7 +54,7 @@ export class AuthGuard implements CanActivate {
 
       // ดึง role ของผู้ใช้จาก AuthService
       const userRole = this.authService.getRole();
-
+      
       // ถ้ามีการกำหนด roles ใน route และ role ของผู้ใช้ตรงกับ roles ที่ต้องการ
       if (requiredRoles.length === 0 || (userRole && requiredRoles.includes(userRole))) {
         return true; // อนุญาตให้เข้าถึงเส้นทางนี้ได้
