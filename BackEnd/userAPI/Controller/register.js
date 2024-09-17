@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports.enrollment=async (req, res) => {
     const { firstname, lastname, username,email, password, confirmPassword, phone } = req.body;
-
+    const defaultRole ='customer';
     // Simple validation
     if (!firstname || !lastname || !username||!email || !password || !confirmPassword || !phone) {
         return res.status(400).json({ message: 'Please provide all required fields.' });
@@ -42,7 +42,8 @@ module.exports.enrollment=async (req, res) => {
             .input('email', sql.VarChar, email)
             .input('password', sql.VarChar, hashedPassword) // Store hashed password
             .input('phone', sql.VarChar, phone)
-            .query('INSERT INTO Users (firstname, lastname, username, email, password, phone) VALUES (@firstname, @lastname, @username, @email, @password, @phone)');
+            .input('role',sql.VarChar,defaultRole)
+            .query('INSERT INTO Users (firstname, lastname, username, email, password, phone,role) VALUES (@firstname, @lastname, @username, @email, @password, @phone,@role)');
 
         res.status(201).json({ message: 'User registered successfully.' });
     } catch (error) {
