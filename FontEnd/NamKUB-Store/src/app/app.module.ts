@@ -32,6 +32,7 @@ import { Minere1Component } from './UserSite/Product-details/minere1/minere1.com
 import { Minere2Component } from './UserSite/Product-details/minere2/minere2.component';
 import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
+import { NoAccessComponent } from './no-access/no-access.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
     Minere2Component,
     ProductBoxComponent,
     AdminRegComponent,
+    NoAccessComponent,
 
   ],
   imports: [

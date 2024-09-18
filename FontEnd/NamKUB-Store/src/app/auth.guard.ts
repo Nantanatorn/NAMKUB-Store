@@ -59,11 +59,11 @@ export class AuthGuard implements CanActivate {
       if (requiredRoles.length === 0 || (userRole && requiredRoles.includes(userRole))) {
         return true; // อนุญาตให้เข้าถึงเส้นทางนี้ได้
       } else {
-        this.router.navigate(['/register']); // เปลี่ยนเส้นทางไปยังหน้าที่ไม่อนุญาต
+        this.router.navigate(['/NoAccess']); // เปลี่ยนเส้นทางไปยังหน้าที่ไม่อนุญาต
         return false; // ไม่อนุญาตให้เข้าถึง
       }
     } else {
-      this.router.navigate(['/login']); // เปลี่ยนเส้นทางไปยังหน้า login ถ้าผู้ใช้ไม่ได้เข้าสู่ระบบ
+      this.router.navigate(['/']); // เปลี่ยนเส้นทางไปยังหน้า login ถ้าผู้ใช้ไม่ได้เข้าสู่ระบบ
       return false;
     }
   }
