@@ -30,6 +30,9 @@ import { Nestle3Component } from './UserSite/Product-details/nestle3/nestle3.com
 import { Minere1Component } from './UserSite/Product-details/minere1/minere1.component';
 import { Minere2Component } from './UserSite/Product-details/minere2/minere2.component';
 import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
+import { AuthService } from './auth.service';
+import { NAMKUBAPIService } from './Service/namkub-api.service';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { ProductBoxComponent } from './UserSite/product/product-box/product-box.
     Minere2Component,
     ProductBoxComponent,
 
+    
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,7 @@ import { ProductBoxComponent } from './UserSite/product/product-box/product-box.
     ReactiveFormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),AuthService,NAMKUBAPIService
   ],
   bootstrap: [AppComponent]
 })

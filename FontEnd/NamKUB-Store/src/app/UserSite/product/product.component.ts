@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product } from '../../model/product';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit{
   @Input() fullWidthMode = false;
   @Output() addToCart = new EventEmitter(); // เพิ่ม EventEmitter สำหรับ cart
   
@@ -19,7 +19,17 @@ export class ProductComponent {
     image: 'assets/คริสตัล1500.jpg' // อัปเดต path ของรูปให้ถูกต้อง
   };
 
+  private NAMKUBAPIService = inject(NAMKUBAPIService);
+
   constructor() {}
+  ngOnInit(): void {
+    this.NAMKUBAPIService.getAllProduct()
+    .subscribe({
+      next:(res)=>{
+        console.log(res);
+      }
+    })
+  }
 
   // ฟังก์ชันสำหรับเพิ่มสินค้าลงในรถเข็น
   onAddToCart(): void {
