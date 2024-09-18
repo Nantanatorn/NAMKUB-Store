@@ -40,7 +40,7 @@ const routes: Routes = [
   {path: 'about-us',component:AboutUsComponent, canActivate: [AuthGuard]},
   {path: 'adminRegister',component:AdminRegComponent},
   {path: 'cart',component:CartComponent},
-  {path: 'AdminHome',component:AdminHomeComponent},
+  {path: 'adminhome',component:AdminHomeComponent},
   {path: 'order',component:OrderComponent},
   {path: 'editproduct',component:EditproductComponent},
   {path: 'memberlist',component:MemberlistComponent},
@@ -55,7 +55,8 @@ const routes: Routes = [
   {path: 'product-details/nestle3',component:Nestle3Component},
   {path: 'product-details/minere1',component:Minere1Component},
   {path: 'product-details/minere2',component:Minere2Component},
-  {path: 'productBox',component:ProductBoxComponent}
+  {path: 'productBox',component:ProductBoxComponent},
+
 ];
 
 @NgModule({

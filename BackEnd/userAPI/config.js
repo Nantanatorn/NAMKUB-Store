@@ -7,7 +7,7 @@ const config = {
     database: process.env.DB_NAME,
     synchronize: true,
     options: {
-        encrypt: false, 
+        encrypt: true, 
         trustServerCertificate: true,
         enableArithAbort: true
     },
