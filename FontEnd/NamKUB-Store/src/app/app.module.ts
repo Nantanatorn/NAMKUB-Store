@@ -35,6 +35,7 @@ import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { AuthService } from './auth.service';
 import { NAMKUBAPIService } from './Service/namkub-api.service';
 
+import { NoAccessComponent } from './no-access/no-access.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { NAMKUBAPIService } from './Service/namkub-api.service';
     Minere2Component,
     ProductBoxComponent,
     AdminRegComponent,
+    NoAccessComponent,
 
     
   ],

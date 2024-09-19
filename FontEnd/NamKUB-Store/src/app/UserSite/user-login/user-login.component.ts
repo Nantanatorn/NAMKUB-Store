@@ -26,21 +26,6 @@ export class UserLoginComponent {
     this.http.post<{ token: string, payload: any }>('http://localhost:3000/login', loginData)
       .subscribe({
         next: (response) => {
-          // console.log('API Response:', response);
-          // if (response.token) {
-          //   localStorage.setItem('token', response.token);
-          //   localStorage.setItem('payload', JSON.stringify(response.payload));
-
-          //   // ดึง payload จาก localStorage และเข้าถึง role
-          //   const payloadString = localStorage.getItem('payload');
-          //   if (payloadString) {
-          //     const payload = JSON.parse(payloadString);
-          //     this.userRole = payload.user.role; // เข้าถึง role ของผู้ใช้
-          //     console.log('User Role:', this.userRole);
-          //   }
-          //   this.router.navigate(['/home']); // Navigate to the home page after successful login
-          // }
-          // this.router.navigate(['/about-us']);
           console.log('API Response:', response);
           if (response.token) {
             localStorage.setItem('token', response.token);
@@ -50,20 +35,26 @@ export class UserLoginComponent {
             const payloadString = localStorage.getItem('payload');
             if (payloadString) {
               const payload = JSON.parse(payloadString);
-              this.userRole = payload.user.role; // เข้าถึง role ของผู้ใช้
+              this.userRole = payload.user.role; // Access the user's role
               console.log('User Role:', this.userRole);
+
+              // Navigate based on the user's role
+              if (this.userRole === 'admin') {
+                this.router.navigate(['/AdminHome']).then(() => {
+                  // Do additional actions after navigation if needed
+                });
+              } else if (this.userRole === 'customer') {
+                this.router.navigate(['/home']).then(() => {
+                  // Do additional actions after navigation if needed
+                });
+              }
+
+              return; // End function execution after navigation
             }
-
-            // นำทางไปที่หน้า home
-            this.router.navigate(['/home']).then(() => {
-              // เมื่อการนำทางเสร็จสิ้น สามารถทำสิ่งที่ต้องการเพิ่มเติมที่นี่ถ้าต้องการ
-            });
-
-            return; // ยุติการทำงานหลังจากการนำทาง
           }
 
           // จัดการกรณีที่ไม่มี token ใน response
-          this.router.navigate(['/about-us']);
+          this.router.navigate(['/login']);
         },
         error: (error) => {
           if (error.status === 401) {
