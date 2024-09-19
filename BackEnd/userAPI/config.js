@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const config = {
-    user:'ing',
+    user:'sa',
     password:'1234',
     server:"127.0.0.1", 
     database:"BusinessProgram",

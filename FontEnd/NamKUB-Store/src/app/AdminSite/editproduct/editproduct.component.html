@@ -68,9 +68,11 @@
     
       <div class="details">
           <p><strong>ID</strong>: {{ product.Product_ID }}</p>
-          <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p>
           <p><strong>ชื่อ</strong>: {{ product.Product_Name }}</p>
+          <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p>
           <p><strong>ราคา</strong>: {{ product.Product_Price }}</p>
+       <!-- <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p> -->
+
       </div>
       <div class="edit-btn" >
           <button class ="btn btn-primary" (click)="updateProduct(product.Product_ID)" >Edit</button>
