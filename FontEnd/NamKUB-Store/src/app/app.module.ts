@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -36,6 +36,7 @@ import { AuthService } from './auth.service';
 import { NAMKUBAPIService } from './Service/namkub-api.service';
 
 import { NoAccessComponent } from './no-access/no-access.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
     ReactiveFormsModule
   ],
   providers: [
-    provideClientHydration(),AuthService,NAMKUBAPIService
+    provideClientHydration(),AuthService,NAMKUBAPIService, provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

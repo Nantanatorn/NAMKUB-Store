@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -7,13 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit{
   username: string = '';
   password: string = '';
   errorMessage: string = '';
   userRole: string | null = null; // ประกาศตัวแปร userRole
 
+  type:string = "password";
+  isText:boolean = false;
+  eyeIcon : string="bi bi-eye-slash-fill";
+  
+
   constructor(private http: HttpClient, private router: Router) { }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   onLogin(): void {
     if (!this.username || !this.password) {
@@ -64,6 +72,11 @@ export class UserLoginComponent {
           }
         }
       });
+  }
+  hideShowPass(){
+    this.isText = !this.isText;
+    this.isText ? this.eyeIcon="bi bi-eye-fill" : this.eyeIcon = "bi bi-eye-slash-fill";
+    this.isText ? this.type = "text" : this.type = "password";
   }
 }
 
