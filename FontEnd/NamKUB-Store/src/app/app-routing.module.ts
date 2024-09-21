@@ -27,6 +27,7 @@ import { Minere2Component } from './UserSite/Product-details/minere2/minere2.com
 import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
 import { AuthGuard } from './auth.guard';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
+import { NoAccessComponent } from './no-access/no-access.component';
 
 
 //http://localhost:4200/AdminRegister
@@ -34,13 +35,13 @@ const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},
   //{path: 'AdminRegister',component: AdminLoginComponent},
-  {path: 'home',component:HomeComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
+  {path: 'home',component:HomeComponent},
   {path: 'products',component:ProductComponent},
   {path: 'contact',component:ContactComponent},
-  {path: 'about-us',component:AboutUsComponent, canActivate: [AuthGuard]},
+  {path: 'about-us',component:AboutUsComponent},
   {path: 'adminRegister',component:AdminRegComponent},
   {path: 'cart',component:CartComponent},
-  {path: 'adminhome',component:AdminHomeComponent},
+  {path: 'AdminHome',component:AdminHomeComponent},
   {path: 'order',component:OrderComponent},
   {path: 'editproduct',component:EditproductComponent},
   {path: 'memberlist',component:MemberlistComponent},
@@ -56,7 +57,7 @@ const routes: Routes = [
   {path: 'product-details/minere1',component:Minere1Component},
   {path: 'product-details/minere2',component:Minere2Component},
   {path: 'productBox',component:ProductBoxComponent},
-
+  {path: 'NoAccess',component:NoAccessComponent}
 ];
 
 @NgModule({

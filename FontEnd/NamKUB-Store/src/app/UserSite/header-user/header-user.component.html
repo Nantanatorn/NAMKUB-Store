@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg d-flex justify-content-between " style="background-color: #AFD5F0;height: 80px; margin-top: 0; padding: 0.25rem 1rem;">
+<!-- <nav class="navbar navbar-expand-lg d-flex justify-content-between " style="background-color: #AFD5F0;height: 80px; margin-top: 0; padding: 0.25rem 1rem;">
     <div class="d-flex align-items-center">
       <a class="navbar-brand" routerLink="/home" style="font-size: 14px; margin-right: 1rem;">
         <img src="namkub.png" alt=" logo namkub" style="width: 150px;">
@@ -26,7 +26,42 @@
       <a class="nav-link bi bi-cart3 " routerLink="/cart" style="font-size: 20px; text-decoration: none;">&nbsp; &nbsp;</a>
     </div>  
     <div>
-      <a class="nav-link bi bi-box-arrow-right " href="#" style="font-size: 20px; text-decoration: none;">&nbsp;</a>
+      <a class="nav-link bi bi-box-arrow-right " (click)="logout()" href="/" style="font-size: 20px; text-decoration: none;">&nbsp;</a>
     </div>
 
-  </nav>
+  </nav> -->
+  <nav class="navbar navbar-expand-lg d-flex justify-content-between " style="background-color: #AFD5F0;height: 80px; margin-top: 0; padding: 0.25rem 1rem;">
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" routerLink="/home" style="font-size: 14px; margin-right: 1rem;">
+        <img src="namkub.png" alt=" logo namkub" style="width: 150px;">
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home" style="font-size: 14px; padding: 0.5rem 1rem;font-weight:bold;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" style="font-size: 14px; padding: 0.5rem 1rem;font-weight:bold;">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" style="font-size: 14px; padding: 0.5rem 1rem;font-weight:bold;">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about-us" style="font-size: 14px; padding: 0.5rem 1rem;font-weight:bold;">About Us</a>
+        </li>
+      </ul>
+    </div>
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" style="background-color:#AFD5F0;" aria-label="Search">
+        <button class="btn btn-outline-dark" type="submit" style="background-color:#AFD5F0;">Search</button>
+    </form>
+    <div class="ms-auto d-flex align-items-center">
+      <!-- Display Username -->
+      <span *ngIf="username" class="nav-link" style="font-size: 16px; margin-right: 1rem;">
+        {{ username }}
+      </span>
+      <a class="nav-link bi bi-cart3" routerLink="/cart" style="font-size: 20px; text-decoration: none;">&nbsp; &nbsp;</a>
+    </div>
+    <div>
+      <a class="nav-link bi bi-box-arrow-right" (click)="logout()" href="/" style="font-size: 20px; text-decoration: none;">&nbsp;</a>
+    </div>
+</nav>

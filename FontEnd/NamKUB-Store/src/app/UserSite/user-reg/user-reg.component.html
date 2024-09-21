@@ -3,32 +3,32 @@
     <h1 style="text-align: center">Register</h1>
 
     <div class="input-field">
-      <input formControlName="firstname" placeholder="Firstname" maxlength="50" required class="box" />
+      <input formControlName="firstname" placeholder="Firstname" maxlength="50" required class="box" />&nbsp;
       <input formControlName="lastname" placeholder="Lastname" maxlength="50" required class="box" />
     </div>
 
     <div class="input-field">
-      <input formControlName="phone" placeholder="Your phone" maxlength="10" required class="box" style="width: 500px;" />
+      <input formControlName="phone" placeholder="Your phone" maxlength="10" required class="box" />&nbsp;
+     <input type="text" formControlName="username" placeholder="Username" maxlength="50" required class="box"  />
     </div>
+    
     <div class="input-field">
-      <input type="text" formControlName="username" placeholder="Username" maxlength="50" required class="box" style="width: 500px;" />
-    </div>
-    <div class="input-field">
-      <input type="email" formControlName="email" placeholder="Email" maxlength="50" required class="box" style="width: 500px;" />
-    </div>
-
-    <div class="input-field">
-      <input type="password" formControlName="password" placeholder="Password" maxlength="50" required class="box" style="width: 500px;" />
+      <input type="email" formControlName="email" placeholder="Email" maxlength="50" required class="box" style="width: 508px;" />
     </div>
 
     <div class="input-field">
-      <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" maxlength="50" required class="box" style="width: 500px;" />
+      <input type="password" formControlName="password" placeholder="Password" maxlength="50" required class="box" style="width: 508px;" />
+    </div>
+
+    <div class="input-field">
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" maxlength="50" required class="box" style="width: 508px;" />
     </div>
 
     <button type="submit" class="btn" style="color:#fff; background-color:#6fb9fa; border-radius: 50px;">Register</button>
 
-    <a routerLink='/login'>Already have an account? Sign in</a>
-    <hr>
+    <div class="text-center pt-4 text-muted">Already have an account? <a id="forget" routerLink="/login">Sign in</a></div>
+  
+  
 
     <!-- <a href="https://accounts.google.com/v3/signin/identifier" target="_blank">
       <button type="button" style="background-color: #fff; border-radius: 50px; height: 30px; width: 500px;">
