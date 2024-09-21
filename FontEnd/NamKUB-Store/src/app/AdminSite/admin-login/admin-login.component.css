@@ -1,5 +1,6 @@
 .form-container {
-    background-image:url(../../../../public/login.jpg) ;
+    background-image:url(../../../../public/login.png) ;
+    font-family: "Noto Sans Thai", sans-serif;
     background-size: auto;
     display: flex;
     align-items: center;

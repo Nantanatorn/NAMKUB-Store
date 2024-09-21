@@ -4,3 +4,6 @@
     transition: background-color 0.3s ease;
     font-family: "Noto Sans Thai", sans-serif;
   }
+  .navbar{
+    background: linear-gradient(120deg,#AFD5F0, rgb(167, 167, 255),rgb(107, 107, 253));
+  }

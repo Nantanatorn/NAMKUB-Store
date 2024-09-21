@@ -1,3 +1,4 @@
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb mt-5 ps-5">
       <li class="breadcrumb-item"><a href="/home">Home</a></li>
@@ -5,34 +6,9 @@
     </ol>
 </nav>
 
-<app-product-box></app-product-box>
-<!--
-<div *ngIf="product" [ngClass]="{ 'text-center': !fullWidthMode }" class="card">
-    <div [ngClass]="{ 'd-flex': fullWidthMode }">
-      <img
-        class="mb-1 mx-auto card-img-top"
-        [ngClass]="{ 'w-100': !fullWidthMode, 'w-50': fullWidthMode }"
-        [src]="product.image"
-        alt="{{ product.name }}"
-      />
-      <div class="card-body" [ngClass]="{ 'p-4 d-flex flex-column justify-content-between': fullWidthMode }">
-        <div>
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text text-truncate" [ngClass]="{ 'text-truncate': !fullWidthMode }">
-            {{ product.name }}
-          </p>
-          <p *ngIf="fullWidthMode" class="card-text">
-            {{ product.description }}
-          </p>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-          <span class="text-danger fw-bold">{{ product.price | currency }}</span>
-          <button class="btn btn-outline-secondary" (click)="onAddToCart()">
-            <i class="bi bi-cart"></i> 
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
--->1
+<h1 class="mt-5" style="padding-left: 15rem;">สินค้าทั้งหมด</h1><hr>
+
+
+
+<app-product-box></app-product-box> 
+

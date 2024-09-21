@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -32,7 +32,11 @@ import { Minere1Component } from './UserSite/Product-details/minere1/minere1.com
 import { Minere2Component } from './UserSite/Product-details/minere2/minere2.component';
 import { ProductBoxComponent } from './UserSite/product/product-box/product-box.component';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
+import { AuthService } from './auth.service';
+import { NAMKUBAPIService } from './Service/namkub-api.service';
+
 import { NoAccessComponent } from './no-access/no-access.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -65,6 +69,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
     AdminRegComponent,
     NoAccessComponent,
 
+    
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
     ReactiveFormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),AuthService,NAMKUBAPIService, provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

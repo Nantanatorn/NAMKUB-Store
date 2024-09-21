@@ -1,20 +1,85 @@
+<div class="bg">
 <div class="container">
-    <h1>ข้อมูลสินค้า</h1>
-    <button class="add-product-btn">Add Product</button>
-
-    <div class="product-card" *ngFor="let product of products">
-        <div class="photo">
-            <p>Photo</p>
-        </div>
-        <div class="details">
-            <p><strong>ID</strong>: {{ product.id }}</p>
-            <p><strong>ขนาด</strong>: {{ product.size }}</p>
-            <p><strong>ชื่อ</strong>: {{ product.name }}</p>
-            <p><strong>จำนวนคงเหลือ</strong>: {{ product.stock }}</p>
-            <p><strong>ราคา</strong>: {{ product.price }}</p>
-        </div>
-        <div class="edit-btn">
-            <button>Edit</button>
+    <h1 class="hehe text-light">ข้อมูลสินค้า</h1>
+    
+    <button class="add-product-btn" (click)="openAddProductModal()">Add Product</button>
+  
+    <div class="modal" *ngIf="isModalOpen">
+        <div class="modal-content">
+            <span class="close-btn" (click)="closeModal()">&times;</span>
+            <h1>Add Product</h1>
+  
+            <!-- Form starts here -->
+            <form 
+                  [formGroup]="addproductform"
+                  (ngSubmit)="onSubmit()"
+                  class="needs-validation"
+                  novalidate
+            > 
+                <div class="modal-body">
+                    <div class="form-section" style="padding-right: 5rem;">
+                        <!-- Product Name -->
+                        <div class="form-group">
+                            <label for="Product_Name" class="form-label">ชื่อสินค้า :</label>
+                            <input id="Product_Name" type="text" formControlName="Product_Name" class="form-control" placeholder="ชื่อสินค้า" required>
+                        </div>
+  
+                        <!-- Product Picture -->
+                        <div class="form-group">
+                            <label for="Product_Picture" class="form-label">รูปภาพสินค้า :</label>
+                            <input id="Product_Picture" type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" required>
+                        </div>
+  
+                        <!-- Product Size -->
+                        <div class="form-group">
+                            <label for="Product_Size" class="form-label">ขนาดสินค้า :</label>
+                            <input id="Product_Size" type="number" formControlName="Product_Size" class="form-control" placeholder="ขนาดสินค้า" required>
+                        </div>
+  
+                        <!-- Product Price -->
+                        <div class="form-group">
+                            <label for="Product_Price" class="form-label">ราคาสินค้า :</label>
+                            <input id="Product_Price" type="number" formControlName="Product_Price" class="form-control" placeholder="ราคาสินค้า" required>
+                        </div>
+  
+                        <!-- Sup_ID -->
+                        <div class="form-group">
+                          <label for="Sup_ID" class="form-label">รหัส Supplier:</label>
+                            <input id="Sup_ID" type="number" formControlName="Sup_ID" class="form-control" placeholder="รหัสผู้ผลิต" required>
+                        </div>
+                    </div>
+                </div>
+  
+                <!-- Submit button -->
+                <div class="modal-footer">
+                    <button type="submit" class="confirm-btn">ตกลง</button>
+                </div>
+            </form> 
+            <!-- Form ends here -->
         </div>
     </div>
+  </div>
+  
+  
+  <div class="product-card" *ngFor="let product of products | async">
+    <div class="photo">
+        <img [src]="product.Product_Picture" alt="Photo" style="width: 180px; height: 180px;">
+    </div>
+    
+      <div class="details">
+          <p><strong>ID</strong>: {{ product.Product_ID }}</p>
+          <p><strong>ชื่อ</strong>: {{ product.Product_Name }}</p>
+          <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p>
+          <p><strong>ราคา</strong>: {{ product.Product_Price }}</p>
+       <!-- <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p> -->
+
+      </div>
+      <div class="edit-btn" >
+          <button class ="btn btn-primary" (click)="updateProduct(product.Product_ID)" >Edit</button>
+      </div>
+      <div class="delete-btn">
+        <button type="button" class="btn btn-danger" (click)="deleteProduct(product.Product_ID )">Delete</button>
+      </div>
+  </div> 
+
 </div>

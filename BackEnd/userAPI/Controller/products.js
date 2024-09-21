@@ -35,17 +35,17 @@ module.exports.getProdById = async (req, res) => {
 
 module.exports.addProducts = async (req, res) => {
     try {
-            const { Product_ID, Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
+            const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
             var pool = await sql.connect(config);
             var addProducts = await pool.request()
 
-            .input('Id', sql.Int, Product_ID)
+
             .input('Name', sql.VarChar, Product_Name)
             .input('Picture', sql.VarChar, Product_Picture)
             .input('Size', sql.Int, Product_Size)
             .input('Price', sql.Money, Product_Price)
             .input('Sup_ID', sql.Int, Sup_ID)
-            .query('INSERT INTO Product (Product_ID, Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID) VALUES ( @Id, @Name, @Picture, @Size, @Price, @Sup_ID)');
+            .query('INSERT INTO Product (Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID) VALUES ( @Name, @Picture, @Size, @Price, @Sup_ID)');
 
             res.status(200).json({
                 message: 'Product added successfully',
