@@ -116,7 +116,7 @@ module.exports.CheckProductName = async (req, res) => {
         const pool = await sql.connect(config);
         const checked = await pool.request()
 
-        .input('Name', sql.VarChar, Product_Name)
+        .input('Product_Name', sql.VarChar, Product_Name)
         .query('SELECT * FROM Product WHERE Product_Name = @Product_Name');
 
         if (checked.recordset.length > 0) {
