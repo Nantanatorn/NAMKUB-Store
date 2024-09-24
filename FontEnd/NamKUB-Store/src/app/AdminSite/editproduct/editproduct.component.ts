@@ -34,6 +34,7 @@ showPopup() {
     Swal.fire("Deleted product");
   }
   onSubmit() {
+    
     if (this.addproductform.valid) {
       const formData = {
         Product_Name: this.addproductform.value.Product_Name,
@@ -42,6 +43,7 @@ showPopup() {
         Product_Price: this.addproductform.value.Product_Price,
         Sup_ID: this.addproductform.value.Sup_ID
       };
+    
       
 
       this.http.post('http://localhost:3000/products', formData).subscribe({

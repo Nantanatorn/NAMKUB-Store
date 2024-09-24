@@ -118,6 +118,9 @@ button {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    flex-direction:column; /* Align the label, input, and feedback vertically */
+    width: 100%;
+    
   }
   
   .form-group label {
@@ -134,6 +137,7 @@ button {
     border-radius: 5px;
     background-color: #e0e0e0;
   }
+
   
   .modal-footer {
     display: flex;
@@ -149,4 +153,12 @@ button {
     border-radius: 10px;
     cursor: pointer;
   }
+  .form-control {
+    width: 100%; /* Make sure the input field takes up the width available */
+  }
   
+  .invalid-feedback {
+    color: red;
+    margin-top: 0.25rem;
+    text-align: left; /* Align error message with the input field */
+  }

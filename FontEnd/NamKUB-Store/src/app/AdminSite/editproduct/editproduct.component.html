@@ -20,37 +20,59 @@
                 <div class="modal-body">
                     <div class="form-section" style="padding-right: 5rem;">
                         <!-- Product Name -->
-                        <div class="form-group">
-                            <label for="Product_Name" class="form-label">ชื่อสินค้า :</label>
-                            <input id="Product_Name" type="text" formControlName="Product_Name" class="form-control" placeholder="ชื่อสินค้า" required>
+                        <div class="form-group" style="width: 100%;">
+                          <!-- <label for="Product_Name" class="form-label">ชื่อสินค้า :</label> -->
+                          <input id="Product_Name" type="text" formControlName="Product_Name" class="form-control" placeholder="ชื่อสินค้า"
+                            [ngClass]="{
+                              'is-invalid': addproductform.get('Product_Name').invalid && addproductform.get('Product_Name').touched
+                            }">
+                          <div class="invalid-feedback"
+                            *ngIf="addproductform.get('Product_Name').invalid && addproductform.get('Product_Name').touched">
+                            กรุณากรอกชื่อสินค้า
+                          </div>
                         </div>
+                        
   
                         <!-- Product Picture -->
                         <div class="form-group">
-                            <label for="Product_Picture" class="form-label">รูปภาพสินค้า :</label>
-                            <input id="Product_Picture" type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" required>
+                            <!-- <label for="Product_Picture" class="form-label">รูปภาพสินค้า :</label> -->
+                            <input id="Product_Picture" type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" >
                         </div>
   
                         <!-- Product Size -->
                         <div class="form-group">
-                            <label for="Product_Size" class="form-label">ขนาดสินค้า :</label>
-                            <input id="Product_Size" type="number" formControlName="Product_Size" class="form-control" placeholder="ขนาดสินค้า" required>
+                            <!-- <label for="Product_Size" class="form-label">ขนาดสินค้า :</label> -->
+                            <input id="Product_Size" type="number" formControlName="Product_Size" class="form-control" placeholder="ขนาดสินค้า" 
+                            [ngClass]="{
+                              'is-invalid': addproductform.get('Product_Size').invalid && addproductform.get('Product_Size').touched
+                            }">
+                          <div class="invalid-feedback"
+                            *ngIf="addproductform.get('Product_Size').invalid && addproductform.get('Product_Size').touched">
+                            กรุณาใส่ขนาดสินค้า หน่วย มล
+                          </div>
                         </div>
   
                         <!-- Product Price -->
                         <div class="form-group">
-                            <label for="Product_Price" class="form-label">ราคาสินค้า :</label>
-                            <input id="Product_Price" type="number" formControlName="Product_Price" class="form-control" placeholder="ราคาสินค้า" required>
+                            <!-- <label for="Product_Price" class="form-label">ราคาสินค้า :</label> -->
+                            <input id="Product_Price" type="number" formControlName="Product_Price" class="form-control" placeholder="ราคาสินค้า" [ngClass]="{
+                              'is-invalid': addproductform.get('Product_Price').invalid && addproductform.get('Product_Price').touched
+                            }">
+                          <div class="invalid-feedback"
+                            *ngIf="addproductform.get('Product_Price').invalid && addproductform.get('Product_Price').touched">
+                            กรุณาใส่ราคาสินค้า
+                          </div>
                         </div>
   
                         <!-- Sup_ID -->
                         <div class="form-group">
-                          <label for="Sup_ID" class="form-label">รหัส Supplier:</label>
+                          <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
                           <select class="form-select" aria-label="Default select example">
                             <option selected>Select Supplier</option>
                             <option value="1">Crystal Factory</option>
                             <option value="2">Singha Factory</option>
                             <option value="3">Minere Factory</option>
+                            <option value="4">Nestre Factory</option>
                           </select>
                         </div>
                     </div>
