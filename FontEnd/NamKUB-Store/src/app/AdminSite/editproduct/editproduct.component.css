@@ -1,6 +1,4 @@
-.bg{
-  background-color: rgb(22, 49, 107);
-}
+
 .container {
     text-align: center;
 }
@@ -18,13 +16,14 @@
 }
 
 .product-card {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 1px solid #ccc;
     padding: 10px;
     margin: 20px auto;
+    height: 15rem;
     width: 50rem;
     border-radius: 10px;
 }
@@ -71,7 +70,7 @@ button {
   }
   
   .modal-content {
-    background-color: white;
+    background-color: rgb(125, 140, 171);
     padding: 20px;
     border: 2px solid #ccc;
     border-radius: 10px;

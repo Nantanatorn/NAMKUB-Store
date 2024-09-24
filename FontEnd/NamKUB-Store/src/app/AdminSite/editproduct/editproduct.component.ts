@@ -17,6 +17,7 @@ export class EditproductComponent {
   addproductform: FormGroup;
   selectedProductId: number | null = null;
   
+  
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private productService: NAMKUBAPIService) {
     this.addproductform = this.fb.group({
       Product_Name: ['', Validators.required],

@@ -21,9 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-sizing: border-box;
 
 }
-.main{
-  height: 100vh;
-}
+
 :root{
   --body-color:#E4E9F7;
   --sidebar-color:#fff;

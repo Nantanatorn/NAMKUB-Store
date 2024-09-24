@@ -1,3 +1,4 @@
+<app-admin-home/>
 <div class="bg">
 <div class="container">
     <h1 class="hehe text-light">ข้อมูลสินค้า</h1>
@@ -45,7 +46,12 @@
                         <!-- Sup_ID -->
                         <div class="form-group">
                           <label for="Sup_ID" class="form-label">รหัส Supplier:</label>
-                            <input id="Sup_ID" type="number" formControlName="Sup_ID" class="form-control" placeholder="รหัสผู้ผลิต" required>
+                          <select class="form-select" aria-label="Default select example">
+                            <option selected>Select Supplier</option>
+                            <option value="1">Crystal Factory</option>
+                            <option value="2">Singha Factory</option>
+                            <option value="3">Minere Factory</option>
+                          </select>
                         </div>
                     </div>
                 </div>
@@ -61,12 +67,13 @@
   </div>
   
   
-  <div class="product-card" *ngFor="let product of products | async">
+  <div class="product-card " *ngFor="let product of products | async">
+    
     <div class="photo">
         <img [src]="product.Product_Picture" alt="Photo" style="width: 180px; height: 180px;">
     </div>
     
-      <div class="details">
+      <div class="details ">
           <p><strong>ID</strong>: {{ product.Product_ID }}</p>
           <p><strong>ชื่อ</strong>: {{ product.Product_Name }}</p>
           <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p>

@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'about-us',component:AboutUsComponent},
   {path: 'adminRegister',component:AdminRegComponent},
   {path: 'cart',component:CartComponent},
-  {path: 'AdminHome',component:AdminHomeComponent},
+  {path: 'adminhome',component:AdminHomeComponent},
   {path: 'order',component:OrderComponent},
   {path: 'editproduct',component:EditproductComponent},
   {path: 'memberlist',component:MemberlistComponent},
