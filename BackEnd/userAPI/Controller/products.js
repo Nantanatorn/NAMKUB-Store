@@ -100,7 +100,6 @@ module.exports.DeleteProducts = async (req, res) => {
             })
 
 
-
     }catch (error) {
         console.log('error message',error.message)
         res.status(500).json({
