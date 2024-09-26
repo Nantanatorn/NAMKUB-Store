@@ -61,7 +61,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .toggle-button {
   position: fixed;
   top: 50%;
-  left: 250px; /* เริ่มต้นวางปุ่มข้างๆ Sidebar ที่เปิดอยู่ */
+  left: 14.2rem;
   transform: translateY(-50%);
   height: 40px;
   width: 40px;
