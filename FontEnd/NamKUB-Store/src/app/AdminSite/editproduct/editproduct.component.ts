@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product } from '../../model/Product'; 
+import { Products } from '../../model/products'; 
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./editproduct.component.css']
 })
 export class EditproductComponent {
-  products: Observable<Product[]> | undefined;
+  products: Observable<Products[]> | undefined;
   addproductform: FormGroup;
   selectedProductId: number | null = null;
   
@@ -33,6 +33,10 @@ showPopup() {
   showPopup1() {
     Swal.fire("Deleted product");
   }
+  closeModal() {
+    this.onClose.emit();
+    this.isModalOpen = false;
+  }
   onSubmit() {
     
     if (this.addproductform.valid) {
@@ -46,10 +50,11 @@ showPopup() {
     
       
 
-      this.http.post('http://localhost:3000/products', formData).subscribe({
+      this.http.post('http://localhost:3500/products', formData).subscribe({
         next: (response) => {
           console.log('Product added successfully:', response);
           this.showPopup(); // เรียกใช้ฟังก์ชันแสดงผลสำเร็จ
+          this.closeModal();
         },
         error: (error) => {
           console.error('Error adding product:', error);
@@ -89,10 +94,6 @@ showPopup() {
     }
   }
 
-  closeModal() {
-    this.onClose.emit();
-    this.isModalOpen = false;
-  }
 
   confirm() {
     if (this.product.Product_Name && this.product.Product_Size && this.product.Product_Price && this.product.Sup_ID) {
@@ -111,7 +112,7 @@ showPopup() {
         Sup_ID: this.addproductform.value.Sup_ID
       };
 
-      this.http.put(`http://localhost:3000/products/${Product_ID}`, formData).subscribe({
+      this.http.put(`http://localhost:3500/products/${Product_ID}`, formData).subscribe({
         next: () => {
           console.log('Product updated successfully');
           console.log('Product updated successfully');
@@ -126,7 +127,7 @@ showPopup() {
       });
     }
   }
-  editProduct(product: Product) {
+  editProduct(product: Products) {
     this.isModalOpen = true;
     this.selectedProductId = product.Product_ID; // เก็บ ID ของสินค้าที่เลือกแก้ไข
     this.addproductform.patchValue({
@@ -140,7 +141,9 @@ showPopup() {
 //--------------ก้อนEdit กับ Update แก้ด้วย
 
   deleteProduct(Product_ID: any) {
-    this.http.delete(`http://localhost:3000/products/${Product_ID}`).subscribe({
+
+
+    this.http.delete(`http://localhost:3500/products/${Product_ID}`).subscribe({
       next: () => {
         console.log('Product deleted successfully');
         this.showPopup1();

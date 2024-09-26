@@ -1,7 +1,7 @@
 <app-admin-home/>
 <div class="bg">
 <div class="container">
-    <h1 class="hehe text-light">ข้อมูลสินค้า</h1>
+    <h1 class="hehe ">Product </h1>
     
     <button class="add-product-btn" (click)="openAddProductModal()">Add Product</button>
   
@@ -67,12 +67,12 @@
                         <!-- Sup_ID -->
                         <div class="form-group">
                           <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
-                          <select class="form-select" aria-label="Default select example">
+                          <select id="Sup_ID" formControlName="Sup_ID" class="form-select"  aria-label="Default select example">
                             <option selected>Select Supplier</option>
-                            <option value="1">Crystal Factory</option>
-                            <option value="2">Singha Factory</option>
-                            <option value="3">Minere Factory</option>
-                            <option value="4">Nestre Factory</option>
+                            <option value="1">Sermsuk (Crystal)</option>
+                            <option value="2">Singha Corporation</option>
+                            <option value="3">Mineré Thailand</option>
+                            <option value="4">Nestle Thailand</option>
                           </select>
                         </div>
                     </div>

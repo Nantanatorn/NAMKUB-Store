@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = 3000;
+const port = 3500;
 
 app.use('/', loginroute);
 app.use('/',registerroute);
@@ -27,6 +27,7 @@ async function connectToDatabase() {
     try{
         await sql.connect(config);
         console.log('Connect to mssql');
+        
     }catch(err){
         console.error('Database connection failed',err);
     }

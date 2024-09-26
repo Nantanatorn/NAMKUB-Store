@@ -1,5 +1,5 @@
 import { Component, Input, input, OnInit } from '@angular/core';
-import { Product } from '../../../model/Product';
+import { Products } from '../../../model/products';
 import { NAMKUBAPIService } from '../../../Service/namkub-api.service'; 
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrl: './product-box.component.css'
 })
 export class ProductBoxComponent {
-  products: Observable<Product[]> | undefined;
+  products: Observable<Products[]> | undefined;
 
   constructor(private productService: NAMKUBAPIService) { }
 
