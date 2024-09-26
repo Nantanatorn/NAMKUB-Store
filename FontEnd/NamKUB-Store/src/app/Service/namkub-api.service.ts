@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Products } from '../model/products';
 
-const api_URL = 'http://localhost:3500'; 
+const api_URL = 'http://localhost:3000'; 
 
 @Injectable({
   providedIn: 'root'

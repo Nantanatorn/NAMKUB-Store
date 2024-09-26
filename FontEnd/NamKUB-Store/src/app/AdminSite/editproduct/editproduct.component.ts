@@ -50,7 +50,7 @@ showPopup() {
     
       
 
-      this.http.post('http://localhost:3500/products', formData).subscribe({
+      this.http.post('http://localhost:3000/products', formData).subscribe({
         next: (response) => {
           console.log('Product added successfully:', response);
           this.showPopup(); // เรียกใช้ฟังก์ชันแสดงผลสำเร็จ
@@ -112,7 +112,7 @@ showPopup() {
         Sup_ID: this.addproductform.value.Sup_ID
       };
 
-      this.http.put(`http://localhost:3500/products/${Product_ID}`, formData).subscribe({
+      this.http.put(`http://localhost:3000/products/${Product_ID}`, formData).subscribe({
         next: () => {
           console.log('Product updated successfully');
           console.log('Product updated successfully');
@@ -143,7 +143,7 @@ showPopup() {
   deleteProduct(Product_ID: any) {
 
 
-    this.http.delete(`http://localhost:3500/products/${Product_ID}`).subscribe({
+    this.http.delete(`http://localhost:3000/products/${Product_ID}`).subscribe({
       next: () => {
         console.log('Product deleted successfully');
         this.showPopup1();

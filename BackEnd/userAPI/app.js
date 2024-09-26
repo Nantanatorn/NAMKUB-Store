@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = 3500;
+const port = 3000;
 
 app.use('/', loginroute);
 app.use('/',registerroute);
