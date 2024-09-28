@@ -28,9 +28,10 @@ import { ProductBoxComponent } from './UserSite/product/product-box/product-box.
 import { AuthGuard } from './auth.guard';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { NoAccessComponent } from './no-access/no-access.component';
+import { PaymentComponent } from './UserSite/payment/payment.component';
 
 
-//http://localhost:4200/AdminRegister
+//http://localhost:4200/adminhome
 const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},
@@ -57,7 +58,8 @@ const routes: Routes = [
   {path: 'product-details/minere1',component:Minere1Component},
   {path: 'product-details/minere2',component:Minere2Component},
   {path: 'productBox',component:ProductBoxComponent},
-  {path: 'NoAccess',component:NoAccessComponent}
+  {path: 'NoAccess',component:NoAccessComponent},
+  {path: 'payment',component:PaymentComponent}
 ];
 
 @NgModule({

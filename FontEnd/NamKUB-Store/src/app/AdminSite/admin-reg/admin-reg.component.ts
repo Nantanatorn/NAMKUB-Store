@@ -37,17 +37,27 @@ export class AdminRegComponent implements OnInit {
       this.registerService.registerAdmin(adminData).subscribe(
         response => {
           Swal.fire({
-            title: "Good job!",
-            text: "Registration successful!",
+            title: "สมัคร สำเร็จ!",
+            text: "sign up successful",
             icon: "success"
           });
           console.log('Admin registration successful', response);
         },
         error => {
+          Swal.fire({
+            title: "สมัคร ไม่สำเร็จ",
+            text: "sign up failed",
+            icon: "error"
+          });
           console.error('Admin registration error', error);
         }
       );
+      this.registerForm.reset();
     } else {
+      Swal.fire({
+        title: "กรอกข้อมูลไม่ถูกต้อง",
+        text: "form is invalid",
+        icon: "error"})
       console.log('Form is invalid');
     }
   }
