@@ -1,0 +1,32 @@
+.container{
+    margin-top: 5rem;
+    
+}
+.search-container {
+    display: flex;               /* ใช้ Flexbox เพื่อให้ในบรรทัดเดียวกัน */
+    align-items: center;          /* จัดแนวกลางในแนวตั้ง */
+    gap: 10px;                    /* เพิ่มช่องว่างระหว่าง dropdown และ input */
+  }
+  
+  .dropdown-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px; 
+  }
+  
+  .dropdown {
+    border: none; 
+    outline: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .search-input {
+    padding: 5px 10px;
+    font-size: 16px;
+    width: 100%;                  /* ทำให้ช่องค้นหากว้างขึ้น */
+    border-radius: 5px;           /* ทำให้ขอบมน */
+    border: 1px solid #ccc;       /* เพิ่มขอบให้ช่องค้นหา */
+  }
+  

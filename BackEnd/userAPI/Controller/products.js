@@ -35,18 +35,26 @@ module.exports.getProdById = async (req, res) => {
 
 module.exports.addProducts = async (req, res) => {
     try {
-            const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
+        const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID, StockQuantity, SupUnitPrice } = req.body;
+            // const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
             var pool = await sql.connect(config);
             var addProducts = await pool.request()
 
+            .input('ProductName', sql.VarChar, Product_Name)          
+            .input('ProductPicture', sql.VarChar, Product_Picture)   
+            .input('ProductSize', sql.Int, Product_Size)              
+            .input('ProductPrice', sql.Money, Product_Price)         
+            .input('Sup_ID', sql.Int, Sup_ID)                        
+            .input('StockQuantity', sql.Int, StockQuantity)          
+            .input('SupUnitPrice', sql.Money, SupUnitPrice) 
+            // .input('Name', sql.VarChar, Product_Name)
+            // .input('Picture', sql.VarChar, Product_Picture)
+            // .input('Size', sql.Int, Product_Size)
+            // .input('Price', sql.Money, Product_Price)
+            // .input('Sup_ID', sql.Int, Sup_ID)
 
-            .input('Name', sql.VarChar, Product_Name)
-            .input('Picture', sql.VarChar, Product_Picture)
-            .input('Size', sql.Int, Product_Size)
-            .input('Price', sql.Money, Product_Price)
-            .input('Sup_ID', sql.Int, Sup_ID)
-            .query('INSERT INTO Product (Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID) VALUES ( @Name, @Picture, @Size, @Price, @Sup_ID)');
-
+            .execute('AddProductandStock');
+            
             res.status(200).json({
                 message: 'Product added successfully',
                 data: addProducts.recordset

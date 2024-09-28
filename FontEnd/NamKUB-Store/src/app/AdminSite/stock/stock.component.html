@@ -1,0 +1,93 @@
+<app-admin-home/>
+<p>stock works!</p>
+<div class="container " >
+    <h3 style="text-align: center;">Stock Manager</h3>
+        
+    <div class="search-container">
+        <div class="dropdown-container">
+          <label for="dropdown">show</label>
+          <select id="dropdown" class="dropdown">
+            <option value="10">All</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+          </select>
+        </div>
+        
+        <input type="text" placeholder="Search by Product Name" class="search-input">
+        
+      </div>
+      
+      
+        
+        <p style="margin-top: 1rem;">Stock Detail</p>
+        <table class="table">
+            <thead>
+            <tr>   
+                <th>Stock ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Supplier Name</th>
+                <th>Restock</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1100</td>
+                    <td>Singha-s</td>
+                    <td>10</td>
+                    <td>30 THB</td>
+                    <td>Singha Corporation</td>
+                    <td><button>Restock</button></td>
+                    <td>Active</td>
+                </tr>
+            </tbody>
+        </table>
+</div> 
+    <div class="container ">
+        
+        <div class="search-container">
+            <div class="dropdown-container">
+              <label for="dropdown">show</label>
+              <select id="dropdown" class="dropdown">
+                <option value="10">All</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </div>
+            <input type="text" placeholder="Search by Product || Date "  class="form-control"/>
+          </div>
+        
+
+        <p style="margin-top: 1rem;">Restock History</p>
+        <table class="table">
+            <thead>
+            <tr>   
+                <th>Restock ID</th>
+                <th>StockID</th>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Total</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>123</td>
+                    <td>1100</td>
+                    <td>9-28-2024</td>
+                    <td>Singha-s</td>
+                    <td>10</td>
+                    <td>30  THB</td>
+                    <td>300 THB</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
