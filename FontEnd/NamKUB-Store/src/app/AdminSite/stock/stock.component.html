@@ -1,5 +1,5 @@
 <app-admin-home/>
-<p>stock works!</p>
+
 <div class="container " >
     <h3 style="text-align: center;">Stock Manager</h3>
         
@@ -31,18 +31,19 @@
                 <th>Cost</th>
                 <th>Supplier Name</th>
                 <th>Restock</th>
-                <th>Status</th>
+                
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1100</td>
-                    <td>Singha-s</td>
-                    <td>10</td>
-                    <td>30 THB</td>
-                    <td>Singha Corporation</td>
-                    <td><button>Restock</button></td>
-                    <td>Active</td>
+                <tr *ngFor="let stock of stocks | async">
+                    <td>{{ stock.Stock_ID }}</td>
+                    <td>{{ stock.Product_Name}}</td>
+                    <td>{{ stock.Stock_Quantity}}</td>
+                    <td>{{ stock.Sup_Unitprice}} THB</td>
+                    <td>{{ stock.Sup_Name}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)="RestockModal(stock)"> Restock  </button></td>
+                
+                    
                 </tr>
             </tbody>
         </table>
@@ -67,10 +68,10 @@
         <p style="margin-top: 1rem;">Restock History</p>
         <table class="table">
             <thead>
-            <tr>   
+            <tr> 
+                <th>Date</th>  
                 <th>Restock ID</th>
                 <th>StockID</th>
-                <th>Date</th>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Cost</th>
@@ -79,15 +80,72 @@
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>123</td>
-                    <td>1100</td>
-                    <td>9-28-2024</td>
-                    <td>Singha-s</td>
-                    <td>10</td>
-                    <td>30  THB</td>
-                    <td>300 THB</td>
+                <tr *ngFor="let restock of restocks | async">
+                    <td>{{ restock.Restock_Date }}</td>
+                    <td>{{ restock.Restock_ID }}</td>
+                    <td>{{ restock.Stock_ID }}</td>
+                    <td>{{ restock.Product_Name}}</td>
+                    <td>{{ restock.Restock_Quantity }}</td>
+                    <td>{{ restock.Restock_Unitprice}} THB</td>
+                    <td>{{ restock.Restock_TotalPrice}} THB</td>
                 </tr>
             </tbody>
         </table>
     </div> 
+
+     <div class="modal " *ngIf="isModalOpen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Restock Product</h3>
+          <span class="close-btn" (click)="closeRestockMoal()">&times;</span>
+          </div>
+          <form 
+                [formGroup]="RestockForm"
+                (ngSubmit)="onSubmit()"
+                class="needs-validation"
+                novalidate
+          > 
+          <div class="modal-body">
+            <div class="form-section" style="padding-right: 5rem;">
+              
+                <div class="form-group" style="width: 100%;">
+                  <!-- เพิ่ม label ก่อน input box -->
+                  <label for="Restock_Quantity">Quantity :</label>
+                  <input id="Restock_Quantity" type="text" formControlName="Restock_Quantity" class="form-control" placeholder="Quantity"
+                    [ngClass]="{
+                      'is-invalid': RestockForm.get('Restock_Quantity').invalid && RestockForm.get('Restock_Quantity').touched
+                    }">
+                  <div class="invalid-feedback"
+                    *ngIf="RestockForm.get('Restock_Quantity').invalid && RestockForm.get('Restock_Quantity').touched">
+                    Please fill Quantity
+                  </div>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                  <!-- เพิ่ม label ก่อน input box -->
+                  <label for="Restock_Unitprice">Unitprice :</label>
+                  <input id="Restock_Unitprice" type="text" formControlName="Restock_Unitprice" class="form-control" placeholder="Unitprice"
+                    [ngClass]="{
+                      'is-invalid': RestockForm.get('Restock_Unitprice').invalid && RestockForm.get('Restock_Unitprice').touched
+                    }">
+                  <div class="invalid-feedback"
+                    *ngIf="RestockForm.get('Restock_Unitprice').invalid && RestockForm.get('Restock_Unitprice').touched">
+                    Please fill Sup_Unitprice
+                  </div>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                  <!-- เพิ่ม label ก่อน input box -->
+                  <label for="Stock_ID">Stock_ID :</label>
+                  <input id="Stock_ID" type="text" formControlName="Stock_ID" class="form-control" placeholder="Stock_ID" readonly>
+                  
+                </div>
+
+            </div>
+        </div>
+
+
+              <div class="modal-footer">
+                  <button type="submit" class="confirm-btn">Confirm</button>
+              </div>
+          </form> 
+      </div>
+ </div> 

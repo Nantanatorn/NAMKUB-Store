@@ -6,7 +6,7 @@ module.exports.getAllProducts = async (req, res) => {
     try {
         var pool = await sql.connect(config);
 
-        const result = await pool.request().query("SELECT * from Product");
+        const result = await pool.request().query("SELECT * from ProductwithStock");
 
         res.status(200).json(result.recordset);
     } catch (err) {

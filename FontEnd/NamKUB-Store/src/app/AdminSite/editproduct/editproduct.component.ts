@@ -232,6 +232,7 @@ export class EditproductComponent {
   }
 
 
+  
   onUpdate() {
     if (this.UpdateProductform.valid && this.selectedProductId) {
       const formData = {
