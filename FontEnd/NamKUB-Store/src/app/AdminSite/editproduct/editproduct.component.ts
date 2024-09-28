@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product } from '../../model/Product'; 
+import { Products } from '../../model/products'; 
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,26 +13,61 @@ import { Router } from '@angular/router';
   styleUrls: ['./editproduct.component.css']
 })
 export class EditproductComponent {
-  products: Observable<Product[]> | undefined;
+  products: Observable<Products[]> | undefined;
   addproductform: FormGroup;
+  UpdateProductform: FormGroup;
   selectedProductId: number | null = null;
   
   
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private productService: NAMKUBAPIService) {
+  constructor(private fb: FormBuilder, 
+              private http: HttpClient, 
+              private router: Router, 
+              private productService: NAMKUBAPIService) {
+
     this.addproductform = this.fb.group({
       Product_Name: ['', Validators.required],
-      Product_Picture: [null, Validators.required], // ใช้ null เพื่อเก็บไฟล์ภาพ
+      Product_Picture: [null], 
       Product_Size: [null, [Validators.required, Validators.min(330)]],
       Product_Price: [null, [Validators.required, Validators.min(1)]],
-      Sup_ID: [null, Validators.required] // เพิ่มฟิลด์ Sup_ID
+      Sup_ID: [null, Validators.required] ,
+      StockQuantity:[null, Validators.required],
+      SupUnitPrice: [null, Validators.required]
+    });
+    this.UpdateProductform = this.fb.group({
+      Product_Name: ['', Validators.required],
+      Product_Picture: [null], 
+      Product_Size: [null, [Validators.required, Validators.min(330)]],
+      Product_Price: [null, [Validators.required, Validators.min(1)]],
+      Sup_ID: [null, Validators.required],
+      
     });
   }
-showPopup() {
-    Swal.fire("Add product success!!!");
+  showPopup() {
+    Swal.fire({
+      title: "Nice!",
+      text: "Product Add Successfully!",
+      icon: "success"
+    });
   }
   showPopup1() {
-    Swal.fire("Deleted product");
+    Swal.fire({
+      title: "Nice!",
+      text: "Product Update Successfully!",
+      icon: "success"
+    });
   }
+
+  closeModal() {
+    this.addproductform.reset();
+    this.onClose.emit();
+    this.isModalOpen = false;
+  }
+  closeModal1() {
+    this.addproductform.reset();
+    this.onClose.emit();
+    this.isModalOpen1 = false;
+  }
+  
   onSubmit() {
     
     if (this.addproductform.valid) {
@@ -41,15 +76,17 @@ showPopup() {
         Product_Picture: this.addproductform.value.Product_Picture,
         Product_Size: this.addproductform.value.Product_Size,
         Product_Price: this.addproductform.value.Product_Price,
-        Sup_ID: this.addproductform.value.Sup_ID
+        Sup_ID: this.addproductform.value.Sup_ID,
+        StockQuantity: this.addproductform.value.StockQuantity,
+        SupUnitPrice: this.addproductform.value.SupUnitPrice
       };
     
-      
-
       this.http.post('http://localhost:3000/products', formData).subscribe({
         next: (response) => {
           console.log('Product added successfully:', response);
           this.showPopup(); // เรียกใช้ฟังก์ชันแสดงผลสำเร็จ
+          this.closeModal();
+          this.reloadPage();
         },
         error: (error) => {
           console.error('Error adding product:', error);
@@ -64,9 +101,8 @@ showPopup() {
     }
   }
 
-  
-
   @Input() isModalOpen: boolean = false;
+  @Input() isModalOpen1: boolean = false;
   @Input() product: { Product_Name?: string; Product_Size?: string; Product_Price?: number; Sup_ID?: number; Product_Picture?: File | null } = {}; 
 
   @Output() onClose = new EventEmitter<void>(); 
@@ -80,6 +116,7 @@ showPopup() {
     this.isModalOpen = true;
   }
 
+
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length) {
@@ -89,10 +126,6 @@ showPopup() {
     }
   }
 
-  closeModal() {
-    this.onClose.emit();
-    this.isModalOpen = false;
-  }
 
   confirm() {
     if (this.product.Product_Name && this.product.Product_Size && this.product.Product_Price && this.product.Sup_ID) {
@@ -126,10 +159,70 @@ showPopup() {
       });
     }
   }
-  editProduct(product: Product) {
-    this.isModalOpen = true;
-    this.selectedProductId = product.Product_ID; // เก็บ ID ของสินค้าที่เลือกแก้ไข
-    this.addproductform.patchValue({
+  deleteProduct(Product_ID: any) {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        this.http.delete(`http://localhost:3000/products/${Product_ID}`).subscribe({
+          next: () => {
+            console.log('Product deleted successfully');
+            swalWithBootstrapButtons.fire({
+              title: "Deleted!",
+              text: "Product has been deleted.",
+              icon: "success"
+            });
+            
+            this.products = this.productService.getAllProduct();
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Error deleting product!",
+            });
+            console.error('Error deleting product:', error);
+          }    });
+        
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "Product is safe :)",
+          icon: "error"
+        });
+      }
+    });
+
+ 
+  
+  }
+
+  editProduct(product: Products) {
+    this.isModalOpen1 = true; // เปิด modal สำหรับการแก้ไข
+
+    // เก็บ Product ID ที่เลือกเพื่อใช้ในอนาคต เช่นการอัปเดต
+    this.selectedProductId = product.Product_ID; 
+
+    // เติมข้อมูลสินค้าที่เลือกลงในฟอร์ม UpdateProductform
+    this.UpdateProductform.patchValue({
       Product_Name: product.Product_Name,
       Product_Picture: product.Product_Picture,
       Product_Size: product.Product_Size,
@@ -137,24 +230,42 @@ showPopup() {
       Sup_ID: product.Sup_ID
     });
   }
-//--------------ก้อนEdit กับ Update แก้ด้วย
 
-  deleteProduct(Product_ID: any) {
-    this.http.delete(`http://localhost:3000/products/${Product_ID}`).subscribe({
-      next: () => {
-        console.log('Product deleted successfully');
-        this.showPopup1();
-        
-        this.products = this.productService.getAllProduct();
-      },
-      error: (error) => {
-        console.error('Error deleting product:', error);
-      }    });
-  }
+
   
+  onUpdate() {
+    if (this.UpdateProductform.valid && this.selectedProductId) {
+      const formData = {
+        Product_Name: this.UpdateProductform.value.Product_Name,
+        Product_Picture: this.UpdateProductform.value.Product_Picture,
+        Product_Size: this.UpdateProductform.value.Product_Size,
+        Product_Price: this.UpdateProductform.value.Product_Price,
+        Sup_ID: this.UpdateProductform.value.Sup_ID
+      };
+
+      // ทำการอัปเดตสินค้าผ่าน API โดยใช้ Product_ID ที่เลือกไว้
+      this.http.put(`http://localhost:3000/products/${this.selectedProductId}`, formData).subscribe({
+        next: () => {
+          console.log('Product updated successfully');
+          this.showPopup1(); 
+          this.closeModal1();
+          this.reloadPage(); 
+          this.selectedProductId = null; // รีเซ็ต Product ID
+        
+        },
+        error: (error) => {
+          console.error('Error updating product:', error);
+        }
+      });
+    }
 }
 
-
+  reloadPage() {
+    setTimeout(() => {
+      window.location.href = window.location.href;
+    }, 1500)
+  }
+}
 
   
 

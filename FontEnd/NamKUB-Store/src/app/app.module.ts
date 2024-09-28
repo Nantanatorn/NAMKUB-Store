@@ -38,7 +38,7 @@ import { NAMKUBAPIService } from './Service/namkub-api.service';
 
 import { NoAccessComponent } from './no-access/no-access.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { PaymentComponent } from './UserSite/payment/payment.component';
+import { StockComponent } from './AdminSite/stock/stock.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,7 @@ import { PaymentComponent } from './UserSite/payment/payment.component';
     ProductBoxComponent,
     AdminRegComponent,
     NoAccessComponent,
-    PaymentComponent,
+    StockComponent,
 
     
   ],

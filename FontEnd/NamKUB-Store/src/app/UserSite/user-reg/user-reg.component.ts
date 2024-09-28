@@ -2,8 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../register.service'; // อย่าลืมนำเข้า service
-
+import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+
+
+
 @Component({
   selector: 'app-user-reg',
   templateUrl: './user-reg.component.html',
@@ -12,7 +15,7 @@ import Swal from 'sweetalert2';
 export class UserRegComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private registerService: RegisterService) { }
+  constructor(private fb: FormBuilder, private registerService: RegisterService, private router:Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -26,6 +29,9 @@ export class UserRegComponent implements OnInit {
     }, { validators: this.passwordMatchValidator });
   }
 
+  gologin() {
+    this.router.navigate(['/']);
+  }
   onSubmit(): void {
     console.log('Form submit triggered');
     if (this.registerForm.valid) {
@@ -40,6 +46,8 @@ export class UserRegComponent implements OnInit {
             icon: "success"
           });
           console.log('Registration successful', response);
+          this.router.navigate(['']);
+          
         },
         error => { 
           Swal.fire({
