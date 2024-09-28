@@ -10,6 +10,7 @@ const registerroute =require('./routes/register');
 const productsRoute = require('./routes/product');
 const deliver_register=require('./routes/deliver_register')
 const testroute= require('./routes/test')
+const stockroute = require('./routes/stock');
 
 app.use(cors());
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use('/',registerroute);
 app.use('/', productsRoute);
 app.use('/',testroute);
 app.use('/',deliver_register);
+app.use('/',stockroute);
 async function connectToDatabase() {
     try{
         await sql.connect(config);
