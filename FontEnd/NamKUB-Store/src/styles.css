@@ -1,6 +1,7 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import '@angular/material/prebuilt-themes/azure-blue.css';
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap");
+
 .noto-sans-thai-main {
     font-family: "Noto Sans Thai", sans-serif;
     font-optical-sizing: auto;
@@ -21,9 +22,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-sizing: border-box;
 
 }
-.main{
-  height: 100vh;
-}
+
 :root{
   --body-color:#E4E9F7;
   --sidebar-color:#fff;

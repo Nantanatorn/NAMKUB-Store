@@ -2,7 +2,8 @@ import { Component, Input, input, OnInit } from '@angular/core';
 import { Product } from '../../../model/Product';
 import { NAMKUBAPIService } from '../../../Service/namkub-api.service'; 
 import { Observable } from 'rxjs/internal/Observable';
-
+import {Router} from '@angular/router'
+import { CartServiceService } from '../../../Service/cart-service.service';
 @Component({
   selector: 'app-product-box',
   templateUrl: './product-box.component.html',
@@ -11,9 +12,14 @@ import { Observable } from 'rxjs/internal/Observable';
 export class ProductBoxComponent {
   products: Observable<Product[]> | undefined;
 
-  constructor(private productService: NAMKUBAPIService) { }
+  constructor(private productService: NAMKUBAPIService,private router:Router,private cartService:CartServiceService) { }
 
   ngOnInit(): void {
     this.products = this.productService.getAllProduct();
   }
+  
+   addToCart(product: any){
+    this.cartService.addToCart(product);
+    //this.router.navigate(['/cart']);
+   }
 }

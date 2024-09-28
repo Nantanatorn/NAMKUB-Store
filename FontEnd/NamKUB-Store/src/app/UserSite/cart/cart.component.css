@@ -5,3 +5,30 @@
 .col-3 p{
     font-size: 18px;
 }
+.modal {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: rgb(125, 140, 171);
+    
+  }
+  
+  .close-btn {
+    align-self: flex-end;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .modal-body {
+    display: block;
+    margin-top: 20px;
+  }

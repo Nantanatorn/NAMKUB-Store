@@ -108,3 +108,28 @@ module.exports.DeleteProducts = async (req, res) => {
         })
     }
 };
+
+module.exports.CheckProductName = async (req, res) => {
+
+    try{ 
+        const Product_Name = req.query.Product_Name;
+        const pool = await sql.connect(config);
+        const checked = await pool.request()
+
+        .input('Product_Name', sql.VarChar, Product_Name)
+        .query('SELECT * FROM Product WHERE Product_Name = @Product_Name');
+
+        if (checked.recordset.length > 0) {
+            // If product exists, return exists as true
+            res.json({ exists: true });
+        } else {
+            // If product does not exist
+            res.json({ exists: false });
+        }
+    }catch(err){
+        console.log('error message',error.message)
+        res.status(500).json({
+            message: 'พัง พัง พัง พัง พัง',
+        })
+    }
+}
