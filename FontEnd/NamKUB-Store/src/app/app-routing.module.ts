@@ -28,6 +28,7 @@ import { ProductBoxComponent } from './UserSite/product/product-box/product-box.
 import { AuthGuard } from './auth.guard';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { NoAccessComponent } from './no-access/no-access.component';
+import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
 
 
 //http://localhost:4200/AdminRegister
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'adminRegister',component:AdminRegComponent},
   {path: 'cart',component:CartComponent},
   {path: 'adminhome',component:AdminHomeComponent},
+  {path: 'dashboard' ,component:DashboardComponent},
   {path: 'order',component:OrderComponent},
   {path: 'editproduct',component:EditproductComponent},
   {path: 'memberlist',component:MemberlistComponent},

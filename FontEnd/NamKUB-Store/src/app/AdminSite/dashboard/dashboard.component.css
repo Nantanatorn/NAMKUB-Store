@@ -1,0 +1,79 @@
+.container {
+    padding-left: 200px;
+    background: none;
+}
+
+.header{
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.filter{
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(38, 0, 255, 0.312);
+}
+
+.headfilter{
+    padding-top: 2rem;
+}
+
+.filtercontrol{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.formyear,.formmonth{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.showvalue{
+    display: flex;
+}
+
+.showdetail{
+    text-align: center;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 2rem;
+    box-shadow: 5px 5px 10px rgba(89, 24, 174, 0.3);
+}
+
+.showdetail h5{
+    margin-top: 2rem;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    padding-bottom: 40px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
