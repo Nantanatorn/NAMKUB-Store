@@ -39,6 +39,8 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
 
+import { StockComponent } from './AdminSite/stock/stock.component';
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,7 @@ import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
     AdminRegComponent,
     NoAccessComponent,
     DashboardComponent,
+    StockComponent,
 
     
   ],

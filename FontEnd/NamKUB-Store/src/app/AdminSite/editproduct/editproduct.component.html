@@ -75,6 +75,30 @@
                             <option value="4">Nestle Thailand</option>
                           </select>
                         </div>
+
+                        <div class="form-group">
+                          <!-- <label for="Product_Price" class="form-label">ราคาสินค้า :</label> -->
+                          <input id="StockQuantity" type="number" formControlName="StockQuantity" class="form-control" placeholder="StockQuantity" [ngClass]="{
+                            'is-invalid': addproductform.get('StockQuantity').invalid && addproductform.get('StockQuantity').touched
+                          }">
+                        <div class="invalid-feedback"
+                          *ngIf="addproductform.get('StockQuantity').invalid && addproductform.get('StockQuantity').touched">
+                          Please fill Stock Quantity 
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <!-- <label for="Product_Price" class="form-label">ราคาสินค้า :</label> -->
+                        <input id="SupUnitPrice" type="number" formControlName="SupUnitPrice" class="form-control" placeholder="SupUnitPrice" [ngClass]="{
+                          'is-invalid': addproductform.get('SupUnitPrice').invalid && addproductform.get('SupUnitPrice').touched
+                        }">
+                      <div class="invalid-feedback"
+                        *ngIf="addproductform.get('SupUnitPrice').invalid && addproductform.get('SupUnitPrice').touched">
+                        Please fill SupUnitPrice
+                      </div>
+                    </div>
+
+
                     </div>
                 </div>
   
@@ -180,7 +204,7 @@
           <p><strong>Title</strong>: {{ product.Product_Name }}</p>
           <p><strong>Size</strong>: {{ product.Product_Size }}</p>
           <p><strong>Price</strong>: {{ product.Product_Price }}</p>
-       <!-- <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p> -->
+          <p><strong>Stock</strong>: {{ product.Stock_Quantity}}</p> 
 
       </div>
       <div class="edit-btn" >

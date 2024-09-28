@@ -29,14 +29,17 @@ export class EditproductComponent {
       Product_Picture: [null], 
       Product_Size: [null, [Validators.required, Validators.min(330)]],
       Product_Price: [null, [Validators.required, Validators.min(1)]],
-      Sup_ID: [null, Validators.required] 
+      Sup_ID: [null, Validators.required] ,
+      StockQuantity:[null, Validators.required],
+      SupUnitPrice: [null, Validators.required]
     });
     this.UpdateProductform = this.fb.group({
       Product_Name: ['', Validators.required],
       Product_Picture: [null], 
       Product_Size: [null, [Validators.required, Validators.min(330)]],
       Product_Price: [null, [Validators.required, Validators.min(1)]],
-      Sup_ID: [null, Validators.required] 
+      Sup_ID: [null, Validators.required],
+      
     });
   }
   showPopup() {
@@ -73,7 +76,9 @@ export class EditproductComponent {
         Product_Picture: this.addproductform.value.Product_Picture,
         Product_Size: this.addproductform.value.Product_Size,
         Product_Price: this.addproductform.value.Product_Price,
-        Sup_ID: this.addproductform.value.Sup_ID
+        Sup_ID: this.addproductform.value.Sup_ID,
+        StockQuantity: this.addproductform.value.StockQuantity,
+        SupUnitPrice: this.addproductform.value.SupUnitPrice
       };
     
       this.http.post('http://localhost:3000/products', formData).subscribe({
@@ -227,6 +232,7 @@ export class EditproductComponent {
   }
 
 
+  
   onUpdate() {
     if (this.UpdateProductform.valid && this.selectedProductId) {
       const formData = {

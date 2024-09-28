@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let product of products | async">
         <div class="card">
-          <img [src]="product.Product_Picture" routerLink="product.Product_Path" class="card-img-top" alt="Product Image">
+          <img [src]="product.Product_Picture" class="card-img-top" alt="Product Image">
           <div class="card-body">
             <h5 class="card-title">{{ product.Product_Name }}</h5>
             <p class="card-text">ขนาด: {{ product.Product_Size }} มิลลิลิตร</p>

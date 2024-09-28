@@ -1,4 +1,8 @@
 .card-text{
     font-size: 14px;
     font-family: "Noto Sans Thai", sans-serif;
+    
+}
+.card-img-top{
+    width: 100%;
 }

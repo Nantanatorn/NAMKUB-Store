@@ -29,6 +29,7 @@ import { AuthGuard } from './auth.guard';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
+import { StockComponent } from './AdminSite/stock/stock.component';
 
 
 //http://localhost:4200/AdminRegister
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'dashboard' ,component:DashboardComponent},
   {path: 'order',component:OrderComponent},
   {path: 'editproduct',component:EditproductComponent},
+  {path: 'stockmanage',component:StockComponent},
   {path: 'memberlist',component:MemberlistComponent},
   {path: 'product-details/singha1',component:Singha1Component},
   {path: 'product-details/singha2',component:Singha2Component},
@@ -60,6 +62,7 @@ const routes: Routes = [
   {path: 'product-details/minere2',component:Minere2Component},
   {path: 'productBox',component:ProductBoxComponent},
   {path: 'NoAccess',component:NoAccessComponent}
+  
 ];
 
 @NgModule({
