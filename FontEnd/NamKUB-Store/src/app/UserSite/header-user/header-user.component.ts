@@ -1,34 +1,79 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common'; 
+import { Inject, PLATFORM_ID } from '@angular/core';
+
 @Component({
   selector: 'app-header-user',
   templateUrl: './header-user.component.html',
-  styleUrl: './header-user.component.css'
+  styleUrls: ['./header-user.component.css']
 })
-export class HeaderUserComponent {
+export class HeaderUserComponent implements OnInit {
   username: string | null = null;
+  isDarkMode: boolean = false;
+
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
+
   ngOnInit(): void {
-    // Retrieve the username 
-    const payload = localStorage.getItem('payload');
-    if(payload){
-      try{
-        const jsonPayload =JSON.parse(payload);
-        this.username = jsonPayload.user.username;
-        
-        
-      }catch(err){
-        console.error('can not parse payload',err);
+    if (isPlatformBrowser(this.platformId)) {
+      const payload = localStorage.getItem('payload');
+      if (payload) {
+        try {
+          const jsonPayload = JSON.parse(payload);
+          this.username = jsonPayload.user.username;
+        } catch (err) {
+          console.error('Cannot parse payload', err);
+        }
       }
+
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme === 'dark') {
+        this.isDarkMode = true;
+        this.renderer.addClass(document.body, 'dark-mode');
+      } else {
+        this.isDarkMode = false;
+        this.renderer.removeClass(document.body, 'dark-mode');
+      }
+
+      this.updateNavbarColor();
     }
-    
   }
-// ล็อกเอาต์ผู้ใช้
 
-constructor(private router: Router) {}
-logout(): void {
-  localStorage.removeItem('token');
-  localStorage.removeItem('payload');
-  this.router.navigate(['/']); // นำทางไปที่หน้า login
-}
+  toggleDarkMode(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isDarkMode = !this.isDarkMode;
+      if (this.isDarkMode) {
+        this.renderer.addClass(document.body, 'dark-mode');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        this.renderer.removeClass(document.body, 'dark-mode');
+        localStorage.setItem('theme', 'light');
+      }
+      this.updateNavbarColor();
+    }
+  }
 
+  // ปรับสีไล่ระดับสำหรับ navbar
+  updateNavbarColor(): void {
+    const navbar = document.querySelector('.navbar') as HTMLElement;
+    if (this.isDarkMode) {
+      // โทนมืด: น้ำเงิน → ฟ้าเข้ม → ม่วงเข้ม
+      navbar.style.background = 'linear-gradient(120deg, #001f3f, #5b2c6f, #000)';
+    } else {
+      // โทนสว่าง: ฟ้าอ่อน → ฟ้าเข้ม → ม่วง
+      navbar.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
+    }
+  }
+
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('payload');
+      this.router.navigate(['/']);
+    }
+  }
 }

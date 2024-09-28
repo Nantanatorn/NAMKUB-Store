@@ -161,3 +161,6 @@ button {
     margin-top: 0.25rem;
     text-align: left; /* Align error message with the input field */
   }
+.bg{
+  margin-left: 300px;
+}
