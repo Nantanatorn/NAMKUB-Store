@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Products, Restock, Stock } from '../model/products';
+import { Products, Restock, Stock, Users } from '../model/products';
 
 const api_URL = 'http://localhost:3000'; 
 
@@ -24,8 +24,9 @@ export class NAMKUBAPIService {
     return this.httpClient.get<Restock[]>(`${api_URL}/restockview`);
   }
 
-  
-
+  getAllUsers(): Observable<Users[]>{
+    return this.httpClient.get<Users[]>(`${api_URL}/user`);
+  }
 }
 
 

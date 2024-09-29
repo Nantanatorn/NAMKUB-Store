@@ -13,10 +13,15 @@ import { response } from 'express';
   styleUrl: './stock.component.css'
 })
 export class StockComponent {
+  searchQuery: string = '';
+  searchdate: string = '';
+  searchQuery1: string = '';
   stocks = new BehaviorSubject<Stock[]>([]);
   restocks = new BehaviorSubject<Restock[]>([]);
   RestockForm: FormGroup;
   selectedStock: number | null;
+  limit: number = 6;  
+  page: number = 1; 
 
 
   constructor( private apiservice: NAMKUBAPIService,
@@ -101,4 +106,35 @@ export class StockComponent {
       window.location.href = window.location.href;
     }, 1500)
   }
+
+  searchRestock(){
+    console.log(`Searching for RestockHistory : ${this.searchQuery}`);
+    this.http.get<Restock[]>(`http://localhost:3000/sreachrestock?q=${this.searchQuery}&date=${this.searchdate}`)
+      .subscribe({
+        next: (response: Restock[]) => {
+          console.log('Search result:', response);
+          this.restocks.next(response);
+        },
+        error: (error) => {
+          console.error('Error fetching products:', error);  
+        }
+      });
+
+  }
+
+  searchstock(){
+    console.log(`Searching for StockHistory : ${this.searchQuery1}`);
+    this.http.get<Stock[]>(`http://localhost:3000/sreachstock?q=${this.searchQuery1}`)
+      .subscribe({
+        next: (response: Stock[]) => {
+          console.log('Search result:', response);
+          this.stocks.next(response);
+        },
+        error: (error) => {
+          console.error('Error fetching products:', error);  
+        }
+      });
+
+  }
+  
 }
