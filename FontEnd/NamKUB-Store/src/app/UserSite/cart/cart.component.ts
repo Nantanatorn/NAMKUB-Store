@@ -13,9 +13,12 @@ export class CartComponent {
   totalPrice = 0;
   isSelectAllChecked: boolean = false;
   username:string|null=null;
+  
   constructor(private http: HttpClient ,private cartService: CartServiceService,private authService:AuthService) {}
-
+  
   ngOnInit() {
+    this.username = this.authService.getUsername();
+    console.log('Username:', this.username);
     // Fetch products from the cart service and initialize quantity if not set
     this.cartProducts = this.cartService.getCart();
     this.cartProducts.forEach(product => {
@@ -64,7 +67,7 @@ export class CartComponent {
   getTotalPrice(): number {
     return this.cartProducts.reduce((total, product) => total + (product.Product_Price * product.quantity), 0);
 }
-comfirmOrder(){
+confirmOrder(){
   const orderData = {
     username:this.username,
     totalPrice:this.totalPrice,
@@ -75,6 +78,7 @@ comfirmOrder(){
         Subtotal_Price:product.Product_Price*product.quantity
     }))
   };
+  console.log('Order Data:', orderData); 
   this.http.post('http://localhost:3000/order',orderData)
   .subscribe({
     next:(response)=>{

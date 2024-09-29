@@ -88,3 +88,57 @@ module.exports.RestockProduct = async (req, res) => {
     }
 
 }
+
+module.exports.SreachStock = async (req , res) => {
+
+    try{
+        const pool = await sql.connect(config);
+        const search = req.query.q;
+        
+        const result = await pool.request()
+        .input('searchID',sql.Int,parseInt(search))
+        .input('search',sql.VarChar,`%${search}%`)
+        .query(` SELECT * FROM StockView WHERE Product_Name LIKE @search
+                OR  Sup_Name LIKE @search 
+                OR  Stock_ID LIKE @searchID`);
+
+            res.status(200).json(result.recordset);
+
+
+    }catch(err){
+
+        console.error(err);
+        res.status(500).send('No Content in Table or Server Error');
+    }
+}
+
+module.exports.SreachRestock = async (req, res) =>{
+
+    try{
+        const pool = await sql.connect(config);
+        const search = req.query.q;
+        const searchDate = req.query.date;
+
+        const result = await pool.request()
+        .input('searchID',sql.Int,parseInt(search))
+        .input('search',sql.VarChar,`%${search}%`)
+        .input('searchDate',sql.VarChar,searchDate ? `%${searchDate}%` : null)
+        .query(`SELECT * FROM RestockView WHERE 
+                (
+                Product_Name LIKE @search
+                OR  Restock_ID LIKE @searchID 
+                OR  Stock_ID LIKE @searchID
+                )   
+                AND(@searchDate IS NULL OR CONVERT(VARCHAR, Restock_Date, 23) LIKE @searchDate)`);
+
+            res.status(200).json(result.recordset);
+
+
+    }catch(err){
+
+        console.error(err);
+        res.status(500).send('No Content in Table or Server Error');
+    }
+
+
+}
