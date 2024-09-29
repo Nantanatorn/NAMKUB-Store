@@ -36,7 +36,7 @@ module.exports.loginUser = async(req,res)=>{
                     if (err) throw err;
 
                     // Send the token and login success message together
-                    return res.status(200).json({ message: 'Login successful', token, payload });
+                    return res.status(200).json({ message: 'Login successful', token });//เพิ่มpayload
                 });
             } else {
                 res.status(401).json({ message: 'Invalid username or password' });

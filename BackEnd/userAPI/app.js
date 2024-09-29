@@ -10,6 +10,7 @@ const registerroute =require('./routes/register');
 const productsRoute = require('./routes/product');
 const deliver_register=require('./routes/deliver_register')
 const testroute= require('./routes/test')
+const stockroute = require('./routes/stock');
 
 app.use(cors());
 app.use(express.json());
@@ -23,10 +24,14 @@ app.use('/',registerroute);
 app.use('/', productsRoute);
 app.use('/',testroute);
 app.use('/',deliver_register);
+app.use('/',stockroute);
 async function connectToDatabase() {
     try{
         await sql.connect(config);
-        console.log('Connect to mssql');
+        const result = await sql.query`SELECT DB_NAME() AS CurrentDatabase`; // ดึงชื่อฐานข้อมูลปัจจุบัน
+        console.log('Connected to mssql');
+        console.log('Using database:', result.recordset[0].CurrentDatabase); // แสดงชื่อฐานข้อมูล
+        
     }catch(err){
         console.error('Database connection failed',err);
     }

@@ -50,7 +50,7 @@
 
 .form-container {
     /* background-color: rgb(36, 60, 145); */
-    background-image:url('../../../../public/login.jpg');
+    background-image:url('../../../../public/login.png');
     background-size: auto;
     display: flex;
     align-items: center;

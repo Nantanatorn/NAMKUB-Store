@@ -28,23 +28,25 @@ import { ProductBoxComponent } from './UserSite/product/product-box/product-box.
 import { AuthGuard } from './auth.guard';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { NoAccessComponent } from './no-access/no-access.component';
+import { StockComponent } from './AdminSite/stock/stock.component';
 
 
-//http://localhost:4200/AdminRegister
+//http://localhost:4200/adminhome
 const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},
   //{path: 'AdminRegister',component: AdminLoginComponent},
-  {path: 'home',component:HomeComponent,canActivate: [AuthGuard],data:{roles:['admin','customer','Deliver']}},
-  {path: 'products',component:ProductComponent,canActivate: [AuthGuard],data:{roles:['admin','customer','Deliver']}},
-  {path: 'contact',component:ContactComponent,canActivate: [AuthGuard],data:{roles:['admin','customer','Deliver']}},
-  {path: 'about-us',component:AboutUsComponent,canActivate: [AuthGuard],data:{roles:['admin','customer','Deliver']}},
-  {path: 'adminRegister',component:AdminRegComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
-  {path: 'cart',component:CartComponent,canActivate: [AuthGuard],data:{roles:['admin','customer','Deliver']}},
-  {path: 'AdminHome',component:AdminHomeComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
-  {path: 'order',component:OrderComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
-  {path: 'editproduct',component:EditproductComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
-  {path: 'memberlist',component:MemberlistComponent,canActivate: [AuthGuard],data:{roles:['admin']}},
+  {path: 'home',component:HomeComponent},
+  {path: 'products',component:ProductComponent},
+  {path: 'contact',component:ContactComponent},
+  {path: 'about-us',component:AboutUsComponent},
+  {path: 'adminRegister',component:AdminRegComponent},
+  {path: 'cart',component:CartComponent},
+  {path: 'adminhome',component:AdminHomeComponent},
+  {path: 'order',component:OrderComponent},
+  {path: 'editproduct',component:EditproductComponent},
+  {path: 'stockmanage',component:StockComponent},
+  {path: 'memberlist',component:MemberlistComponent},
   {path: 'product-details/singha1',component:Singha1Component},
   {path: 'product-details/singha2',component:Singha2Component},
   {path: 'product-details/singha3',component:Singha3Component},
@@ -58,6 +60,7 @@ const routes: Routes = [
   {path: 'product-details/minere2',component:Minere2Component},
   {path: 'productBox',component:ProductBoxComponent},
   {path: 'NoAccess',component:NoAccessComponent}
+  
 ];
 
 @NgModule({

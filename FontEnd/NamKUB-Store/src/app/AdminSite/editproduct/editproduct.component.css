@@ -1,7 +1,10 @@
+
 .container {
     text-align: center;
 }
-
+.hehe{
+  padding-top: 2rem;
+}
 .add-product-btn {
     background-color: limegreen;
     border: none;
@@ -13,13 +16,15 @@
 }
 
 .product-card {
+    /* background-color: #ffffff; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 1px solid #ccc;
     padding: 10px;
     margin: 20px auto;
-    width: 80%;
+    height: 15rem;
+    width: 50rem;
     border-radius: 10px;
 }
 
@@ -31,22 +36,133 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    margin-left: 75px;
 }
 
 .details {
     flex-grow: 1;
-    margin-left: 20px;
+    margin-left: 75px;
     text-align: left;
 }
 
 .edit-btn {
-    margin-left: 20px;
+    margin-right: 10px;
 }
 
 button {
     padding: 5px 10px;
-    background-color: #ccc;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+/* product-modal.component.css */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    
+  }
+  
+  .modal-content {
+    background-color: rgb(125, 140, 171);
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .close-btn {
+    align-self: flex-end;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .modal-body {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .photo-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .photo-box {
+    width: 150px;
+    height: 150px;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .form-section {
+    flex: 2;
+    margin-left: 5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction:column; /* Align the label, input, and feedback vertically */
+    width: 100%;
+    
+  }
+  
+  .form-group label {
+    flex: 1;
+    text-align: right;
+    margin-right: 10px;
+  }
+  
+  .form-group input, 
+  .form-group select {
+    flex: 2;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    
+  }
+
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .confirm-btn {
+    background-color: limegreen;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .form-control {
+    width: 100%; /* Make sure the input field takes up the width available */
+  }
+  
+  .invalid-feedback {
+    color: red;
+    margin-top: 0.25rem;
+    text-align: left; /* Align error message with the input field */
+  }
+.bg{
+  margin-left: 300px;
 }

@@ -6,7 +6,7 @@ module.exports.getAllProducts = async (req, res) => {
     try {
         var pool = await sql.connect(config);
 
-        const result = await pool.request().query("SELECT * from Product");
+        const result = await pool.request().query("SELECT * from ProductwithStock");
 
         res.status(200).json(result.recordset);
     } catch (err) {
@@ -35,18 +35,26 @@ module.exports.getProdById = async (req, res) => {
 
 module.exports.addProducts = async (req, res) => {
     try {
-            const { Product_ID, Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
+        const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID, StockQuantity, SupUnitPrice } = req.body;
+            // const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
             var pool = await sql.connect(config);
             var addProducts = await pool.request()
 
-            .input('Id', sql.Int, Product_ID)
-            .input('Name', sql.VarChar, Product_Name)
-            .input('Picture', sql.VarChar, Product_Picture)
-            .input('Size', sql.Int, Product_Size)
-            .input('Price', sql.Money, Product_Price)
-            .input('Sup_ID', sql.Int, Sup_ID)
-            .query('INSERT INTO Product (Product_ID, Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID) VALUES ( @Id, @Name, @Picture, @Size, @Price, @Sup_ID)');
+            .input('ProductName', sql.VarChar, Product_Name)          
+            .input('ProductPicture', sql.VarChar, Product_Picture)   
+            .input('ProductSize', sql.Int, Product_Size)              
+            .input('ProductPrice', sql.Money, Product_Price)         
+            .input('Sup_ID', sql.Int, Sup_ID)                        
+            .input('StockQuantity', sql.Int, StockQuantity)          
+            .input('SupUnitPrice', sql.Money, SupUnitPrice) 
+            // .input('Name', sql.VarChar, Product_Name)
+            // .input('Picture', sql.VarChar, Product_Picture)
+            // .input('Size', sql.Int, Product_Size)
+            // .input('Price', sql.Money, Product_Price)
+            // .input('Sup_ID', sql.Int, Sup_ID)
 
+            .execute('AddProductandStock');
+            
             res.status(200).json({
                 message: 'Product added successfully',
                 data: addProducts.recordset
@@ -107,3 +115,28 @@ module.exports.DeleteProducts = async (req, res) => {
         })
     }
 };
+
+module.exports.CheckProductName = async (req, res) => {
+
+    try{ 
+        const Product_Name = req.query.Product_Name;
+        const pool = await sql.connect(config);
+        const checked = await pool.request()
+
+        .input('Product_Name', sql.VarChar, Product_Name)
+        .query('SELECT * FROM Product WHERE Product_Name = @Product_Name');
+
+        if (checked.recordset.length > 0) {
+            // If product exists, return exists as true
+            res.json({ exists: true });
+        } else {
+            // If product does not exist
+            res.json({ exists: false });
+        }
+    }catch(err){
+        console.log('error message',error.message)
+        res.status(500).json({
+            message: 'พัง พัง พัง พัง พัง',
+        })
+    }
+}
