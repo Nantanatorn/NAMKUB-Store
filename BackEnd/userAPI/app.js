@@ -28,7 +28,9 @@ app.use('/',stockroute);
 async function connectToDatabase() {
     try{
         await sql.connect(config);
-        console.log('Connect to mssql');
+        const result = await sql.query`SELECT DB_NAME() AS CurrentDatabase`; // ดึงชื่อฐานข้อมูลปัจจุบัน
+        console.log('Connected to mssql');
+        console.log('Using database:', result.recordset[0].CurrentDatabase); // แสดงชื่อฐานข้อมูล
         
     }catch(err){
         console.error('Database connection failed',err);

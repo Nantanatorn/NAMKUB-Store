@@ -1,9 +1,37 @@
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* ปรับแต่งปุ่ม navbar */
 .navbar-nav .nav-link:hover {
     color: white;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
     font-family: "Noto Sans Thai", sans-serif;
+}
+/* อัพเดทข้างบน navbar เปลี่ยนสีโหมดมืด สว่าง*/
+
+  .toggle{
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
   }
-  .navbar{
-    background: linear-gradient(120deg,#AFD5F0, rgb(167, 167, 255),rgb(107, 107, 253));
+  .moon-sun i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  .active-nav-link {
+    padding-bottom: 3px; 
+    border-bottom: 2px solid #ffffff; 
+    
+  }
+  .nav-link.router-link-active {
+    color: #ffffff;
+  }
+  .navbar-nav .nav-link {
+    color: #ffffff; /* สีขาวสำหรับลิงค์ที่เปิดอยู่ */
+    background-color: transparent; /* พื้นหลังโปร่งใสหรือปรับตามต้องการ */
   }
