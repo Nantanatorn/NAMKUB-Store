@@ -49,6 +49,7 @@ body {
   background-color: #333333;
   transition: width 0.3s ease;
   overflow: hidden;
+  z-index: 1000;
   border: .5px solid black;
   
 }
@@ -229,6 +230,7 @@ header .image-text .header-text{
   background-color: #aaaaaa;
   transition: .4s;
   border-radius: 34px;
+  
 }
 
 .slider:before {
