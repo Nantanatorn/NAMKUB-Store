@@ -1,6 +1,7 @@
 import { Component, Renderer2, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common'; 
+import { AuthService } from '../../auth.service';
+import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
@@ -15,10 +16,11 @@ export class HeaderUserComponent implements OnInit {
   constructor(
     private router: Router,
     private renderer: Renderer2,
-    @Inject(PLATFORM_ID) private platformId: any
-  ) {}
+    @Inject(PLATFORM_ID) private platformId: any, private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.username = this.authService.getUsername();
     if (isPlatformBrowser(this.platformId)) {
       const payload = localStorage.getItem('payload');
       if (payload) {
@@ -68,11 +70,11 @@ export class HeaderUserComponent implements OnInit {
       navbar.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
     }
   }
+  
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
-      localStorage.removeItem('payload');
       this.router.navigate(['/']);
     }
   }

@@ -32,7 +32,7 @@ import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
 import { StockComponent } from './AdminSite/stock/stock.component';
 
 
-//http://localhost:4200/AdminRegister
+//http://localhost:4200/adminhome
 const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},

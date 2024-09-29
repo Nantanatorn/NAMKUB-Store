@@ -12,9 +12,9 @@ export class NAMKUBAPIService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllProduct(): Observable<Products[]> {
-    return this.httpClient.get<Products[]>(`${api_URL}/products`);
-  }
+    getAllProduct(): Observable<Products[]> {
+      return this.httpClient.get<Products[]>(`${api_URL}/products`);
+    }
   
   getAllStockView(): Observable<Stock[]>{
     return this.httpClient.get<Stock[]>(`${api_URL}/stockview`);
