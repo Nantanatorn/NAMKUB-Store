@@ -34,4 +34,7 @@ export class CartServiceService {
   getCart(){
     return this.cart;
   }
+  clearCart(){
+    this.cart=[];
+  }
 }

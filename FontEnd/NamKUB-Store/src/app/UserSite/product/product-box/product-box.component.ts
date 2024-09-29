@@ -20,6 +20,5 @@ export class ProductBoxComponent {
   
    addToCart(product: any){
     this.cartService.addToCart(product);
-    //this.router.navigate(['/cart']);
    }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CartServiceService } from '../../Service/cart-service.service';
 import * as bootstrap from 'bootstrap';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -10,8 +12,8 @@ export class CartComponent {
   cartProducts: any[] = [];
   totalPrice = 0;
   isSelectAllChecked: boolean = false;
-
-  constructor(private cartService: CartServiceService) {}
+  username:string|null=null;
+  constructor(private http: HttpClient ,private cartService: CartServiceService,private authService:AuthService) {}
 
   ngOnInit() {
     // Fetch products from the cart service and initialize quantity if not set
@@ -22,6 +24,7 @@ export class CartComponent {
       }
     });
     this.updateTotal();
+    this.username=this.authService.getUsername();
   }
 
   increaseQuantity(product: any) {
@@ -61,5 +64,29 @@ export class CartComponent {
   getTotalPrice(): number {
     return this.cartProducts.reduce((total, product) => total + (product.Product_Price * product.quantity), 0);
 }
-
+comfirmOrder(){
+  const orderData = {
+    username:this.username,
+    totalPrice:this.totalPrice,
+    item: this.cartProducts.map(product=>({
+      Product_ID:product.Product_ID,
+      Product_Price:product.Product_Price,
+      Order_Quantity:product.quantity,
+        Subtotal_Price:product.Product_Price*product.quantity
+    }))
+  };
+  this.http.post('http://localhost:3000/order',orderData)
+  .subscribe({
+    next:(response)=>{
+      console.log('order placed successfully',response);
+      this.closeModal();
+      this.cartService.clearCart();
+      this.cartProducts=[];
+      this.totalPrice=0;
+    },
+    error:(error)=>{
+      console.error('Error placing order',error);
+    }
+  })
+}
 }
