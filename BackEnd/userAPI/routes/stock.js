@@ -7,8 +7,8 @@ const router = express.Router();
     router.get('/stockview',StockContorl.getAllStockView);
     router.get('/restockview',StockContorl.getRestockHistory)
     router.post('/restock',StockContorl.RestockProduct);
-    
-
+    router.get('/sreachstock',StockContorl.SreachStock);
+    router.get('/sreachrestock',StockContorl.SreachRestock);
 
 
 module.exports = router;

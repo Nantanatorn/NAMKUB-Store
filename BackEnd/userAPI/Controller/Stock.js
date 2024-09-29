@@ -23,10 +23,17 @@ module.exports.getAllStock = async (req ,res ) => {
 
 module.exports.getAllStockView = async (req ,res ) => {
 
-    try {
+    try {   
             var pool = await sql.connect(config);
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 10;
+            const offset = (page - 1) * limit;
 
-            const result = await pool.request().query("SELECT * from StockView");
+
+            const result = await pool.request()
+            .input('offset', sql.Int, offset)
+            .input('limit', sql.Int, limit)
+            .query("SELECT * from StockView ORDER BY Stock_ID OFFSET @offset ROWS FETCH NEXT @limit ROW ONLY");
 
             res.status(200).json(result.recordset);
 
@@ -88,3 +95,65 @@ module.exports.RestockProduct = async (req, res) => {
     }
 
 }
+
+module.exports.SreachStock = async (req , res) => {
+
+    try{
+        const pool = await sql.connect(config);
+        const search = req.query.q;
+        
+        const result = await pool.request()
+        .input('searchID',sql.Int,parseInt(search))
+        .input('search',sql.VarChar,`%${search}%`)
+        .query(` SELECT * FROM StockView WHERE Product_Name LIKE @search
+                OR  Sup_Name LIKE @search 
+                OR  Stock_ID LIKE @searchID`);
+
+            res.status(200).json(result.recordset);
+
+
+    }catch(err){
+
+        console.error(err);
+        res.status(500).send('No Content in Table or Server Error');
+    }
+}
+
+module.exports.SreachRestock = async (req, res) => {
+    try {
+        const pool = await sql.connect(config);
+        const search = req.query.q;
+        const searchDate = req.query.date;
+
+        const result = await pool.request()
+            .input('searchID', sql.Int, isNaN(parseInt(search)) ? null : parseInt(search))
+            .input('search', sql.VarChar, `%${search}%`)
+            .input('searchDate', sql.VarChar, searchDate ? `%${searchDate}%` : null)
+            .query(`
+                SELECT 
+                    Restock_ID,
+                    Stock_ID,
+                    Product_Name,
+                    Restock_Quantity,
+                    Restock_Unitprice,
+                    Restock_TotalPrice,
+                    CONVERT(VARCHAR(10), Restock_Date, 23) AS Restock_Date 
+                FROM RestockView 
+                WHERE 
+                    (
+                        Product_Name LIKE @search
+                        OR Restock_ID = @searchID 
+                        OR Stock_ID = @searchID
+                    )
+                AND (@searchDate IS NULL OR CONVERT(VARCHAR, Restock_Date, 23) LIKE @searchDate)
+            `);
+            console.log('Search query:', search);
+            console.log('Search date:', searchDate);
+        res.status(200).json(result.recordset);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('No Content in Table or Server Error');
+    }
+};
+
