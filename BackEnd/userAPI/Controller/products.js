@@ -132,12 +132,30 @@ module.exports.CheckProductName = async (req, res) => {
             res.json({ exists: true });
         } else {
             // If product does not exist
-            res.json({ exists: false });
+            res.json({ exists: false });    
         }
     }catch(err){
         console.log('error message',error.message)
         res.status(500).json({
             message: 'พัง พัง พัง พัง พัง',
         })
+    }
+}
+module.exports.FindProducts = async (req, res) => {
+        try{
+        const pool = await sql.connect(config);
+        const search = req.query.q;
+
+        const result = await pool.request()
+            .input('search',sql.VarChar,`%${search}%`)
+            .query(' SELECT * FROM ProductwithStock WHERE Product_Name LIKE @search');
+
+            res.status(200).json(result.recordset);
+
+    }catch(err){
+
+        console.err(err);
+        res.status(500).send('error');
+
     }
 }

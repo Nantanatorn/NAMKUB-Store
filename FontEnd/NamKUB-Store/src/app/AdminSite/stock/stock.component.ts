@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {  Restock, Stock } from '../../model/products';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
@@ -13,8 +13,8 @@ import { response } from 'express';
   styleUrl: './stock.component.css'
 })
 export class StockComponent {
-  stocks: Observable<Stock[]> | undefined;
-  restocks: Observable<Restock[]> | undefined;
+  stocks = new BehaviorSubject<Stock[]>([]);
+  restocks = new BehaviorSubject<Restock[]>([]);
   RestockForm: FormGroup;
   selectedStock: number | null;
 
@@ -31,13 +31,24 @@ export class StockComponent {
   }
 
   ngOnInit(): void{
-    this.stocks = this.apiservice.getAllStockView();
-    this.restocks = this.apiservice.getAllRestock();
+    this.reloadStocks();
+    this.reloadRestock();
   }
 
   @Input() isModalOpen: boolean = false;
   @Output() onClose = new EventEmitter<void>(); 
   @Output() onConfirm = new EventEmitter<any>(); 
+  
+  reloadStocks(){
+    this.apiservice.getAllStockView().subscribe((stocks) =>{
+      this.stocks.next(stocks); 
+    })
+  }
+  reloadRestock(){
+    this.apiservice.getAllRestock().subscribe((restocks) =>{
+      this.restocks.next(restocks);
+    })
+  }
 
   RestockModal(stock : Stock){
     this.isModalOpen = true;
@@ -68,7 +79,7 @@ export class StockComponent {
           console.log('Restock successfully:', response);
           this.showPopup(); 
           this.closeModal();
-          this.reloadPage();
+          this.reloadRestock();
         }
       })
     }
