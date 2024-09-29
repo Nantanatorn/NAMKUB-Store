@@ -13,13 +13,30 @@
   .bi-twitter {
     color: #1da1f2;
   }
-  
+  .icons{
+    font-size: 20px;
+  }
+  .icon {
+    border: 1px solid #000;   
+    margin: 20px 20px;
+    background-color: #e4405f;
+    width: fit-content;
+    padding: 10px;
+}
+
+
+  ul i.icons {
+    display: block; 
+    margin-bottom: 10px; 
+}
+ul{
+  margin-left: 170px;
+}
   .social-icons i:hover {
     opacity: 0.7;
   }
   .back{
-    text-align: right;
-    margin-left: 1300px;
+    right: 0;
     padding: 30px;
     position: absolute;
     

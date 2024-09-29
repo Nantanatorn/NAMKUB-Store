@@ -56,6 +56,8 @@ export class HeaderUserComponent implements OnInit {
         localStorage.setItem('theme', 'light');
       }
       this.updateNavbarColor();
+
+      window.dispatchEvent(new CustomEvent('themeChange', { detail: { darkMode: this.isDarkMode }}));
     }
   }
 

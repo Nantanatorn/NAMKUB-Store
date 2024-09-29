@@ -53,7 +53,18 @@ body {
   border: .5px solid black;
   
 }
-
+.mat-typography h2{
+  font-family: "Noto Sans Thai", sans-serif; 
+}
+.mat-typography h5{
+  font-family: "Noto Sans Thai", sans-serif; 
+}
+.mat-typography h4{
+  font-family: "Noto Sans Thai", sans-serif; 
+}
+.mat-typography h3{
+  font-family: "Noto Sans Thai", sans-serif; 
+}
 .sidebar.closed {
   width: 60px; /* ขนาดเล็กสุดเมื่อปิด */
   transition: width 0.3s ease;
