@@ -30,7 +30,7 @@ import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
 import { StockComponent } from './AdminSite/stock/stock.component';
-
+import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.component';
 
 //http://localhost:4200/adminhome
 const routes: Routes = [
@@ -61,8 +61,8 @@ const routes: Routes = [
   {path: 'product-details/minere1',component:Minere1Component},
   {path: 'product-details/minere2',component:Minere2Component},
   {path: 'productBox',component:ProductBoxComponent},
-  {path: 'NoAccess',component:NoAccessComponent}
-  
+  {path: 'NoAccess',component:NoAccessComponent},
+  {path: 'edit-profile' ,component:EditProfileComponent}
 ];
 
 @NgModule({

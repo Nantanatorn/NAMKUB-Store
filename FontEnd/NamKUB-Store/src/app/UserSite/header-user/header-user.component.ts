@@ -12,26 +12,21 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 export class HeaderUserComponent implements OnInit {
   username: string | null = null;
   isDarkMode: boolean = false;
+  isProfilePopupVisible = false;
 
   constructor(
     private router: Router,
     private renderer: Renderer2,
-    @Inject(PLATFORM_ID) private platformId: any, private authService: AuthService
+    @Inject(PLATFORM_ID) private platformId: any, 
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.username = this.authService.getUsername();
+    // ตรวจสอบว่ากำลังทำงานในเบราว์เซอร์
     if (isPlatformBrowser(this.platformId)) {
-      const payload = localStorage.getItem('payload');
-      if (payload) {
-        try {
-          const jsonPayload = JSON.parse(payload);
-          this.username = jsonPayload.user.username;
-        } catch (err) {
-          console.error('Cannot parse payload', err);
-        }
-      }
+      this.username = this.authService.getUsername();
 
+      // ตรวจสอบว่ามีการเรียกใช้งาน localStorage ได้หรือไม่
       const storedTheme = localStorage.getItem('theme');
       if (storedTheme === 'dark') {
         this.isDarkMode = true;
@@ -41,11 +36,15 @@ export class HeaderUserComponent implements OnInit {
         this.renderer.removeClass(document.body, 'dark-mode');
       }
 
+      // อัปเดตสีพื้นหลังของ navbar และ profile popup
       this.updateNavbarColor();
+      this.updateProfilePopupBackground(); // อัปเดตพื้นหลังของ profile popup ตามโหมดที่ใช้อยู่
     }
   }
 
+  // ฟังก์ชันสลับโหมดมืดและสว่าง
   toggleDarkMode(): void {
+    // ตรวจสอบว่ากำลังทำงานในเบราว์เซอร์
     if (isPlatformBrowser(this.platformId)) {
       this.isDarkMode = !this.isDarkMode;
       if (this.isDarkMode) {
@@ -55,29 +54,75 @@ export class HeaderUserComponent implements OnInit {
         this.renderer.removeClass(document.body, 'dark-mode');
         localStorage.setItem('theme', 'light');
       }
+      this.refresh();
+      // อัปเดตสีพื้นหลังของ navbar และ profile popup
       this.updateNavbarColor();
-
-      window.dispatchEvent(new CustomEvent('themeChange', { detail: { darkMode: this.isDarkMode }}));
+      this.updateProfilePopupBackground(); // เปลี่ยนสีพื้นหลัง popup ทันที
     }
   }
 
-  // ปรับสีไล่ระดับสำหรับ navbar
+  // อัปเดตสี navbar ให้ตรงกับโหมดปัจจุบัน
   updateNavbarColor(): void {
     const navbar = document.querySelector('.navbar') as HTMLElement;
-    if (this.isDarkMode) {
-      // โทนมืด: น้ำเงิน → ฟ้าเข้ม → ม่วงเข้ม
-      navbar.style.background = 'linear-gradient(120deg, #001f3f, #5b2c6f, #000)';
-    } else {
-      // โทนสว่าง: ฟ้าอ่อน → ฟ้าเข้ม → ม่วง
-      navbar.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
+    if (navbar) {
+      if (this.isDarkMode) {
+        navbar.style.background = 'linear-gradient(120deg, #001f3f, #5b2c6f, #000)';
+      } else {
+        navbar.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
+      }
     }
   }
-  
+
+  // แสดง/ซ่อน profile popup และเปลี่ยนสีพื้นหลังทันทีเมื่อกดที่ชื่อ
+  toggleProfilePopup(): void {
+    this.isProfilePopupVisible = !this.isProfilePopupVisible;
+
+    // ดึง element profilePopup ให้แน่ใจว่าอยู่ใน DOM
+    const profilePopup = document.getElementById('profilePopup') as HTMLElement;
+    if (profilePopup) {
+      if (this.isProfilePopupVisible) {
+        // แสดง profile popup
+        profilePopup.style.display = 'block';
+
+        // ตรวจสอบว่าโหมดมืดหรือสว่างและเปลี่ยนสีพื้นหลัง popup
+        this.updateProfilePopupBackground();
+      } else {
+        // ซ่อน profile popup
+        profilePopup.style.display = 'none';
+      }
+    } else {
+      console.error("Element 'profilePopup' not found in DOM");
+    }
+  }
+
+  // ฟังก์ชันเปลี่ยนสีพื้นหลังของ profile popup ให้ตรงกับ navbar
+  updateProfilePopupBackground(): void {
+    const profilePopup = document.getElementById('profilePopup') as HTMLElement;
+    if (profilePopup) {
+      if (this.isDarkMode) {
+        // เปลี่ยนเป็นสีโหมดมืด
+        profilePopup.style.background = 'linear-gradient(120deg, #001f3f, #5b2c6f, #000)';
+      } else {
+        // เปลี่ยนเป็นสีโหมดสว่าง
+        profilePopup.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
+      }
+    } else {
+      console.error("Element 'profilePopup' not found in DOM when updating background");
+    }
+  }
 
   logout(): void {
+    // ตรวจสอบว่ากำลังทำงานในเบราว์เซอร์
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
       this.router.navigate(['/']);
     }
   }
+
+  editProfile(): void {
+    this.router.navigate(['/edit-profile']);
+  }
+  refresh(): void {
+    window.location.reload();
+}
 }
