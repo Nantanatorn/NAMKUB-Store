@@ -28,11 +28,11 @@ import { ProductBoxComponent } from './UserSite/product/product-box/product-box.
 import { AuthGuard } from './auth.guard';
 import { AdminRegComponent } from './AdminSite/admin-reg/admin-reg.component';
 import { NoAccessComponent } from './no-access/no-access.component';
+import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
 import { StockComponent } from './AdminSite/stock/stock.component';
-import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.component';
 
 
-//http://localhost:4200/AdminRegister
+//http://localhost:4200/adminhome
 const routes: Routes = [
   {path: '',component: UserLoginComponent},
   {path: 'register',component: UserRegComponent},
@@ -44,6 +44,7 @@ const routes: Routes = [
   {path: 'adminRegister',component:AdminRegComponent},
   {path: 'cart',component:CartComponent},
   {path: 'adminhome',component:AdminHomeComponent},
+  {path: 'dashboard' ,component:DashboardComponent},
   {path: 'order',component:OrderComponent},
   {path: 'editproduct',component:EditproductComponent},
   {path: 'stockmanage',component:StockComponent},
@@ -60,8 +61,7 @@ const routes: Routes = [
   {path: 'product-details/minere1',component:Minere1Component},
   {path: 'product-details/minere2',component:Minere2Component},
   {path: 'productBox',component:ProductBoxComponent},
-  {path: 'NoAccess',component:NoAccessComponent},
-  {path: 'edit-profile' ,component:EditProfileComponent}
+  {path: 'NoAccess',component:NoAccessComponent}
   
 ];
 
