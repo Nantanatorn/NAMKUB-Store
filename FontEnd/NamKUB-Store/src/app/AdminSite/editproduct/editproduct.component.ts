@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-editproduct',
@@ -14,11 +13,10 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./editproduct.component.css']
 })
 export class EditproductComponent {
-  products$ = new BehaviorSubject<Products[]>([]);
+  products: Observable<Products[]> | undefined;
   addproductform: FormGroup;
   UpdateProductform: FormGroup;
   selectedProductId: number | null = null;
-  searchQuery: string = '';
   
   
   constructor(private fb: FormBuilder, 
@@ -88,7 +86,7 @@ export class EditproductComponent {
           console.log('Product added successfully:', response);
           this.showPopup(); // เรียกใช้ฟังก์ชันแสดงผลสำเร็จ
           this.closeModal();
-          this.reloadProducts();
+          this.reloadPage();
         },
         error: (error) => {
           console.error('Error adding product:', error);
@@ -111,7 +109,7 @@ export class EditproductComponent {
   @Output() onConfirm = new EventEmitter<any>(); 
 
   ngOnInit(): void {
-    this.reloadProducts();
+    this.products = this.productService.getAllProduct();
   }
 
   openAddProductModal() {
@@ -190,7 +188,7 @@ export class EditproductComponent {
               icon: "success"
             });
             
-            this.reloadProducts();
+            this.products = this.productService.getAllProduct();
           },
           error: (error) => {
             Swal.fire({
@@ -234,7 +232,6 @@ export class EditproductComponent {
   }
 
 
-  
   onUpdate() {
     if (this.UpdateProductform.valid && this.selectedProductId) {
       const formData = {
@@ -251,7 +248,7 @@ export class EditproductComponent {
           console.log('Product updated successfully');
           this.showPopup1(); 
           this.closeModal1();
-          this.reloadProducts(); 
+          this.reloadPage(); 
           this.selectedProductId = null; // รีเซ็ต Product ID
         
         },
@@ -261,30 +258,21 @@ export class EditproductComponent {
       });
     }
 }
-  searchProducts() {
-    console.log(`Searching for products with query: ${this.searchQuery}`);
-    this.http.get<Products[]>(`http://localhost:3000/search?q=${this.searchQuery}`)
-      .subscribe({
-        next: (response: Products[]) => {
-          console.log('Search result:', response); 
-          this.products$.next(response);  
-        },
-        error: (error) => {
-          console.error('Error fetching products:', error);  
-        }
-      });
+
+  reloadPage() {
+    setTimeout(() => {
+      window.location.href = window.location.href;
+    }, 1500)
   }
-  
-  
-  
-  reloadProducts() {
-    this.productService.getAllProduct().subscribe((products) => {
-      this.products$.next(products);
-    });
-  }
+}
+
   
 
-}
+  
+   
+  
+
+
 
   
   

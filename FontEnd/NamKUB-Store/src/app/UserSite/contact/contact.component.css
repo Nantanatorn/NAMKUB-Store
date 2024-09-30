@@ -13,51 +13,8 @@
   .bi-twitter {
     color: #1da1f2;
   }
-  .icons{
-    font-size: 20px;
-  }
-  .icon {
-    border: 1px solid #000;   
-    margin: 20px 20px;
-    background-color: #e4405f;
-    width: fit-content;
-    padding: 10px;
-}
-
-
-  ul i.icons {
-    display: block; 
-    margin-bottom: 10px; 
-}
-ul{
-  margin-left: 170px;
-}
+  
   .social-icons i:hover {
     opacity: 0.7;
   }
-  .back{
-    right: 0;
-    padding: 30px;
-    position: absolute;
-    
-}
-.back button{
-    background-color: #AFD5F0;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-.back button:hover {
-    background-color: #a7a7ff;
-    color: white;
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  }
+  

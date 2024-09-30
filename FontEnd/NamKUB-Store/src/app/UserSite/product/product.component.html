@@ -1,12 +1,14 @@
 <app-header-user></app-header-user>
-<div class="back">
-  <button type="button" routerLink="/home">Back</button>
-  </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-5 ps-5">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Product</li>
+    </ol>
+</nav>
 
-<h2 class="mt-5" style="padding-left: 15rem;">สินค้าทั้งหมด</h2><hr>
+<h1 class="mt-5" style="padding-left: 15rem;">สินค้าทั้งหมด</h1><hr>
 
 
 
 <app-product-box></app-product-box> 
 
-<app-footer></app-footer>

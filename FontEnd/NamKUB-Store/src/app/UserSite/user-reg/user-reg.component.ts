@@ -1,4 +1,107 @@
 
+// import { Component } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { AuthService } from '../../auth.service';
+
+// @Component({
+//   selector: 'app-user-reg',
+//   templateUrl: './user-reg.component.html',
+//   styleUrls: ['./user-reg.component.css']
+// })
+// export class UserRegComponent {  // Make sure the class name matches the import
+//   registerForm: FormGroup;
+
+//   constructor(private fb: FormBuilder, private authService: AuthService) {
+//     this.registerForm = this.fb.group({
+//       firstname: ['', Validators.required],
+//       lastname: ['', Validators.required],
+//       username:['',Validators.required],
+//       email: ['', [Validators.required, Validators.email]],
+//       password: ['', [Validators.required, Validators.minLength(6)]],
+//       confirmPassword: ['', Validators.required],
+//       phone: ['', Validators.required]
+//     });
+//   }
+
+//   onSubmit(): void {
+//     if (this.registerForm.valid) {
+//       const formValues = this.registerForm.value;
+//       if (formValues.password !== formValues.confirmPassword) {
+//         alert('Passwords do not match.');
+//         return;
+//       }
+
+//       this.authService.register(formValues).subscribe(
+//         response => {
+//           alert('Registration successful.');
+//           // Handle success (e.g., redirect to login page)
+//         },
+//         error => {
+//           alert('Registration failed: ' + error.message);
+//           // Handle error
+//         }
+//       );
+//     }
+//   }
+// }
+// import { Component } from '@angular/core';
+//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+ //import { RegisterService } from '../../register.service';
+
+// @Component({
+//   selector: 'app-user-reg',
+//   templateUrl: './user-reg.component.html',
+//   styleUrls: ['./user-reg.component.css']
+// })
+// export class UserRegComponent {
+//   registerForm: FormGroup;
+//   submitted = false;
+//   successMessage = '';
+//   errorMessage = '';
+
+//   constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
+//     this.registerForm = this.formBuilder.group({
+//       firstname: ['', Validators.required],
+//       lastname: ['', Validators.required],
+//       username: ['', Validators.required],
+//       email: ['', [Validators.required, Validators.email]],
+//       password: ['', [Validators.required, Validators.minLength(6)]],
+//       confirmPassword: ['', Validators.required],
+//       phone: ['', Validators.required]
+//     }, {
+//       validator: this.passwordMatchValidator // ฟังก์ชันสำหรับตรวจสอบว่า password กับ confirm password ตรงกัน
+//     });
+//   }
+
+//   // ตรวจสอบให้ password ตรงกับ confirm password
+//   passwordMatchValidator(formGroup: FormGroup) {
+//     const password = formGroup.get('password');
+//     const confirmPassword = formGroup.get('confirmPassword');
+//     return password && confirmPassword && password.value === confirmPassword.value ? null : { mismatch: true };
+//   }
+
+//   // ฟังก์ชันที่ทำงานเมื่อกดปุ่มลงทะเบียน
+//   onSubmit() {
+//     this.submitted = true;
+
+//     // หยุดทำงานถ้าฟอร์มไม่ถูกต้อง
+//     if (this.registerForm.invalid) {
+//       return;
+//     }
+
+//     // ส่งข้อมูลไปที่ backend
+//     this.registerService.registerUser(this.registerForm.value).subscribe(
+//       (response) => {
+//         this.successMessage = response.message;
+//         this.errorMessage = '';
+//       },
+//       (error) => {
+//         this.errorMessage = error.error.message || 'An error occurred. Please try again.';
+//         this.successMessage = '';
+//       }
+//     );
+//   }
+// }
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../register.service'; // อย่าลืมนำเข้า service
@@ -41,29 +144,19 @@ export class UserRegComponent implements OnInit {
       this.registerService.registerUser(this.registerForm.value).subscribe(
         response => {
           Swal.fire({
-            title: "สมัคร สำเร็จ!",
-            text: "sign up successful",
+            title: "Good job!",
+            text: "You clicked the button!",
             icon: "success"
           });
           console.log('Registration successful', response);
           this.router.navigate(['']);
           
         },
-        error => { 
-          Swal.fire({
-          title: "สมัคร ไม่สำเร็จ",
-          text: "sign up failed",
-          icon: "error"
-        });
+        error => {
           console.error('Registration error', error);
         }
       );
-      this.registerForm.reset();
     } else {
-      Swal.fire({
-        title: "กรอกข้อมูลไม่ถูกต้อง",
-        text: "form is invalid",
-        icon: "error"})
       console.log('Form is invalid');
     }
   }

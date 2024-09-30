@@ -1,8 +1,11 @@
 <app-header-user></app-header-user>
-<div class="back">
-    <button type="button" routerLink="/home">Back</button>
-    </div>
-    
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-5 ps-5">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+    </ol>
+</nav>
+
 <div class="row">
     <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d933.4958962069111!2d100.92266199209492!3d13.113654720744448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102b9c536bf4bbd%3A0x389f6bb05ac0734f!2z4LmA4Lii4LmH4LiZ4Liq4Lia4Liy4Lii4LmB4Lih4LiZ4LiK4Lix4LmI4LiZ!5e1!3m2!1sth!2sth!4v1726297421637!5m2!1sth!2sth"
@@ -15,37 +18,40 @@
     <div class="container ml-4">
         <router-outlet></router-outlet>
         <div class="col-6">
-            
-            <div class="row ">
-                <div class="col-12" style="font-size: 20px;">
-                    <p><i class="bi bi-geo-alt-fill icon"></i>&nbsp;&nbsp;234 ม.8 ถ. ทุ่งสุขลา ตำบลทุ่งสุขลา อำเภอศรีราชา ชลบุรี 20230</p><br>
-                </div>
-            </div>
-            
-            <div class="row ">
-                <div class="col-9" style="font-size: 20px;">
-                <p><i class="bi bi-telephone-fill icon"></i>&nbsp;&nbsp;090-XXX-XXXX</p><br>
-                </div>
-            </div>
-            
-            <div class="row ">
-                <div class="col-9" style="font-size: 20px;">
-                    <p><i class="bi bi-envelope-open icon"></i>&nbsp;&nbsp;namkub<i class="bi bi-threads"></i>gmail.com</p><br>
-                </div>
-            </div>
-            <h3>Social Media</h3>
+            <h2>ที่ตั้ง</h2>
             <div class="row">
                 <div class="col-3"></div>
-                <ul>
-                        <i class="bi bi-facebook icons">&nbsp;namkum</i>
-                        <i class="bi bi-instagram icons">&nbsp;namkubbb</i>
-                        <i class="bi bi-line icons">&nbsp;namkubb</i>
-                        <i class="bi bi-twitter icons">&nbsp;nnamkubb</i>
-                    </ul>
+                <div class="col-9" style="font-size: 20px;">
+                    <p>234 ม.8 ถ. ทุ่งสุขลา ตำบลทุ่งสุขลา อำเภอศรีราชา ชลบุรี 20230</p>
+                </div>
+            </div>
+            <h2>เบอร์โทร</h2>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-9" style="font-size: 20px;">
+                    <p>090-XXX-XXXX</p>
+                </div>
+            </div>
+            <h2>Social Media</h2>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-1"><a href="facebook.com" target="_blank">
+                        <h1><i class="bi bi-facebook"></i></h1>
+                    </a>
+                </div>
+                <div class="col-1"><a href="instagram.com" target="_blank">
+                        <h1><i class="bi bi-instagram"></i></h1>
+                    </a>
+                </div>
+                <div class="col-1"><a href="line.com" target="_blank">
+                        <h1><i class="bi bi-line"></i></h1>
+                    </a>
+                </div>
+                <div class="col-1"><a href="twitter.com" target="_blank">
+                        <h1><i class="bi bi-twitter"></i></h1>
+                    </a>
+                </div>
                 <div class="section" style="padding-bottom: 50px;">
                 </div>
             </div>
         </div>
-    </div>
-</div>
-    <app-footer></app-footer>

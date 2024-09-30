@@ -1,16 +1,16 @@
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-md-4" *ngFor="let product of products | async">
-      <div class="card">
-        <img [src]="product.Product_Picture" class="card-img-top" alt="Product Image">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.Product_Name }}</h5>
-          <p class="card-text">ขนาด: {{ product.Product_Size }} มิลลิลิตร</p>
-          <p class="card-text">ราคา: {{ product.Product_Price }} บาท</p>
-          <!-- Use 'product' instead of 'Products' -->
-          <a class="btn btn-primary d-flex justify-content-center" (click)="addToCart(product)">ใส่รถเข็น</a>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let product of products | async">
+        <div class="card">
+          <img [src]="product.Product_Picture" routerLink="product.Product_Path" class="card-img-top" alt="Product Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.Product_Name }}</h5>
+            <p class="card-text">ขนาด: {{ product.Product_Size }} มิลลิลิตร</p>
+            <p class="card-text">ราคา: {{ product.Product_Price }} บาท</p>
+            <a class="btn btn-primary d-flex justify-content-center">ใส่รถเข็น</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  

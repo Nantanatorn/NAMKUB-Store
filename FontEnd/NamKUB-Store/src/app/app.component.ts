@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'NamKUB-Store';
   showHeader = true;
-  
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(() => {
       const currentRoute = this.router.url;
+
       this.showHeader = !(currentRoute.includes('login') || currentRoute.includes('register'));
     });
   }
