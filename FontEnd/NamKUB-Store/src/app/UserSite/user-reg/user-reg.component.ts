@@ -2,8 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../register.service'; // อย่าลืมนำเข้า service
-
+import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+
+
+
 @Component({
   selector: 'app-user-reg',
   templateUrl: './user-reg.component.html',
@@ -12,7 +15,7 @@ import Swal from 'sweetalert2';
 export class UserRegComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private registerService: RegisterService) { }
+  constructor(private fb: FormBuilder, private registerService: RegisterService, private router:Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -21,11 +24,15 @@ export class UserRegComponent implements OnInit {
       phone: ['', [Validators.required, Validators.maxLength(10)]],
       username: ['', [Validators.required, Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      picture: [''],
       password: ['', [Validators.required, Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required, Validators.maxLength(50)]]
     }, { validators: this.passwordMatchValidator });
   }
 
+  gologin() {
+    this.router.navigate(['/']);
+  }
   onSubmit(): void {
     console.log('Form submit triggered');
     if (this.registerForm.valid) {
@@ -40,6 +47,8 @@ export class UserRegComponent implements OnInit {
             icon: "success"
           });
           console.log('Registration successful', response);
+          this.router.navigate(['']);
+          
         },
         error => { 
           Swal.fire({
@@ -69,4 +78,15 @@ export class UserRegComponent implements OnInit {
     }
     return null;
   }
+  onFileChange(event: Event){
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length){
+
+      this.registerForm.patchValue({
+        picture : input.files[0].name
+      })
+    }
+  }
+
+
 }

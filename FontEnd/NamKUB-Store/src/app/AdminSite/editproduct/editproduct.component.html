@@ -1,14 +1,14 @@
 <app-admin-home/>
 <div class="bg">
 <div class="container">
-    <h1 class="hehe text-light">ข้อมูลสินค้า</h1>
+    <h2 class="hehe ">Product Editor </h2>
     
     <button class="add-product-btn" (click)="openAddProductModal()">Add Product</button>
   
     <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
             <span class="close-btn" (click)="closeModal()">&times;</span>
-            <h1>Add Product</h1>
+            <h3>Add Product</h3>
   
             <!-- Form starts here -->
             <form 
@@ -28,7 +28,7 @@
                             }">
                           <div class="invalid-feedback"
                             *ngIf="addproductform.get('Product_Name').invalid && addproductform.get('Product_Name').touched">
-                            กรุณากรอกชื่อสินค้า
+                            Please fill Product Name
                           </div>
                         </div>
                         
@@ -48,7 +48,7 @@
                             }">
                           <div class="invalid-feedback"
                             *ngIf="addproductform.get('Product_Size').invalid && addproductform.get('Product_Size').touched">
-                            กรุณาใส่ขนาดสินค้า หน่วย มล
+                            Please fill Size (mL)
                           </div>
                         </div>
   
@@ -60,21 +60,45 @@
                             }">
                           <div class="invalid-feedback"
                             *ngIf="addproductform.get('Product_Price').invalid && addproductform.get('Product_Price').touched">
-                            กรุณาใส่ราคาสินค้า
+                            Please fill Product Price
                           </div>
                         </div>
   
                         <!-- Sup_ID -->
                         <div class="form-group">
                           <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
-                          <select class="form-select" aria-label="Default select example">
+                          <select id="Sup_ID" formControlName="Sup_ID" class="form-select"  aria-label="Default select example">
                             <option selected>Select Supplier</option>
-                            <option value="1">Crystal Factory</option>
-                            <option value="2">Singha Factory</option>
-                            <option value="3">Minere Factory</option>
-                            <option value="4">Nestre Factory</option>
+                            <option value="1">Sermsuk (Crystal)</option>
+                            <option value="2">Singha Corporation</option>
+                            <option value="3">Mineré Thailand</option>
+                            <option value="4">Nestle Thailand</option>
                           </select>
                         </div>
+
+                        <div class="form-group">
+                          <!-- <label for="Product_Price" class="form-label">ราคาสินค้า :</label> -->
+                          <input id="StockQuantity" type="number" formControlName="StockQuantity" class="form-control" placeholder="StockQuantity" [ngClass]="{
+                            'is-invalid': addproductform.get('StockQuantity').invalid && addproductform.get('StockQuantity').touched
+                          }">
+                        <div class="invalid-feedback"
+                          *ngIf="addproductform.get('StockQuantity').invalid && addproductform.get('StockQuantity').touched">
+                          Please fill Stock Quantity 
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <!-- <label for="Product_Price" class="form-label">ราคาสินค้า :</label> -->
+                        <input id="SupUnitPrice" type="number" formControlName="SupUnitPrice" class="form-control" placeholder="SupUnitPrice" [ngClass]="{
+                          'is-invalid': addproductform.get('SupUnitPrice').invalid && addproductform.get('SupUnitPrice').touched
+                        }">
+                      <div class="invalid-feedback"
+                        *ngIf="addproductform.get('SupUnitPrice').invalid && addproductform.get('SupUnitPrice').touched">
+                        Please fill SupUnitPrice
+                      </div>
+                    </div>
+
+
                     </div>
                 </div>
   
@@ -86,29 +110,115 @@
             <!-- Form ends here -->
         </div>
     </div>
+    <!---------Edit Product Modal-------------------->
+
+    <div class="modal" *ngIf="isModalOpen1">
+      <div class="modal-content">
+          <span class="close-btn" (click)="closeModal1()">&times;</span>
+          <h3>Update Product</h3>
+
+          <!-- Form starts here -->
+          <form 
+                [formGroup]="UpdateProductform"
+                (ngSubmit)="onUpdate()"
+                class="needs-validation"
+                novalidate
+          > 
+              <div class="modal-body">
+                  <div class="form-section" style="padding-right: 5rem;">
+                      <!-- Product Name -->
+                      <div class="form-group" style="width: 100%;">
+                        <!-- <label for="Product_Name" class="form-label">ชื่อสินค้า :</label> -->
+                        <input id="Product_Name" type="text" formControlName="Product_Name" class="form-control" placeholder="ชื่อสินค้า"
+                          [ngClass]="{
+                            'is-invalid': addproductform.get('Product_Name').invalid && addproductform.get('Product_Name').touched
+                          }">
+                        <div class="invalid-feedback"
+                          *ngIf="addproductform.get('Product_Name').invalid && addproductform.get('Product_Name').touched">
+                          Please fill Product Name
+                        </div>
+                      </div>
+                      
+
+                      <!-- Product Picture -->
+                      <div class="form-group">
+                          <!-- <label for="Product_Picture" class="form-label">รูปภาพสินค้า :</label> -->
+                          <input id="Product_Picture" type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" >
+                      </div>
+
+                      <!-- Product Size -->
+                      <div class="form-group">
+                          <!-- <label for="Product_Size" class="form-label">ขนาดสินค้า :</label> -->
+                          <input id="Product_Size" type="number" formControlName="Product_Size" class="form-control" placeholder="ขนาดสินค้า" 
+                          >
+                          
+                      </div>
+
+                      <!-- Product Price -->
+                      <div class="form-group">
+                          <!-- <label for="Product_Price" class="form-label">ราคาสินค้า :</label> -->
+                          <input id="Product_Price" type="number" formControlName="Product_Price" class="form-control" placeholder="ราคาสินค้า" [ngClass]="{
+                            'is-invalid': addproductform.get('Product_Price').invalid && addproductform.get('Product_Price').touched
+                          }">
+                        <div class="invalid-feedback"
+                          *ngIf="addproductform.get('Product_Price').invalid && addproductform.get('Product_Price').touched">
+                          Please fill Product Price
+                        </div>
+                      </div>
+
+                      <!-- Sup_ID -->
+                      <div class="form-group">
+                        <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
+                        <select id="Sup_ID" formControlName="Sup_ID" class="form-select"  aria-label="Default select example">
+                          <option selected>Select Supplier</option>
+                          <option value="1">Sermsuk (Crystal)</option>
+                          <option value="2">Singha Corporation</option>
+                          <option value="3">Mineré Thailand</option>
+                          <option value="4">Nestle Thailand</option>
+                        </select>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Submit button -->
+              <div class="modal-footer">
+                  <button type="submit" class="confirm-btn">Update</button>
+              </div>
+          </form> 
+          <!-- Form ends here -->
+      </div>
+  </div>
   </div>
   
-  
-  <div class="product-card " *ngFor="let product of products | async">
-    
-    <div class="photo">
-        <img [src]="product.Product_Picture" alt="Photo" style="width: 180px; height: 180px;">
-    </div>
-    
-      <div class="details ">
+
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for products" />
+    <button (click)="searchProducts()">Search</button>
+  </div>
+  <div *ngIf="products$ | async as products">
+    <div *ngIf="products.length > 0; else noData">
+      <div class="product-card" *ngFor="let product of products">
+        <div class="photo">
+          <img [src]="product.Product_Picture" alt="Photo" style="width: 180px; height: 180px;">
+        </div>
+        <div class="details">
           <p><strong>ID</strong>: {{ product.Product_ID }}</p>
-          <p><strong>ชื่อ</strong>: {{ product.Product_Name }}</p>
-          <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p>
-          <p><strong>ราคา</strong>: {{ product.Product_Price }}</p>
-       <!-- <p><strong>ขนาด</strong>: {{ product.Product_Size }}</p> -->
-
+          <p><strong>Title</strong>: {{ product.Product_Name }}</p>
+          <p><strong>Size</strong>: {{ product.Product_Size }}</p>
+          <p><strong>Price</strong>: {{ product.Product_Price }}</p>
+          <p><strong>Stock</strong>: {{ product.Stock_Quantity }}</p>
+        </div>
+        <div class="edit-btn">
+          <button class="btn btn-primary" (click)="editProduct(product)">Edit</button>
+        </div>
+        <div class="delete-btn">
+          <button type="button" class="btn btn-danger" (click)="deleteProduct(product.Product_ID)">Delete</button>
+        </div>
       </div>
-      <div class="edit-btn" >
-          <button class ="btn btn-primary" (click)="updateProduct(product.Product_ID)" >Edit</button>
-      </div>
-      <div class="delete-btn">
-        <button type="button" class="btn btn-danger" (click)="deleteProduct(product.Product_ID )">Delete</button>
-      </div>
-  </div> 
-
+    </div>
+  
 </div>
+
+<ng-template #noData>
+  <p>No products available.</p>
+</ng-template>

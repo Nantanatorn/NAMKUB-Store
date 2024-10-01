@@ -51,7 +51,6 @@
 
 button {
     padding: 5px 10px;
-    background-color: #ccc;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -67,6 +66,7 @@ button {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
+    
   }
   
   .modal-content {
@@ -111,7 +111,7 @@ button {
   
   .form-section {
     flex: 2;
-    margin-left: 20px;
+    margin-left: 5rem;
   }
   
   .form-group {
@@ -136,6 +136,7 @@ button {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #e0e0e0;
+    
   }
 
   
@@ -162,3 +163,6 @@ button {
     margin-top: 0.25rem;
     text-align: left; /* Align error message with the input field */
   }
+.bg{
+  margin-left: 300px;
+}

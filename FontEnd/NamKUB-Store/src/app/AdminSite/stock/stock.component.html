@@ -1,0 +1,154 @@
+<app-admin-home/>
+<div class="container " >
+    <h3 style="text-align: center;">Stock Manager</h3>
+        
+    <div class="search-container">
+        <div class="dropdown-container">
+          <label for="dropdown">show</label>
+          <select id="dropdown" class="dropdown">
+            <option value="10">All</option>
+            <option value="10">6</option>
+            <option value="20">12</option>
+            <option value="30">24</option>
+            <option value="40">30</option>
+          </select>
+        </div>
+        
+        <input type="text" [(ngModel)]="searchQuery1" placeholder="Search by Product Name" class="search-input">
+        <button class="search-btn" (click)="searchstock()">Search</button>
+      </div>
+      
+      
+        
+        <p style="margin-top: 1rem;">Stock Detail</p>
+        <table class="table">
+            <thead>
+            <tr>   
+                <th>Stock ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Supplier Name</th>
+                <th>Restock</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stock of stocks | async">
+                    <td>{{ stock.Stock_ID }}</td>
+                    <td>{{ stock.Product_Name}}</td>
+                    <td>{{ stock.Stock_Quantity}}</td>
+                    <td>{{ stock.Sup_Unitprice}} THB</td>
+                    <td>{{ stock.Sup_Name}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)="RestockModal(stock)"> Restock  </button></td>
+                
+                    
+                </tr>
+            </tbody>
+        </table>
+</div> 
+    <div class="container ">
+        
+        <div class="search-container">
+            <div class="dropdown-container">
+              <label for="dropdown">show</label>
+              <select id="dropdown" class="dropdown">
+                <option value="10">All</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </div>
+            <input type="text"  [(ngModel)]="searchQuery" placeholder="Search by Product || ID "  class="form-control"/>
+            <input type="date" [(ngModel)]="searchdate" placeholder="Search by Date" />
+            <button class="search-btn" (click)="searchRestock()">Search</button>
+          </div>
+          
+        
+        <!-- Search by Date -->
+        
+        <p style="margin-top: 1rem;">Restock History</p>
+        <table class="table">
+            <thead>
+            <tr> 
+                <th>Date</th>  
+                <th>Restock ID</th>
+                <th>StockID</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Total</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let restock of restocks | async">
+                    <td>{{ restock.Restock_Date }}</td>
+                    <td>{{ restock.Restock_ID }}</td>
+                    <td>{{ restock.Stock_ID }}</td>
+                    <td>{{ restock.Product_Name}}</td>
+                    <td>{{ restock.Restock_Quantity }}</td>
+                    <td>{{ restock.Restock_Unitprice}} THB</td>
+                    <td>{{ restock.Restock_TotalPrice}} THB</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+
+     <div class="modal " *ngIf="isModalOpen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Restock Product</h3>
+          <span class="close-btn" (click)="closeRestockMoal()">&times;</span>
+          </div>
+          <form 
+                [formGroup]="RestockForm"
+                (ngSubmit)="onSubmit()"
+                class="needs-validation"
+                novalidate
+          > 
+          <div class="modal-body">
+            <div class="form-section" style="padding-right: 5rem;">
+              
+                <div class="form-group" style="width: 100%;">
+                  <!-- เพิ่ม label ก่อน input box -->
+                  <label for="Restock_Quantity">Quantity :</label>
+                  <input id="Restock_Quantity" type="text" formControlName="Restock_Quantity" class="form-control" placeholder="Quantity"
+                    [ngClass]="{
+                      'is-invalid': RestockForm.get('Restock_Quantity').invalid && RestockForm.get('Restock_Quantity').touched
+                    }">
+                  <div class="invalid-feedback"
+                    *ngIf="RestockForm.get('Restock_Quantity').invalid && RestockForm.get('Restock_Quantity').touched">
+                    Please fill Quantity
+                  </div>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                  <!-- เพิ่ม label ก่อน input box -->
+                  <label for="Restock_Unitprice">Unitprice :</label>
+                  <input id="Restock_Unitprice" type="text" formControlName="Restock_Unitprice" class="form-control" placeholder="Unitprice"
+                    [ngClass]="{
+                      'is-invalid': RestockForm.get('Restock_Unitprice').invalid && RestockForm.get('Restock_Unitprice').touched
+                    }">
+                  <div class="invalid-feedback"
+                    *ngIf="RestockForm.get('Restock_Unitprice').invalid && RestockForm.get('Restock_Unitprice').touched">
+                    Please fill Sup_Unitprice
+                  </div>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                  <!-- เพิ่ม label ก่อน input box -->
+                  <label for="Stock_ID">Stock_ID :</label>
+                  <input id="Stock_ID" type="text" formControlName="Stock_ID" class="form-control" placeholder="Stock_ID" readonly>
+                  
+                </div>
+
+            </div>
+        </div>
+
+
+              <div class="modal-footer">
+                  <button type="submit" class="confirm-btn">Confirm</button>
+              </div>
+          </form> 
+      </div>
+ </div> 
