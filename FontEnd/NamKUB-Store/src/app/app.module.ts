@@ -5,6 +5,7 @@ import {MatButtonModule}from '@angular/material/button';
 import{MatIconModule} from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatBadgeModule } from '@angular/material/badge';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 
@@ -78,7 +79,7 @@ import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.compo
     DashboardComponent,
     StockComponent,
     EditProfileComponent,
-
+    
     
   ],
   imports: [
@@ -86,7 +87,8 @@ import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.compo
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatBadgeModule
   ],
   providers: [
     provideClientHydration(),AuthService,NAMKUBAPIService, provideAnimationsAsync(),
