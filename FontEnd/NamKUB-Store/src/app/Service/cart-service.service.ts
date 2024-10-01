@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export class CartServiceService {
   private cart: any[] =[];
 
-  constructor() {this.loadCartFromLocalStorage() }
+  constructor() {this.loadCartFromLocalStorage(); }
   addToCart(product: any) {
     // ตรวจสอบว่าสินค้ามีอยู่ในรถเข็นแล้ว
     const sameProduct = this.cart.find(p => p.Product_Name === product.Product_Name);
@@ -29,12 +29,48 @@ export class CartServiceService {
         icon: "success"
       });
     }
-    
+    this.saveCartToLocalStorage();
   }
   getCart(){
     return this.cart;
   }
   clearCart(){
+
     this.cart=[];
+
   }
+  public saveCartToLocalStorage(){
+    localStorage.setItem('cart',JSON.stringify(this.cart));// แปลงjson เก็บใน localStorage
+    
+  }
+  public loadCartFromLocalStorage(){
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart){
+      this.cart =JSON.parse(savedCart);
+    }
+  }
+  
+  public removeFromCart(product: any) {
+  
+
+    //loop checkout ว่า ตรงไหม
+    const index = this.cart.findIndex(p => 
+        p.Product_Name === product.Product_Name && p.product_Size === product.product_Size
+    );
+
+    console.log('Index found:', index); // ตรวจสอบค่า index
+
+    if (index !== -1) {
+      this.cart.splice(index, 1);
+      Swal.fire({
+        title: "ลบสินค้า",
+        text: "ลบสินค้าจากรถเข็นสำเร็จ",
+        icon: "success"
+      });
+      this.saveCartToLocalStorage();
+    } else {
+      console.log('Product not found in cart');
+    }
+}
+
 }

@@ -5,6 +5,10 @@
 .col-3 p{
     font-size: 18px;
 }
+.row{
+  text-align: center;
+  align-items: center;   
+}
 .modal {
     display: block;
     justify-content: center;
