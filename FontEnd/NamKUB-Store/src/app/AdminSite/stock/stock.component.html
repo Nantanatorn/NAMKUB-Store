@@ -14,7 +14,7 @@
           </select>
         </div>
         
-        <input type="text" [(ngModel)]="searchQuery1" placeholder="Search by Product Name" class="search-input">
+        <input type="text" [(ngModel)]="searchQuery1" placeholder="Search by Product Name" class="search-input" (keyup.enter)="searchstock()">
         <button class="search-btn" (click)="searchstock()">Search</button>
       </div>
       
@@ -60,7 +60,8 @@
                 <option value="40">40</option>
               </select>
             </div>
-            <input type="text"  [(ngModel)]="searchQuery" placeholder="Search by Product || ID "  class="form-control"/>
+
+            <input type="text"  [(ngModel)]="searchQuery" placeholder="Search by Product || ID "  class="form-control"  (keyup.enter)="searchRestock()" />
             <input type="date" [(ngModel)]="searchdate" placeholder="Search by Date" />
             <button class="search-btn" (click)="searchRestock()">Search</button>
           </div>

@@ -17,6 +17,9 @@
 
     <div class="row">
         <div class="col">
+            <p>รูปภาพสินค้า</p>
+        </div>
+        <div class="col">
             <p>สินค้า</p>
         </div>
         <div class="col">
@@ -29,16 +32,19 @@
             <p>ราคารวม (บาท)</p>
         </div>
         <div class="col">
-            <p></p>
+            <p class="text-danger bi bi-trash-fill" (click)="removeAll()" style="cursor: pointer;">ลบสินค้าทั้งหมด</p>
         </div>
         <hr>
     </div>
 
     <div class="row" *ngFor="let product of cartProducts">
         <div class="col">
-            <!-- <input type="checkbox" class="form-check-input" [(ngModel)]="product.selected"
-                (change)="checkSelectAllStatus()"> -->
+            
             <img [src]="product.Product_Picture" alt="Product Image" style="width: 100px; height: 100px;">
+            
+        </div>
+        <div class="col">
+            
             <span>{{ product.Product_Name }}</span>
         </div>
         <div class="col">
@@ -69,15 +75,12 @@
         <h4>ยอดรวมทั้งหมด: {{ totalPrice }} บาท</h4>
     </div>
     <div class="row">
-        <div class="col">
-            <button class="btn btn-danger" (click)="removeAll()">ลบทั้งหมด</button>
+        <div class="col-6">
+           
         </div>
-        <div class="col">
+        <div class="col-6">
             <button class="btn btn-primary" (click)="openModal()">ชำระเงิน</button> 
         </div>
-        
-        
-        
     </div>
     
 </div>

@@ -192,7 +192,8 @@
   
 
   <div class="search-container">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for products" />
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for products" (keyup.enter)="searchProducts()"/>
+    
     <button (click)="searchProducts()">Search</button>
   </div>
   <div *ngIf="products$ | async as products">

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -7,7 +8,7 @@ import Swal from 'sweetalert2';
 export class CartServiceService {
   private cart: any[] =[];
 
-  constructor() {this.loadCartFromLocalStorage(); }
+  constructor(private router: Router) {this.loadCartFromLocalStorage(); }
   addToCart(product: any) {
     // ตรวจสอบว่าสินค้ามีอยู่ในรถเข็นแล้ว
     const sameProduct = this.cart.find(p => p.Product_Name === product.Product_Name);
@@ -20,13 +21,27 @@ export class CartServiceService {
         text: "เพิ่มสินค้าลงรถเข็น",
         icon: "success"
       });
+     
+      
     } else {
       // ถ้าไม่มีสินค้าในรถเข็น ให้เพิ่มสินค้าใหม่พร้อมกำหนดจำนวนเริ่มต้นเป็น 1
       this.cart.push({ ...product, quantity: 1 });
+      
       Swal.fire({
         title: "สำเร็จ",
-        text: "เพิ่มสินค้าลงรถเข็น",
-        icon: "success"
+        text: "คุณต้องการที่จะเลือกซื้อต่อไหม",
+        
+        showCancelButton: true,
+        confirmButtonColor: "#75df72",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "สั่งซื้อทันที!",
+        cancelButtonText: "หยิบใส่ตะกร้า",
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.goCart();
+        }
+
       });
     }
     this.saveCartToLocalStorage();
@@ -62,15 +77,14 @@ export class CartServiceService {
 
     if (index !== -1) {
       this.cart.splice(index, 1);
-      Swal.fire({
-        title: "ลบสินค้า",
-        text: "ลบสินค้าจากรถเข็นสำเร็จ",
-        icon: "success"
-      });
+      
       this.saveCartToLocalStorage();
     } else {
       console.log('Product not found in cart');
     }
 }
+  goCart() {
+  this.router.navigateByUrl('/cart')
+  }
 
 }
