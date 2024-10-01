@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export class CartServiceService {
   private cart: any[] =[];
 
-  constructor() { }
+  constructor() {this.loadCartFromLocalStorage() }
   addToCart(product: any) {
     // ตรวจสอบว่าสินค้ามีอยู่ในรถเข็นแล้ว
     const sameProduct = this.cart.find(p => p.Product_Name === product.Product_Name);
