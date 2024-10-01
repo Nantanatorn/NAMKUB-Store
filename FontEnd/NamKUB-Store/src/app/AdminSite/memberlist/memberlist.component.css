@@ -221,3 +221,6 @@ table tr:nth-child(even) {
 .bg{
   font-family:"Rajdhani", sans-serif; 
 }
+h2{
+  font-family: "Rubik Bubbles", system-ui;
+}
