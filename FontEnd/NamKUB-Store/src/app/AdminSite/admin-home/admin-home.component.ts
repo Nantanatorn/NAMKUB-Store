@@ -18,7 +18,7 @@ export class AdminHomeComponent implements OnInit {
   isSidebarOpen: boolean = true; // ค่าเริ่มต้นให้ Sidebar เปิดอยู่
 
   toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen; // สลับสถานะการแสดง Sidebar
+    this.isSidebarOpen = !this.isSidebarOpen; 
   }
 
   ngOnInit(): void {

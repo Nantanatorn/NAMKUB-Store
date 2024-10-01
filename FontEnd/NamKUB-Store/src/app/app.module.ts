@@ -6,6 +6,8 @@ import{MatIconModule} from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { AboutUsComponent } from './UserSite/about-us/about-us.component';
@@ -89,7 +91,8 @@ import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.compo
     MatBadgeModule
   ],
   providers: [
-    provideClientHydration(),AuthService,NAMKUBAPIService, provideAnimationsAsync()
+    provideClientHydration(),AuthService,NAMKUBAPIService, provideAnimationsAsync(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
