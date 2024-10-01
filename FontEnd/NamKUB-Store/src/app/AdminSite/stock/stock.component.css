@@ -146,7 +146,7 @@
   .search-btn {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #3b3f60;
     color: white;
     border: none;
     border-radius: 5px;
@@ -154,5 +154,75 @@
   }
   
   .search-btn:hover {
-    background-color: #0056b3;
+    background-color: #36304e;
+    color: #fff
   }
+  button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3b3f60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover{
+     background-color: #36304e;
+    color: #fff
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    padding-bottom: 40px;
+    box-shadow: 5px 5px 10px #5918ae4d;
+}
+
+table, th, td {
+    border: none;
+}
+
+tr {
+    position: relative; 
+}
+
+tr::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 25px; 
+    right: 25px; 
+    height: 1px; 
+    background-color: #a3a3a3; 
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: none;
+}
+
+th {
+    background-color: #36304e;
+    color: #a3a3a3;;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 30px;
+}
+
+td {
+    background-color: #282a3f;
+    color: #a3a3a3;
+}
+
+table tr:nth-child(even) {
+    background: none;
+    color: #a3a3a3;
+}
+h2{
+  font-family: "Rubik Bubbles", system-ui;
+}
+
+.bg{
+  font-family:"Rajdhani", sans-serif; 
+}

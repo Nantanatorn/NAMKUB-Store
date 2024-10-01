@@ -192,7 +192,7 @@
   
 
   <div class="search-container">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for products" />
+    <input type="text" [(ngModel)]="searchQuery" class="search" placeholder="Search for products" />
     <button (click)="searchProducts()">Search</button>
   </div>
   <div *ngIf="products$ | async as products">
@@ -217,6 +217,7 @@
       </div>
     </div>
   
+</div>
 </div>
 
 <ng-template #noData>

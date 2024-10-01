@@ -2,11 +2,15 @@
     padding-left: 200px;
     background: none;
 }
+h2{
+    font-family: "Rubik Bubbles", system-ui;
+}
 
 .header{
     padding-top: 2rem;
     text-align: center;
 }
+
 
 .filter{
     border: 2px solid black;
@@ -28,9 +32,16 @@
 
 .formyear,.formmonth{
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
 }
-
+button{
+    background-color: #3b3f60;
+    border: none;
+}
+button:hover{
+    background-color: #36304e;
+    color: #fff;
+}
 .showvalue{
     display: flex;
 }
@@ -54,30 +65,54 @@ table {
     border-collapse: collapse;
     margin: 20px auto;
     padding-bottom: 40px;
+    box-shadow: 5px 5px 10px #5918ae4d;
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: none;
+}
+
+tr {
+    position: relative; 
+}
+
+tr::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 25px; 
+    right: 25px; 
+    height: 1px; 
+    background-color: #a3a3a3; 
 }
 
 th, td {
     padding: 12px;
     text-align: center;
+    border: none;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #36304e;
+    color: #a3a3a3;;
     font-weight: bold;
+    font-size: 20px;
+    padding: 30px;
 }
 
 td {
-    background-color: #ffffff;
+    background-color: #282a3f;
+    color: #a3a3a3;
 }
 
 table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background: none;
+    color: #a3a3a3;
 }
 
 .filter{
     background:none;
 }
+.bg{
+    font-family:"Rajdhani", sans-serif; 
+  }
