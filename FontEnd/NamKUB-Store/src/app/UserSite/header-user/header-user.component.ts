@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Users } from '../../model/products';
+import { NAMKUBAPIService } from '../../Service/namkub-api.service';
+
+
 
 @Component({
   selector: 'app-header-user',
@@ -13,18 +18,22 @@ export class HeaderUserComponent implements OnInit {
   username: string | null = null;
   isDarkMode: boolean = false;
   isProfilePopupVisible = false;
+  user = new BehaviorSubject<Users[]>([]);
+  picture: string | null;
 
   constructor(
     private router: Router,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: any, 
-    private authService: AuthService
+    private authService: AuthService,
+    private userapi : NAMKUBAPIService
   ) { }
 
   ngOnInit(): void {
     // ตรวจสอบว่ากำลังทำงานในเบราว์เซอร์
     if (isPlatformBrowser(this.platformId)) {
       this.username = this.authService.getUsername();
+      this.picture = this.authService.getPicture();
 
       // ตรวจสอบว่ามีการเรียกใช้งาน localStorage ได้หรือไม่
       const storedTheme = localStorage.getItem('theme');
@@ -41,6 +50,8 @@ export class HeaderUserComponent implements OnInit {
       this.updateProfilePopupBackground(); // อัปเดตพื้นหลังของ profile popup ตามโหมดที่ใช้อยู่
     }
   }
+
+  
 
   // ฟังก์ชันสลับโหมดมืดและสว่าง
   toggleDarkMode(): void {

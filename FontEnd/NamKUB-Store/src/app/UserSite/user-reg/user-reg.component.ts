@@ -24,6 +24,7 @@ export class UserRegComponent implements OnInit {
       phone: ['', [Validators.required, Validators.maxLength(10)]],
       username: ['', [Validators.required, Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      picture: [''],
       password: ['', [Validators.required, Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required, Validators.maxLength(50)]]
     }, { validators: this.passwordMatchValidator });
@@ -77,4 +78,15 @@ export class UserRegComponent implements OnInit {
     }
     return null;
   }
+  onFileChange(event: Event){
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length){
+
+      this.registerForm.patchValue({
+        picture : input.files[0].name
+      })
+    }
+  }
+
+
 }

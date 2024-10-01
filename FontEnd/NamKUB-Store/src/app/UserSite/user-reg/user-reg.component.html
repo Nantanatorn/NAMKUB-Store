@@ -14,7 +14,9 @@
 
     <div class="input-field">
       <input type="email" formControlName="email" placeholder="Email" maxlength="50" required class="box"
-        style="width: 508px;" />
+        style="width: 508px;" />  <br>
+      <input type="file" formControlName="picture" (change)="onFileChange($event)" accept="image/*" style="width: 508px;" >
+      
     </div>
 
     <div class="input-field">
