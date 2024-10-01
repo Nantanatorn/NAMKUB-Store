@@ -29,7 +29,8 @@ module.exports.loginUser = async(req,res)=>{
                 var payload ={
                     user: {
                         username:user.username,
-                        role:user.role
+                        role:user.role,
+                        picture:user.picture
                     }
                 }
                 jwt.sign(payload, 'jwtsecret', { expiresIn: '1h' }, (err, token) => {

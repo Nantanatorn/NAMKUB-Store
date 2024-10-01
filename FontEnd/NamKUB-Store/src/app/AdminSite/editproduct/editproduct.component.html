@@ -150,10 +150,8 @@
                       <div class="form-group">
                           <!-- <label for="Product_Size" class="form-label">ขนาดสินค้า :</label> -->
                           <input id="Product_Size" type="number" formControlName="Product_Size" class="form-control" placeholder="ขนาดสินค้า" 
-                          [ngClass]="{
-                            'is-invalid': addproductform.get('Product_Size').invalid && addproductform.get('Product_Size').touched
-                          }">
-                          Please fill Size (mL)
+                          >
+                          
                       </div>
 
                       <!-- Product Price -->
@@ -192,31 +190,34 @@
   </div>
   </div>
   
-  
-  <div class="product-card " *ngFor="let product of products | async">
-    
-    <div class="photo">
-        <img [src]="product.Product_Picture" alt="Photo" style="width: 180px; height: 180px;">
-    </div>
-    
-      <div class="details ">
+
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for products" />
+    <button (click)="searchProducts()">Search</button>
+  </div>
+  <div *ngIf="products$ | async as products">
+    <div *ngIf="products.length > 0; else noData">
+      <div class="product-card" *ngFor="let product of products">
+        <div class="photo">
+          <img [src]="product.Product_Picture" alt="Photo" style="width: 180px; height: 180px;">
+        </div>
+        <div class="details">
           <p><strong>ID</strong>: {{ product.Product_ID }}</p>
           <p><strong>Title</strong>: {{ product.Product_Name }}</p>
           <p><strong>Size</strong>: {{ product.Product_Size }}</p>
           <p><strong>Price</strong>: {{ product.Product_Price }}</p>
-          <p><strong>Stock</strong>: {{ product.Stock_Quantity}}</p> 
-
+          <p><strong>Stock</strong>: {{ product.Stock_Quantity }}</p>
+        </div>
+        <div class="edit-btn">
+          <button class="btn btn-primary" (click)="editProduct(product)">Edit</button>
+        </div>
+        <div class="delete-btn">
+          <button type="button" class="btn btn-danger" (click)="deleteProduct(product.Product_ID)">Delete</button>
+        </div>
       </div>
-      <div class="edit-btn" >
-          <button class ="btn btn-primary" (click)="editProduct(product)" >Edit</button>
-      </div>
-      <div class="delete-btn">
-        <button type="button" class="btn btn-danger" (click)="deleteProduct(product.Product_ID )">Delete</button>
-      </div>
-  </div> 
-
+    </div>
+  
 </div>
-
 
 <ng-template #noData>
   <p>No products available.</p>

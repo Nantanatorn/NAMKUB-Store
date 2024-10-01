@@ -22,10 +22,7 @@
     <input class="form-control me-2" type="search" placeholder="Search" style="background-color:#AFD5F0;" aria-label="Search">
     <button class="btn btn-outline-dark" type="submit" style="background-color:#AFD5F0;">Search</button>
   </form>
-  <div class="ms-auto d-flex align-items-center">
-    <span *ngIf="username" class="nav-link" style="font-size: 16px; margin-right: 1rem;">
-      {{ username }}
-    </span>
+  <div class="ms-auto d-flex align-items-center profile">
     <div class="toggle">
       <div class="moon-sun">
         <i class="bi" [ngClass]="isDarkMode ? 'bi bi-sun' : 'bi bi-moon'"></i>
@@ -36,6 +33,19 @@
         <span class="slider round"></span>
       </label>
     </div>
+    <span *ngIf="username" (click)="toggleProfilePopup()" class="nav-link" style="font-size: 16px; margin-right: 1rem; cursor: pointer;">
+      {{ username }}
+    </span>
+    <div id="profilePopup" class="profile-popup" [ngStyle]="{ 'visibility': isProfilePopupVisible ? 'visible' : 'hidden' }">
+      <div class="profile-popup-content">
+        <img src="{{picture}}" alt="Profile image" class="profile-image">
+        <p>Hello {{ username }}</p>
+        <button class="edit-profile-btn" routerLink="/edit-profile" (click)="editProfile()">Edit Profile</button>
+      </div>
+    </div>
+    
+    
+    
     <a class="nav-link bi bi-cart3" routerLink="/cart" style="font-size: 20px; text-decoration: none;">&nbsp; &nbsp;</a>
     <a class="nav-link bi bi-box-arrow-right" (click)="logout()" href="/" style="font-size: 20px; text-decoration: none;">&nbsp;</a>
   </div>

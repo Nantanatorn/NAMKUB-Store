@@ -11,6 +11,9 @@ export class AuthService {
   private baseUrl = 'http://localhost:3000'; // Adjust URL if necessary
   private usernameSubject = new BehaviorSubject<string | null>(null);
   public username$ = this.usernameSubject.asObservable();
+  public pictureBehaviorSubject = new BehaviorSubject<string | null >(null);
+  public picture = this.pictureBehaviorSubject.asObservable();
+
 
   constructor(private router: Router) {
     // Initialize the username from payload in localStorage if available
@@ -28,7 +31,10 @@ export class AuthService {
     if(token){
       const payload =this.decodeToken(token);
       const username =payload?.user?.username || null;
+      const picture = payload?.user?.picture || null;
       this.usernameSubject.next(username);
+      this.pictureBehaviorSubject.next(picture);
+
     }
   }
 
@@ -76,7 +82,13 @@ export class AuthService {
     }
     return null;
   }
-
+  getPicture(){
+    const token=localStorage.getItem('token');
+    if(token){
+      const payload =this.decodeToken(token);
+      return payload?.user?.picture || null;
+    }
+  }
   // Decode JWT token
   private decodeToken(token: string):any{
     try{

@@ -24,8 +24,7 @@
 }
 
 .back{
-    text-align: right;
-    margin-left: 1300px;
+    right: 0;
     padding: 30px;
     position: absolute;
     

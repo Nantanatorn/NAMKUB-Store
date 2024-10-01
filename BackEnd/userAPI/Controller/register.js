@@ -8,10 +8,10 @@ const jwt = require('jsonwebtoken');
 
 
 module.exports.enrollment = async (req, res) => {
-    const { firstname, lastname, username, email, password, confirmPassword, phone } = req.body;
+    const { firstname, lastname, username, email, picture, password, confirmPassword, phone } = req.body;
     const defaultRole = 'customer';
     // Simple validation
-    if (!firstname || !lastname || !username || !email || !password || !confirmPassword || !phone) {
+    if (!firstname || !lastname || !username || !email || !picture ||  !password || !confirmPassword || !phone) {
         return res.status(400).json({ message: 'Please provide all required fields.' });
     }
 
@@ -43,10 +43,11 @@ module.exports.enrollment = async (req, res) => {
                 .input('lastname', sql.VarChar, lastname)
                 .input('username', sql.VarChar, username)
                 .input('email', sql.VarChar, email)
+                .input('picture',sql.VarChar,picture)
                 .input('password', sql.VarChar, hashedPassword) // Store hashed password
                 .input('phone', sql.VarChar, phone)
                 .input('role', sql.VarChar, defaultRole)
-                .query('INSERT INTO Users (firstname, lastname, username, email, password, phone,role) OUTPUT INSERTED.User_ID VALUES (@firstname, @lastname, @username, @email, @password, @phone,@role)');
+                .query('INSERT INTO Users (firstname, lastname, username, email,picture, password, phone,role) OUTPUT INSERTED.User_ID VALUES (@firstname, @lastname, @username, @email,@picture, @password, @phone,@role)');
 
             const User_ID = insertCustomer.recordset[0].User_ID;
             await transaction.request()

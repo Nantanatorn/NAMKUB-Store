@@ -41,6 +41,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DashboardComponent } from './AdminSite/dashboard/dashboard.component';
 
 import { StockComponent } from './AdminSite/stock/stock.component';
+import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.component';
   
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { StockComponent } from './AdminSite/stock/stock.component';
     NoAccessComponent,
     DashboardComponent,
     StockComponent,
+    EditProfileComponent,
 
     
   ],

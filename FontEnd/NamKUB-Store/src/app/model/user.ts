@@ -3,6 +3,7 @@ export interface User {
     lname? : string;
     phone? : string;
     email? : string;
+    picture? : string;
     password?: string;
     repassword?: string;
 

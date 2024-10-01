@@ -11,7 +11,8 @@ const productsRoute = require('./routes/product');
 const deliver_register=require('./routes/deliver_register')
 const testroute= require('./routes/test')
 const stockroute = require('./routes/stock');
-const orderroute =require('./routes/order')
+const orderroute =require('./routes/order');
+const userroute = require('./routes/user');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +26,7 @@ app.use('/', productsRoute);
 app.use('/',testroute);
 app.use('/',deliver_register);
 app.use('/',stockroute);
+app.use('/',userroute);
 async function connectToDatabase() {
     try{
         await sql.connect(config);
