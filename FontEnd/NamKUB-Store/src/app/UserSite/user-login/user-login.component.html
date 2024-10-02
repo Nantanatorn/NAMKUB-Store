@@ -27,6 +27,7 @@
           [(ngModel)]="password"
           required
           class="box"
+          (keyup.enter)="onLogin()"
         />
         <span (click)="hideShowPass()" class=" {{eyeIcon}}"></span>
       </div> 
