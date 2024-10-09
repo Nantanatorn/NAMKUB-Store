@@ -61,4 +61,16 @@
     color: white;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   }
-  
+  .payment .btn{
+    color: #ffffff;
+  }
+.payment button{
+  background-color: rgb(143, 89, 137);
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.payment button:hover{
+  cursor: pointer;
+  background-color: rgb(99, 198, 255);
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  transition: all .5s ease;
+}
