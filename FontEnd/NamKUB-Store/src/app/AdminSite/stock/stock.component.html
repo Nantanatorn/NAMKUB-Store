@@ -22,6 +22,8 @@
       
         
         <p style="margin-top: 1rem;">Stock Detail</p>
+        <table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+
         <table class="table">
             <thead>
             <tr>   
@@ -117,7 +119,7 @@
                   <!-- เพิ่ม label ก่อน input box -->
                   <label for="Restock_Quantity">Quantity :</label>
                   <input id="Restock_Quantity" type="text" formControlName="Restock_Quantity" class="form-control" placeholder="Quantity"
-                    [ngClass]="{
+                    maxlength="8"     [ngClass]="{
                       'is-invalid': RestockForm.get('Restock_Quantity').invalid && RestockForm.get('Restock_Quantity').touched
                     }">
                   <div class="invalid-feedback"
@@ -129,6 +131,7 @@
                   <!-- เพิ่ม label ก่อน input box -->
                   <label for="Restock_Unitprice">Unitprice :</label>
                   <input id="Restock_Unitprice" type="text" formControlName="Restock_Unitprice" class="form-control" placeholder="Unitprice"
+                    maxlength="8"
                     [ngClass]="{
                       'is-invalid': RestockForm.get('Restock_Unitprice').invalid && RestockForm.get('Restock_Unitprice').touched
                     }">

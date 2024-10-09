@@ -1,2 +1,52 @@
 <app-admin-home/>
-<p>order works!</p>
+<div class="bg">
+<div class="container " >
+    <h2 style="text-align: center;">Order List</h2>
+        
+    <div class="search-container">
+        <div class="dropdown-container">
+          <label for="dropdown">show</label>
+          <select id="dropdown" class="dropdown">
+            <option value="10">All</option>
+            <option value="10">6</option>
+            <option value="20">12</option>
+            <option value="30">24</option>
+            <option value="40">30</option>
+          </select>
+        </div>
+        
+        <input type="text"  placeholder="Search by Product Name" class="search-input">
+        <button class="search-btn" >Search</button> 
+      </div>
+      
+      
+        
+        <p style="margin-top: 1rem;">Stock Detail</p>
+        <table class="table">
+            <thead>
+            <tr>   
+                <th>Date</th>
+                <th>OrderID</th>
+                <th>Product_Name</th>
+                <th>Quantity</th>
+                <th>Total</th>
+        
+                
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of order | async">
+                    <td>{{ order.Order_Date }}</td>
+                    <td>{{ order.Order_ID}}</td>
+                    <td>{{ order.Product_Name}}</td>
+                    <td>{{ order.Order_Quantity}} </td>
+                    <td>{{ order.Total_Price}}</td>
+
+                    
+                
+                    
+                </tr>
+            </tbody>
+        </table>
+</div> 
+</div>

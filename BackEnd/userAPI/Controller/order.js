@@ -82,3 +82,20 @@ module.exports.AddOrder = async (req, res) => {
   }
 };
 
+module.exports.GetOrder = async (req, res) => {
+  try {
+      var pool = await sql.connect(config);
+
+      const result = await pool.request().query(`SELECT CONVERT(Date,dbo.tbl_Order.Order_Date), dbo.tbl_OrderDetails.Order_ID, dbo.Product.Product_Name, dbo.tbl_OrderDetails.Order_Quantity, dbo.tbl_Order.Total_Price
+FROM dbo.tbl_Order
+INNER JOIN dbo.tbl_OrderDetails ON dbo.tbl_Order.Order_ID = dbo.tbl_OrderDetails.Order_ID
+INNER JOIN dbo.Product ON dbo.tbl_OrderDetails.Product_ID = dbo.Product.Product_ID`);
+
+      
+
+      res.status(200).json(result.recordset);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }   
+};

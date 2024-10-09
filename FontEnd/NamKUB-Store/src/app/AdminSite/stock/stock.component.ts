@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { response } from 'express';
+import { Config } from 'datatables.net';
+import { DataTablesResponse } from '../../datatables-response.model';
 
 @Component({
   selector: 'app-stock',
@@ -82,9 +84,11 @@ export class StockComponent {
       this.http.post('http://localhost:3000/restock', formData).subscribe({
         next: (response) => {
           console.log('Restock successfully:', response);
-          this.showPopup(); 
-          this.closeModal();
+          this.showPopup();
+          this.reloadStocks(); 
           this.reloadRestock();
+          this.closeModal();
+         
         }
       })
     }
