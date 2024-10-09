@@ -66,11 +66,9 @@ body {
 .mat-typography h3{
   font-family: "Noto Sans Thai", sans-serif; 
 }
-.mat-typography h2 *:lang(eg){
-  font-family: "Rubik Bubbles", system-ui;
-}
+
 .mat-typography h5{
-  font-family:"Rajdhani", sans-serif; 
+  font-family:"Noto Sans Thai", sans-serif; 
 
 }
 .sidebar.closed {
