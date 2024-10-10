@@ -30,6 +30,9 @@ export class NAMKUBAPIService {
   getAllOrders(): Observable<Orders[]>{
     return this.httpClient.get<Orders[]>(`${api_URL}/getorder`);
   }
+  getActiveProducts(): Observable<Products[]>{
+    return this.httpClient.get<Products[]>(`${api_URL}/activeproduct`);
+  }
 }
 
 

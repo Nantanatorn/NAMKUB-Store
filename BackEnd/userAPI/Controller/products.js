@@ -16,6 +16,23 @@ module.exports.getAllProducts = async (req, res) => {
     }   
 };
 
+
+module.exports.getActiveProducts = async (req, res) => {
+    try{
+        const conn = await sql.connect(config);
+        
+        const result = await conn.request()
+        .query("Select * from ProductwithStock where Product_status = 'Active' ");
+
+        res.status(200).json(result.recordset);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }   
+};
+
+
 module.exports.getProdById = async (req, res) => {
     try {
         var pool = await sql.connect(config);
@@ -37,9 +54,11 @@ module.exports.getProdById = async (req, res) => {
 module.exports.addProducts = async (req, res) => {
     try {
         const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID, StockQuantity, SupUnitPrice } = req.body;
+            const defaultStatus = 'Active';
             // const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
             var pool = await sql.connect(config);
             var addProducts = await pool.request()
+            
 
             .input('ProductName', sql.VarChar, Product_Name)          
             .input('ProductPicture', sql.VarChar, Product_Picture)   
@@ -48,6 +67,7 @@ module.exports.addProducts = async (req, res) => {
             .input('Sup_ID', sql.Int, Sup_ID)                        
             .input('StockQuantity', sql.Int, StockQuantity)          
             .input('SupUnitPrice', sql.Money, SupUnitPrice) 
+            .input('Status',sql.VarChar,defaultStatus)
             // .input('Name', sql.VarChar, Product_Name)
             // .input('Picture', sql.VarChar, Product_Picture)
             // .input('Size', sql.Int, Product_Size)
@@ -70,7 +90,7 @@ module.exports.addProducts = async (req, res) => {
 };
 
 module.exports.UpdateProducts = async (req, res) => {
-         const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID } = req.body;
+         const { Product_Name, Product_Picture, Product_Size, Product_Price, Sup_ID, Product_status } = req.body;
    try{     var pool = await sql.connect(config);
             var UpdateProducts = await pool.request()
 
@@ -80,7 +100,8 @@ module.exports.UpdateProducts = async (req, res) => {
             .input('Size', sql.Int, Product_Size)
             .input('Price', sql.Money, Product_Price)
             .input('Sup_ID', sql.Int, Sup_ID)
-            .query('UPDATE Product SET Product_Name = @Name, Product_Picture = @Picture, Product_Size = @Size , Product_Price = @Price , Sup_ID = @Sup_ID WHERE Product_ID = @ID')
+            .input('Status',sql.VarChar,Product_status)
+            .query('UPDATE Product SET Product_Name = @Name, Product_Picture = @Picture, Product_Size = @Size , Product_Price = @Price , Sup_ID = @Sup_ID ,Product_status = @Status WHERE Product_ID = @ID ')
 
             res.status(200).json({
                 message: 'Product Update successfully',

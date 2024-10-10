@@ -7,6 +7,7 @@ export interface Products {
     Product_Price: number
     Sup_ID: string
     Stock_Quantity: number
+    Product_status : string
   }
 
 export interface Stock {
