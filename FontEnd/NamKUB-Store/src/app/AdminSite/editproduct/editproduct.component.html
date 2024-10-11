@@ -177,6 +177,14 @@
                           <option value="4">Nestle Thailand</option>
                         </select>
                       </div>
+                      <div class="form-group">
+                        <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
+                        <select id="Product_status" formControlName="Product_status" class="form-select"  aria-label="Default select example">
+                          <option selected>Status</option>
+                          <option value="Active">Active</option>
+                          <option value="Inactive">Inactive</option>
+                        </select>
+                      </div>
                   </div>
               </div>
 
@@ -208,13 +216,14 @@
           <p><strong>Size</strong>: {{ product.Product_Size }}</p>
           <p><strong>Price</strong>: {{ product.Product_Price }}</p>
           <p><strong>Stock</strong>: {{ product.Stock_Quantity }}</p>
+          <p><strong>Status</strong>: {{ product.Product_status}}</p>
         </div>
         <div class="edit-btn">
           <button class="btn btn-primary" (click)="editProduct(product)">Edit</button>
         </div>
-        <div class="delete-btn">
+        <!-- <div class="delete-btn">
           <button type="button" class="btn btn-danger" (click)="deleteProduct(product.Product_ID)">Delete</button>
-        </div>
+        </div> -->
       </div>
     </div>
   

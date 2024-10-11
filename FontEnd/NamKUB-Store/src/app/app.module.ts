@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { DataTablesModule } from "angular-datatables";
 
 
 import { AppComponent } from './app.component';
@@ -88,7 +89,8 @@ import { EditProfileComponent } from './UserSite/edit-profile/edit-profile.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    DataTablesModule
   ],
   providers: [
     provideClientHydration(),AuthService,NAMKUBAPIService, provideAnimationsAsync(),

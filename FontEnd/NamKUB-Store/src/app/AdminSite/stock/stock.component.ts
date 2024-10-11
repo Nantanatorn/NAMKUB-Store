@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
 import {  Restock, Stock } from '../../model/products';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { response } from 'express';
+
 
 @Component({
   selector: 'app-stock',
@@ -34,6 +34,9 @@ export class StockComponent {
       Stock_ID:[null]
     })
   }
+
+
+
 
   ngOnInit(): void{
     this.reloadStocks();

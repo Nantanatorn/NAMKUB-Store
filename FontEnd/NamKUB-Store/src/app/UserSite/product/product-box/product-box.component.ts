@@ -15,7 +15,7 @@ export class ProductBoxComponent {
   constructor(private productService: NAMKUBAPIService,private router:Router,private cartService:CartServiceService) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getAllProduct();
+    this.products = this.productService.getActiveProducts();
   }
   
    addToCart(product: any){

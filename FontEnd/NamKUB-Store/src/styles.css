@@ -41,15 +41,12 @@ body {
 }
 
 .sidebar {
-  position: fixed; /* ทำให้ Sidebar คงที่ */
-  top: 0;
-  left: 0;
+  position: fixed;
+  height: 100%;
   width: 250px;
-  height: 100vh;
-  background-color: #333333;
-  transition: width 0.3s ease;
-  overflow: hidden;
-  z-index: 1000;
+  top: 0;
+  left: -250px; /* ซ่อน sidebar เริ่มต้น */
+  transition: left 0.3s ease; /* การเลื่อนเมื่อเปิด/ปิด */
   border: .5px solid black;
   
 }
@@ -70,17 +67,6 @@ body {
 .mat-typography h5{
   font-family:"Noto Sans Thai", sans-serif; 
 
-}
-.sidebar.closed {
-  width: 60px; /* ขนาด Sidebar เมื่อปิด */
-  transition: width 0.3s ease;
-}
-
-/* ซ่อนข้อความเมื่อ Sidebar ปิด */
-.sidebar.closed .text {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 /* ปุ่มสลับ Sidebar */
@@ -129,6 +115,8 @@ body {
   list-style: none;
   display: flex;
   align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .sidebar li .icon {
@@ -178,7 +166,6 @@ header .image-text .header-text{
   border: none;
   border-radius: 6px;
    background: none;
-  margin-left: 5px;
   font-weight: 600;
 }
 .sidebar li a{
@@ -190,8 +177,16 @@ header .image-text .header-text{
   border-radius: 6px;
   transition: all 0.4s ease;
 }
+.sidebar li .text{
+text-align: center;
+justify-content: center;
+
+}
+.sidebar li .icon{
+  margin-left: 50px;
+}
 .sidebar li a:hover{
-  background-color: #695CFE;
+  background-color: #110113;
 }
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text{

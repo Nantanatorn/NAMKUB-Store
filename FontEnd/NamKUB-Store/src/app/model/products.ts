@@ -7,6 +7,7 @@ export interface Products {
     Product_Price: number
     Sup_ID: string
     Stock_Quantity: number
+    Product_status : string
   }
 
 export interface Stock {
@@ -35,4 +36,11 @@ export interface Users{
   phone :string, 
   role : string,
 }
-  
+
+export interface Orders{
+  Order_Date : string,
+  Order_ID : number,
+  Product_Name : string,
+  Order_Quantity : number,
+  Total_Price : number
+}

@@ -14,6 +14,8 @@ export class CartComponent {
   totalPrice = 0;
   isSelectAllChecked: boolean = false;
   username: string | null = null;
+  userAddress: string = '';
+  isAddressModalOpen: boolean = false;
 
   constructor(private http: HttpClient, private cartService: CartServiceService, private authService: AuthService) { }
 
@@ -115,5 +117,28 @@ export class CartComponent {
      
     });
      this.cartService.saveCartToLocalStorage();
+  }
+
+  closeAddressModal() {
+    this.isAddressModalOpen = false;
+  }
+  openAddressModal() {
+    this.isAddressModalOpen = true;
+  }
+
+  checkAddress() {
+    if (this.userAddress.trim() === '') {
+      this.openAddressModal();
+    } else {
+      this.openModal();
+    }
+  }
+  saveAddress() {
+    if (this.userAddress.trim() === '') {
+      alert('กรุณากรอกที่อยู่ให้ถูกต้อง');
+    } else {
+      this.closeAddressModal();
+      this.openModal();
+    }
   }
 }
