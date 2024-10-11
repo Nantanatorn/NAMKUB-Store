@@ -8,7 +8,6 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000'; // Adjust URL if necessary
   private usernameSubject = new BehaviorSubject<string | null>(null);
   public username$ = this.usernameSubject.asObservable();
   public pictureBehaviorSubject = new BehaviorSubject<string | null >(null);
@@ -16,17 +15,7 @@ export class AuthService {
 
 
   constructor(private router: Router) {
-    // Initialize the username from payload in localStorage if available
-    // const payload = localStorage.getItem('payload');
-    // if (payload) {
-    //   try {
-    //     const parsedPayload = JSON.parse(payload);
-    //     const username = parsedPayload.user?.username || null;
-    //     this.usernameSubject.next(username);
-    //   } catch (error) {
-    //     console.error('Error parsing payload from localStorage:', error);
-    //   }
-    // }
+    
     const token =localStorage.getItem('token');
     if(token){
       const payload =this.decodeToken(token);
@@ -38,13 +27,7 @@ export class AuthService {
     }
   }
 
-  // Simulate user login and store token and payload
-  // login(token: string, payload: any): void {
-  //   localStorage.setItem('token', token);
-  //   localStorage.setItem('payload', JSON.stringify(payload));
-  //   const username = payload.user?.username || null;
-  //   this.usernameSubject.next(username);
-  // }
+
   login(token:string):void{
     localStorage.setItem('token',token);
     const payload =this.decodeToken(token);

@@ -32,6 +32,8 @@ module.exports.AddOrder = async (req, res) => {
       const cusId = userResult.recordset[0].Cus_ID;
       console.log('User ID:', userId, 'Customer ID:', cusId);  // ตรวจสอบว่าได้ค่า userId และ cusId ถูกต้องหรือไม่
 
+
+
       // Insert order
       const orderInsertResult = await transaction.request()
         .input('OrderDate', sql.DateTime, orderDate)
@@ -72,6 +74,9 @@ module.exports.AddOrder = async (req, res) => {
     }
     catch (error) {
       await transaction.rollback();
+      if (error.message && error.message.includes('CHECK constraint')) {
+        return res.status(400).json({ message: 'Not enough stock available' });
+    }
       console.error('Error during order placement:', error);  // ตรวจสอบข้อผิดพลาดระหว่างการดำเนินการ
       res.status(500).json({ message: 'Error placing order', error: error.message });
     }

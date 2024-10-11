@@ -9,7 +9,7 @@ module.exports.loginUser = async(req,res)=>{
     const pool = await sql.connect(config);
     
     try {
-        // Query to check if user exists with the given username and password
+        // query username 
         const result = await pool.request()
 
         .input('username', sql.VarChar, username)//bind username
@@ -24,7 +24,7 @@ module.exports.loginUser = async(req,res)=>{
             const storedHashedPassword = user.password;
         
             const isPasswordValid = await bcrypt.compare(password, storedHashedPassword);
-            // Successful login
+            // Successful login make payload and send to angular
             if (isPasswordValid) {
                 var payload ={
                     user: {
