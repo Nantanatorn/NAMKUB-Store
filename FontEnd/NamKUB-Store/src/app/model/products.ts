@@ -42,5 +42,6 @@ export interface Orders{
   Order_ID : number,
   Product_Name : string,
   Order_Quantity : number,
-  Total_Price : number
+  Total_Price : number,
+  username : string
 }

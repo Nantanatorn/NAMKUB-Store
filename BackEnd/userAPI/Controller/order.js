@@ -1,4 +1,3 @@
-
 const sql = require("mssql");
 const config = require("../config");
 
@@ -82,15 +81,17 @@ module.exports.AddOrder = async (req, res) => {
   }
 };
 
+
 module.exports.GetOrder = async (req, res) => {
   try {
       var pool = await sql.connect(config);
 
-      const result = await pool.request().query(`SELECT dbo.tbl_Order.Order_Date, dbo.Product.Product_Name, dbo.tbl_OrderDetails.Order_Quantity, dbo.tbl_Order.Total_Price
-                  FROM     dbo.tbl_OrderDetails INNER JOIN
-                  dbo.tbl_Order ON dbo.tbl_OrderDetails.Order_ID = dbo.tbl_Order.Order_ID INNER JOIN
-                  dbo.Product ON dbo.tbl_OrderDetails.Product_ID = dbo.Product.Product_ID CROSS JOIN
-                  dbo.Users`);
+      const result = await pool.request().query(`SELECT dbo.tbl_Order.Order_Date, dbo.Users.username, dbo.Product.Product_Name, dbo.tbl_OrderDetails.Order_Quantity, dbo.tbl_Order.Total_Price
+FROM     dbo.tbl_Order INNER JOIN
+                  dbo.tbl_OrderDetails ON dbo.tbl_Order.Order_ID = dbo.tbl_OrderDetails.Order_ID INNER JOIN
+                  dbo.Product ON dbo.tbl_OrderDetails.Product_ID = dbo.Product.Product_ID INNER JOIN
+                  dbo.tbl_Customer ON dbo.tbl_Order.Cus_ID = dbo.tbl_Customer.Cus_ID INNER JOIN
+                  dbo.Users ON dbo.tbl_Customer.User_ID = dbo.Users.User_ID`);
 
       
 

@@ -72,6 +72,13 @@ export class CartComponent {
     this.isModalOpen = true;
     console.log('dialog box popup')
   }
+
+  OnShipping(){
+
+  
+
+  }
+
   closeModal() {
     this.isModalOpen = false;
   }
@@ -93,7 +100,10 @@ export class CartComponent {
     this.http.post('http://localhost:3000/order', orderData)
       .subscribe({
         next: (response) => {
+
           console.log('order placed successfully', response);
+
+          this.OngoingAlert();
           this.closeModal();
           this.cartService.clearCart();
           this.cartProducts = [];
@@ -115,5 +125,12 @@ export class CartComponent {
      
     });
      this.cartService.saveCartToLocalStorage();
+  }
+  OngoingAlert(){
+    Swal.fire({
+      title: "Order Complete",
+      text: "Delivery Coming 🚚..",
+      icon: "success"
+    });
   }
 }
