@@ -41,6 +41,7 @@ export class EditproductComponent {
       Product_Size: [null, [Validators.required, Validators.min(330)]],
       Product_Price: [null, [Validators.required, Validators.min(1)]],
       Sup_ID: [null, Validators.required],
+      Product_status : [null]
       
     });
   }
@@ -143,7 +144,8 @@ export class EditproductComponent {
         Product_Picture: this.addproductform.value.Product_Picture,
         Product_Size: this.addproductform.value.Product_Size,
         Product_Price: this.addproductform.value.Product_Price,
-        Sup_ID: this.addproductform.value.Sup_ID
+        Sup_ID: this.addproductform.value.Sup_ID,
+        
       };
 
       this.http.put(`http://localhost:3000/products/${Product_ID}`, formData).subscribe({
@@ -229,7 +231,9 @@ export class EditproductComponent {
       Product_Picture: product.Product_Picture,
       Product_Size: product.Product_Size,
       Product_Price: product.Product_Price,
-      Sup_ID: product.Sup_ID
+      Sup_ID: product.Sup_ID,
+      Product_status : product.Product_status
+      
     });
   }
 
@@ -242,7 +246,8 @@ export class EditproductComponent {
         Product_Picture: this.UpdateProductform.value.Product_Picture,
         Product_Size: this.UpdateProductform.value.Product_Size,
         Product_Price: this.UpdateProductform.value.Product_Price,
-        Sup_ID: this.UpdateProductform.value.Sup_ID
+        Sup_ID: this.UpdateProductform.value.Sup_ID,
+        Product_status : this.UpdateProductform.value.Product_status
       };
 
       // ทำการอัปเดตสินค้าผ่าน API โดยใช้ Product_ID ที่เลือกไว้
