@@ -98,9 +98,19 @@ export class CartComponent {
           this.cartService.clearCart();
           this.cartProducts = [];
           this.totalPrice = 0;
+          this.cartService.saveCartToLocalStorage();
         },
         error: (error) => {
           console.error('Error placing order', error);
+          
+            console.error(' not enough quantity')
+            Swal.fire({
+              title: "สั่งซื้อไม้่สำเร็จ",
+              text: "มีสินค้าในคลังไม่เพียงพอ",       
+              icon: "error"
+             
+            });
+         
         }
       })
   }
