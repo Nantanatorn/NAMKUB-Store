@@ -95,6 +95,13 @@ export class CartComponent {
           this.cartProducts = [];
           this.totalPrice = 0;
           this.cartService.saveCartToLocalStorage();
+          Swal.fire({
+            title: 'สั่งซื้อสำเร็จ!',
+            text: 'ขอบคุณที่สั่งซื้อสินค้ากับเรา',
+            icon: 'success',
+            confirmButtonText: 'ตกลง'
+          });
+        
         },
         error: (error) => {
           console.error('Error placing order', error);
