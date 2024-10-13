@@ -61,14 +61,7 @@ export class CartComponent {
     this.updateTotal(); //update price
     console.log('4')
   }
-  // selectAll(event: any) {
-  //   const isChecked = event.target.checked;
-  //   this.cartProducts.forEach(product => product.selected = isChecked);
-  // }
-
-  // checkSelectAllStatus() {
-  //   this.isSelectAllChecked = this.cartProducts.every(product => product.selected);
-  // }
+ 
   isModalOpen: boolean = false;
   openModal() {
     this.isModalOpen = true;
@@ -84,6 +77,7 @@ export class CartComponent {
     const orderData = {
       username: this.username,
       totalPrice: this.totalPrice,
+      Cus_Address:this.userAddress,
       item: this.cartProducts.map(product => ({
         Product_ID: product.Product_ID,
         Product_Price: product.Product_Price,
