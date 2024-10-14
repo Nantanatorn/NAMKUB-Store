@@ -1,5 +1,5 @@
 <div class="main">
-  <nav class="sidebar" [ngClass]="{ 'closed': !isSidebarOpen }">
+  <nav class="sidebar" [ngClass]="{'open': isOpen}">
     <header>
       <div class="image-text">
         <span class="image">
@@ -10,17 +10,15 @@
             <span class="profession">Management</span>
         </div>
       </div>
-      <button class="toggle-button" (click)="toggleSidebar()">
-        <i class="bi" [ngClass]="isSidebarOpen ? 'bi-chevron-left' : 'bi-chevron-right'"></i>
-      </button>
+      
     </header>
     <div class="menu-bar">
       <div class="menu">
           <li class="search-box">
-            <i class="bi bi-search icon" style="margin-left: 30px;"></i>
+            <i class="bi bi-search icon" style="margin-left: 70px;" ></i>
               <input type="search" placeholder="Search...">
           </li>
-          <ul class="menu-links">
+          <div class="menu-links">
           <li class="nav-link">
             <a routerLink="/dashboard">
               <i class="bi bi-house icon"></i>
@@ -60,7 +58,7 @@
             </a>
           </li>
           
-        </ul>
+        </div>
       </div>
       <div class="bottom-content">
         <li class="">
@@ -87,4 +85,6 @@
   
   </nav>
   </div>
-  
+  <div class="main-content" [ngClass]="{'slide': isOpen}">
+    <button class="main-content" (click)="toggleSidebar()">{{ isOpen ? '× ' : '☰ ' }}</button>
+</div>

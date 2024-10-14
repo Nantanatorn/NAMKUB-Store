@@ -1,31 +1,75 @@
 <app-header-user/>
 <div class="container">
     <h2>Edit Profile</h2>
-    <form #profileForm="ngForm">
+    <form 
+    [formGroup]="editprofileform"
+    (ngSubmit)="onSubmit()"
+    class="needs-validation"
+    >
   
       <div class="form-group">
         <label for="firstname">First Name</label>
-        <input type="text" id="firstname" [(ngModel)]="user.firstname" name="firstname" class="form-control" required>
+        <input type="text" id="firstname" formControlName="firstname"  class="form-control" 
+        [ngClass]="{
+        'is-invalid':editprofileform.get('firstname').invalid && editprofileform.get('firstname').touched
+        }"
+        >
+        <div class="invalid-feedback"
+        *ngIf="editprofileform.get('firstname').invalid && editprofileform.get('firstname').touched">
+          Please fill your firstname
+        </div>
       </div>
   
       <div class="form-group">
         <label for="lastname">Last Name</label>
-        <input type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" class="form-control" required>
+        <input type="text" id="lastname" formControlName="lastname"    class="form-control" 
+        [ngClass]="{
+          'is-invalid':editprofileform.get('lastname').invalid && editprofileform.get('lastname').touched
+          }"
+          >
+          <div class="invalid-feedback"
+          *ngIf="editprofileform.get('lastname').invalid && editprofileform.get('lastname').touched">
+            Please fill your lastname
+          </div>
       </div>
   
       <div class="form-group">
         <label for="yourphone">Phone</label>
-        <input type="text" id="yourphone" [(ngModel)]="user.phone" name="phone" class="form-control" required>
+        <input type="text" id="phone" formControlName="phone" class="form-control" 
+        [ngClass]="{
+          'is-invalid':editprofileform.get('phone').invalid && editprofileform.get('phone').touched
+          }"
+        >
+        <div class="invalid-feedback"
+        *ngIf="editprofileform.get('phone').invalid && editprofileform.get('phone').touched">
+          Please fill your phone
+        </div>
       </div>
   
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" id="username" [(ngModel)]="user.username" name="username" class="form-control" required>
+        <input type="text" id="username" formControlName="username" class="form-control" 
+        [ngClass]="{
+          'is-invalid':editprofileform.get('username').invalid && editprofileform.get('username').touched
+          }"
+        >
+        <div class="invalid-feedback"
+        *ngIf="editprofileform.get('username').invalid && editprofileform.get('username').touched">
+          Please fill your username
+        </div>
       </div>
   
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required>
+        <input type="email" id="email" formControlName="email" class="form-control" 
+        [ngClass]="{
+          'is-invalid':editprofileform.get('email').invalid && editprofileform.get('email').touched
+          }"
+        >
+        <div class="invalid-feedback"
+        *ngIf="editprofileform.get('email').invalid && editprofileform.get('email').touched">
+          Please fill your email
+        </div>
       </div>
   
       

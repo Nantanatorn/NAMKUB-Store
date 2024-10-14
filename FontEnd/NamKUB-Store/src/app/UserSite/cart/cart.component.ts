@@ -14,6 +14,8 @@ export class CartComponent {
   totalPrice = 0;
   isSelectAllChecked: boolean = false;
   username: string | null = null;
+  userAddress: string = '';
+  isAddressModalOpen: boolean = false;
 
   constructor(private http: HttpClient, private cartService: CartServiceService, private authService: AuthService) { }
 
@@ -72,13 +74,6 @@ export class CartComponent {
     this.isModalOpen = true;
     console.log('dialog box popup')
   }
-
-  OnShipping(){
-
-  
-
-  }
-
   closeModal() {
     this.isModalOpen = false;
   }
@@ -100,17 +95,24 @@ export class CartComponent {
     this.http.post('http://localhost:3000/order', orderData)
       .subscribe({
         next: (response) => {
-
           console.log('order placed successfully', response);
-
-          this.OngoingAlert();
           this.closeModal();
           this.cartService.clearCart();
           this.cartProducts = [];
           this.totalPrice = 0;
+          this.cartService.saveCartToLocalStorage();
         },
         error: (error) => {
           console.error('Error placing order', error);
+          
+            console.error(' not enough quantity')
+            Swal.fire({
+              title: "สั่งซื้อไม้่สำเร็จ",
+              text: "มีสินค้าในคลังไม่เพียงพอ",       
+              icon: "error"
+             
+            });
+         
         }
       })
   }
@@ -126,11 +128,27 @@ export class CartComponent {
     });
      this.cartService.saveCartToLocalStorage();
   }
-  OngoingAlert(){
-    Swal.fire({
-      title: "Order Complete",
-      text: "Delivery Coming 🚚..",
-      icon: "success"
-    });
+
+  closeAddressModal() {
+    this.isAddressModalOpen = false;
+  }
+  openAddressModal() {
+    this.isAddressModalOpen = true;
+  }
+
+  checkAddress() {
+    if (this.userAddress.trim() === '') {
+      this.openAddressModal();
+    } else {
+      this.openModal();
+    }
+  }
+  saveAddress() {
+    if (this.userAddress.trim() === '') {
+      alert('กรุณากรอกที่อยู่ให้ถูกต้อง');
+    } else {
+      this.closeAddressModal();
+      this.openModal();
+    }
   }
 }

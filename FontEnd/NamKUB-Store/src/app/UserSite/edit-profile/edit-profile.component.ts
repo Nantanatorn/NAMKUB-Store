@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NAMKUBAPIService } from '../../Service/namkub-api.service';
+import { BehaviorSubject } from 'rxjs';
+import { Users } from '../../model/products';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-edit-profile',
@@ -6,33 +14,79 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent {
-  user = {
-    firstname: 'Jane',
-    lastname: 'Doe',
-    phone: '0123456789',
-    username: 'janedoe',
-    email: 'janedoe@example.com',
-    password: 'password1234'
-  };
+  user = new BehaviorSubject<Users[]>([]);
+  editprofileform:FormGroup;
 
-  saveProfile(): void {
-    alert('Profile saved successfully!\n' +
-      `First Name: ${this.user.firstname}\n` +
-      `Last Name: ${this.user.lastname}\n` +
-      `Phone: ${this.user.phone}\n` +
-      `Username: ${this.user.username}\n` +
-      `Email: ${this.user.email}`);
-  }
-
-  resetForm(): void {
-    this.user = {
-      firstname: 'Jane',
-      lastname: 'Doe',
-      phone: '0123456789',
-      username: 'johndoe',
-      email: 'janedoe@example.com',
-      password: 'password1234'
+  constructor( private apiservice: NAMKUBAPIService,
+                private http : HttpClient,
+                private router:Router,private fb: FormBuilder){
+    this.editprofileform = this.fb.group({
+      firstname: ['', [Validators.required, Validators.maxLength(50)]],
+      lastname: ['', [Validators.required, Validators.maxLength(50)]],
+      phone: ['', [Validators.required, Validators.maxLength(10)]],
+      username: ['', [Validators.required, Validators.maxLength(30)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]]
+    });
+}
+onSubmit(){
+  if(this.editprofileform.value){
+    const formData = {
+      firstname:this.editprofileform.value.firstname,
+      lastname:this.editprofileform.value.lastname,
+      phone:this.editprofileform.value.phone,
+      username:this.editprofileform.value.username,
+      email:this.editprofileform.value.email
     };
-    alert('Form reset to default values!');
+    this.http.post('http://localhost:3000/users', formData).subscribe({
+    next:(response)=> {
+      console.log('Profile saved successfully!',response);
+      this.saveProfile();
+     
+    },
+    error:(error) =>{
+      console.error('Error save profile',error);
+      console.log(this.editprofileform.errors);
+      console.log(this.editprofileform.value);
+    }
+  });
+  }else{
+    console.log('Form is not valid');
+    console.log(this.editprofileform.errors);
+    console.log(this.editprofileform.value);
   }
 }
+@Input() users: { firstname?: string; lastname?: string; phone?: string; username?: string; email?: string } = {}; 
+@Output() onConfirm = new EventEmitter<any>(); 
+
+saveProfile(){
+  if (this.users.firstname && this.users.lastname && this.users.phone && this.users.username && this.users.email) {
+    this.onConfirm.emit(this.users);
+}
+}
+resetForm(){
+  this.editprofileform.reset;
+}
+}
+
+  
+  // saveProfile(): void {
+  //   alert('Profile saved successfully!\n' +
+  //     `First Name: ${this.user.firstname}\n` +
+  //     `Last Name: ${this.user.lastname}\n` +
+  //     `Phone: ${this.user.phone}\n` +
+  //     `Username: ${this.user.username}\n` +
+  //     `Email: ${this.user.email}`);
+  // }
+
+  // resetForm(): void {
+  //   this.user = {
+  //     firstname: 'Jane',
+  //     lastname: 'Doe',
+  //     phone: '0123456789',
+  //     username: 'johndoe',
+  //     email: 'janedoe@example.com',
+  //     password: 'password1234'
+  //   };
+  //   alert('Form reset to default values!');
+  // }
+

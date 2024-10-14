@@ -5,84 +5,98 @@
     
 <h2 class="hed2">รายละเอียดคำสั่งซื้อ</h2>
 
-<div class="container mt-4 mb-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <!-- <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="isSelectAllChecked"
-                (change)="selectAll($event)">
-            <label class="form-check-label" for="selectAllBtn">เลือกสินค้าทั้งหมด</label>
-        </div> -->
-        <h5>สินค้า {{ cartProducts.length }} ชิ้นในรถเข็น</h5>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <p>รูปภาพสินค้า</p>
-        </div>
-        <div class="col">
-            <p>สินค้า</p>
-        </div>
-        <div class="col">
-            <p>ราคาต่อแพ็ค (บาท)</p>
-        </div>
-        <div class="col">
-            <p style="padding-right:75px;">จำนวน</p>
-        </div>
-        <div class="col">
-            <p>ราคารวม (บาท)</p>
-        </div>
-        <div class="col">
-            <p class="text-danger bi bi-trash-fill" (click)="removeAll()" style="cursor: pointer;">ลบสินค้าทั้งหมด</p>
-        </div>
-        <hr>
-    </div>
-
-    <div class="row" *ngFor="let product of cartProducts">
-        <div class="col">
-            
-            <img [src]="product.Product_Picture" alt="Product Image" style="width: 100px; height: 100px;">
-            
-        </div>
-        <div class="col">
-            
-            <span>{{ product.Product_Name }}</span>
-        </div>
-        <div class="col">
-            <p>{{ product.Product_Price }} บาท</p>
-        </div>
-        <div class="col">
-            <div class="d-flex align-items-center">
-                <!-- Decrease button -->
-                <button class="btn btn-outline-secondary" (click)="decreaseQuantity(product)">&#x25BC;</button>
-                <!-- Number input, readonly because the user can't directly change it -->
-                <input type="number" [(ngModel)]="product.quantity" class="form-control text-center mx-2" min="1"
-                    style="width: 60px;" readonly>
-                <!-- Increase button -->
-                <button class="btn btn-outline-secondary" (click)="increaseQuantity(product)">&#x25B2;</button>
+<div class="container ">
+    
+    <div class="d-flex justify-content-between mt-5">
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="isSelectAllChecked"
+                        (change)="selectAll($event)">
+                    <label class="form-check-label" for="selectAllBtn">เลือกสินค้าทั้งหมด</label>
+                </div> -->
+                <h5>สินค้า {{ cartProducts.length }} ชิ้นในรถเข็น</h5>
+            </div>
+           
+            <div class="row">
+                <div class="col">
+                    <p>รูปภาพสินค้า</p>
+                </div>
+                <div class="col">
+                    <p>สินค้า</p>
+                </div>
+                <div class="col">
+                    <p>ราคาต่อแพ็ค (บาท)</p>
+                </div>
+                <div class="col">
+                    <p style="padding-right:75px;">จำนวน</p>
+                </div>
+                <div class="col">
+                    <p>ราคารวม (บาท)</p>
+                </div>
+                <div class="col">
+                    <p class="text-danger bi bi-trash-fill" (click)="removeAll()" style="cursor: pointer;">ลบสินค้าทั้งหมด</p>
+                </div>
+              
+          
+            </div>
+           
+            <div class="row" *ngFor="let product of cartProducts">
+                <div class="col">
+                    
+                    <img [src]="product.Product_Picture" alt="Product Image" style="width: 100px; height: 100px;">
+                    
+                </div>
+                <div class="col">
+                    
+                    <span>{{ product.Product_Name }}</span>
+                </div>
+                <div class="col">
+                    <p>{{ product.Product_Price }} บาท</p>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <!-- Decrease button -->
+                        <button class="btn btn-outline-secondary" (click)="decreaseQuantity(product)">&#x25BC;</button>
+                        <!-- Number input, readonly because the user can't directly change it -->
+                        <input type="number" [(ngModel)]="product.quantity" class="form-control text-center mx-2" min="1"
+                            style="width: 60px;" readonly>
+                        <!-- Increase button -->
+                        <button class="btn btn-outline-secondary" (click)="increaseQuantity(product)">&#x25B2;</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <p>{{ product.Product_Price * product.quantity }} บาท</p>
+                    
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" (click)="removeProduct(product)">ลบสินค้า </button>
+                </div>
+                <hr>
             </div>
         </div>
-        <div class="col">
-            <p>{{ product.Product_Price * product.quantity }} บาท</p>
-            
+        <div class="col-md-3 purchase" style="max-width: 300px; margin-top:65px">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">ยอดการสั่งซื้อ</h4>
+                    <p>ราคารวม: {{ totalPrice }} บาท</p>
+                
+                    <button class="btn  btn-block" (click)="checkAddress()">ชำระเงิน</button>
+                </div>
+            </div>
         </div>
-        <div class="col">
-            <button class="btn btn-danger" (click)="removeProduct(product)">ลบสินค้า </button>
-        </div>
-        <hr>
     </div>
+</div>
 
-   
-    
-    
-</div> 
-
-<div class="row">
+<!-- <div class="row">
     
     <div class="col-6 payment">
             <h4>ยอดรวมทั้งหมด: {{ totalPrice }} บาท</h4>
         <button class="btn" (click)="openModal()">ชำระเงิน</button> 
     </div>
-</div>
+</div> -->
+
+
 <!-- ทำpopup จ้า -->
 
 <div class="modal" tabindex="-1" role="dialog" *ngIf="isModalOpen">
@@ -120,6 +134,26 @@
                     <button type="button" class="btn btn-secondary" (click)="closeModal()">ยกเลิก</button>
                     <button type="button" class="btn btn-primary" (click)="confirmOrder()">ยืนยัน</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal สำหรับกรอกที่อยู่ -->
+<div class="modal" tabindex="-1" role="dialog" *ngIf="isAddressModalOpen">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">กรอกที่อยู่สำหรับจัดส่ง</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="userAddress">ที่อยู่จัดส่ง</label>
+                    <input type="text" class="form-control" id="userAddress" [(ngModel)]="userAddress" placeholder="กรอกที่อยู่ของคุณ">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeAddressModal()">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" (click)="saveAddress()">บันทึก</button>
             </div>
         </div>
     </div>
