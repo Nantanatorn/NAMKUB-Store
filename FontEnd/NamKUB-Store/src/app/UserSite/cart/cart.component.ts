@@ -145,7 +145,12 @@ export class CartComponent {
   }
   saveAddress() {
     if (this.userAddress.trim() === '') {
-      alert('กรุณากรอกที่อยู่ให้ถูกต้อง');
+      Swal.fire({
+        title: "กรุณากรอกที่อยู่",
+        text: "กรุณากรอกที่อยู่ของคุณ",       
+        icon: "info"
+       
+      });
     } else {
       this.closeAddressModal();
       this.openModal();
