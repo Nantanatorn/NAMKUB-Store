@@ -25,7 +25,8 @@ export class EditProfileComponent {
       lastname: ['', [Validators.required, Validators.maxLength(50)]],
       phone: ['', [Validators.required, Validators.maxLength(10)]],
       username: ['', [Validators.required, Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]]
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      picture: [null], 
     });
 }
 onSubmit(){
@@ -35,7 +36,9 @@ onSubmit(){
       lastname:this.editprofileform.value.lastname,
       phone:this.editprofileform.value.phone,
       username:this.editprofileform.value.username,
-      email:this.editprofileform.value.email
+      email:this.editprofileform.value.email,
+      picture: this.editprofileform.value.picture
+      
     };
     this.http.put('http://localhost:3000/users', formData).subscribe({
     next:(response)=> {
@@ -68,8 +71,26 @@ onSubmit(){
   }
 
   editprofile(){
-    
+    this.editprofileform.patchValue({
+      
+      firstname: this.users.firstname,
+      lastname: this.users.lastname,
+      phone: this.users.phone,
+      username: this.users.username,
+      email: this.users.email,
+      
+    });
   }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length) {
+      this.editprofileform.patchValue({
+        picture: input.files[0].name
+      });
+    }
+  }
+
 }
 
   
