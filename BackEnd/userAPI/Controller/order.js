@@ -155,4 +155,70 @@ module.exports.GetOrder = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }   
   };
+
+  module.exports.GetBestSale = async (req, res) => {
+    try {
+        var pool = await sql.connect(config);
+  
+        const result = await pool.request().query(`  SELECT 
+        TOP (1) PERCENT 
+        ROW_NUMBER() OVER (ORDER BY product_name) AS No,  
+        DATENAME(month, Order_Date) AS Month,
+        product_name as Product, 
+        SUM(Order_Quantity) AS Quantity, 
+        SUM(Subtotal_Price) AS Income,
+        SUM(Sup_Unitprice * Order_Quantity) AS Capital,
+        SUM(Subtotal_Price - (Sup_Unitprice * Order_Quantity)) as Profit
+      FROM 
+        Summary
+      GROUP BY 
+        product_name,
+        DATENAME(month, Order_Date)
+      ORDER BY 
+        Quantity DESC, 
+        product_name;`);
+
+        res.status(200).json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }   
+  };
+
+
+  module.exports.FindMonth = async (req, res) => {
+    try {
+      const pool = await sql.connect(config);
+      const search = parseInt(req.query.q); // เปลี่ยนค่าเป็นตัวเลข
+  
+      const result = await pool.request()
+        .input('search', sql.Int, search) // ใช้ sql.Int เพื่อรองรับตัวเลข
+        .query(`SELECT 
+          ROW_NUMBER() OVER (ORDER BY product_name) AS No,
+          DATENAME(month, Order_Date) AS Month,
+          product_name as Product, 
+          SUM(Order_Quantity) AS Quantity, 
+          SUM(Subtotal_Price) AS Income,
+          SUM(Sup_Unitprice * Order_Quantity) AS Capital,
+          SUM(Subtotal_Price - (Sup_Unitprice * Order_Quantity)) as Profit
+        FROM 
+          Summary
+        WHERE 
+          MONTH(Order_Date) = @search 
+        GROUP BY 
+          product_name,
+          DATENAME(month, Order_Date)
+        ORDER BY 
+          product_name;
+        `);
+  
+      res.status(200).json(result.recordset);
+  
+    } catch (err) {
+      console.error(err); // แก้ไขจาก console.err เป็น console.error
+      res.status(500).send('error');
+    }
+  }
+  
+
   

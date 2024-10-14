@@ -64,3 +64,13 @@ export interface Alltime{
   Capital: number;
   Profit: number;
 }
+
+export interface BestSale {
+  No: string;
+  Month: string;
+  Product: string;
+  Quantity: number;
+  Income: number;
+  Capital: number;
+  Profit: number;
+}

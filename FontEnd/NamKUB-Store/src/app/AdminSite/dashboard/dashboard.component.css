@@ -28,8 +28,12 @@ h2{
     display: flex;
     justify-content: space-between;
     margin: 2rem;
+    
 }
-
+ .submitFilter{
+   margin-left: 550px;
+   margin-top: 10px;
+}
 .formyear,.formmonth{
     width: 100%;
     border-radius: 10px;
@@ -37,6 +41,7 @@ h2{
 button{
     background-color: #3b3f60;
     border: none;
+    width: fit-content;
 }
 button:hover{
     background-color: #36304e;

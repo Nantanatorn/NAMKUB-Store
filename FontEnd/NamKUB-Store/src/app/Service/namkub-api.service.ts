@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Alltime, Orders, Products, Restock, Stock, Summary, Users } from '../model/products';
+import { Alltime, BestSale, Orders, Products, Restock, Stock, Summary, Users } from '../model/products';
 
 const api_URL = 'http://localhost:3000'; 
 
@@ -38,6 +38,9 @@ export class NAMKUBAPIService {
   }
   getAlltime():Observable<Alltime[]>{
     return this.httpClient.get<Alltime[]>(`${api_URL}/AlltimeSUM`);
+  }
+  getBestSale():Observable<BestSale[]>{
+    return this.httpClient.get<BestSale[]>(`${api_URL}/GetBestSale`);
   }
 
 }

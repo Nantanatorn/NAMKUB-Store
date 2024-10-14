@@ -9,34 +9,41 @@
         <div class="headfilter"><h5>Filter</h5></div>
         <div class="filtercontrol">
             <div class="form">
-            <label for="month">Month </label>
-            <select name="month" id="month" class="formmonth">
-                <option value="1">มกราคม</option>
-                <option value="2">กุมภาพันธ์</option>
-                <option value="3">มีนาคม</option>
-                <option value="4">เมษายน</option>
-                <option value="5">พฤษภาคม</option>
-                <option value="6">มิถุนายน</option>
-                <option value="7">กรกฎาคม</option>
-                <option value="8">สิงหาคม</option>
-                <option value="9">กันยายน</option>
-                <option value="10">ตุลาคม</option>
-                <option value="11">พฤศจิกายน</option>
-                <option value="12">ธันวาคม</option>
-            </select>
-        </div>
-
-        <div class="form">
-            <div class="form-group"> 
-                <label for="year">Year</label>
-                <input type="number" id="year" class="formyear" placeholder="กรอกปี" />
+                <label for="month">Month </label>
+                <select name="month" id="month" class="formmonth" [(ngModel)]="selectedMonth">
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                
               </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary">กรอง</button>
-        </div>
-        
-
+              <div class="form">
+                <div class="form-group"> 
+                    <label for="year">year</label>
+                    <select name="year" id="year" class="formyear">
+                      <option value="1">2024</option>
+                      <option value="2">2023</option>
+                      <option value="3">2022</option>
+                    </select>
+                  </div>
+            </div>
+            
+    <div class="submitFilter">
+        <button type="submit" class="btn btn-primary submit" (click)="submitMonth()">Filter</button>&nbsp;
+        <button type="submit" class="btn btn-primary submit" (click)="reloadPage()">Refresh</button>
+        </div>   
+    </div>
+    
     </div>
 
     <div class="showvalue">
@@ -58,6 +65,12 @@
                 <h6>{{ AlltimeSum?.[0]?.Quantity }}</h6>
             </div>
         </div>
+        <div class="col">
+            <div class="showdetail">
+                <h5>Best Sale</h5>
+                <h6>{{ bestsale?.[0]?.Product }}</h6>
+            </div>
+        </div>
     </div>
     
 
@@ -75,7 +88,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let sum of summaries">
+            <tr *ngFor="let sum of summaries | async">
               <td>{{ sum.No }}</td>
               <td>{{ sum.Month }}</td>
               <td>{{ sum.Product }}</td>
