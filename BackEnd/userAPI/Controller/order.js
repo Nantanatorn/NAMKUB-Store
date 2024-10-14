@@ -31,7 +31,10 @@ module.exports.AddOrder = async (req, res) => {
       const cusId = userResult.recordset[0].Cus_ID;
       console.log('User ID:', userId, 'Customer ID:', cusId);  // ตรวจสอบว่าได้ค่า userId และ cusId ถูกต้องหรือไม่
 
-
+        const insertAddressResult =await transaction.request()
+        .input('Cus_ID',sql.Int,cusId)
+        .input('Cus_Address',sql.VarChar,orderData.Cus_Address)
+        .query(`update  tbl_Customer set Cus_Address = @Cus_Address where Cus_ID =@Cus_ID`)
 
       // Insert order
       const orderInsertResult = await transaction.request()
