@@ -41,6 +41,26 @@ export interface Orders{
   Order_Date : string,
   Order_ID : number,
   Product_Name : string,
+  Cus_Address : string,
   Order_Quantity : number,
-  Total_Price : number
+  Total_Price : number,
+  username : string,
+  Subtotal_Price : string
+}
+
+export interface Summary {
+  No: string;
+  Month: string;
+  Product: string;
+  Quantity: number;
+  Income: number;
+  Capital: number;
+  Profit: number;
+}
+
+export interface Alltime{
+  Quantity: number;
+  Income: number;
+  Capital: number;
+  Profit: number;
 }

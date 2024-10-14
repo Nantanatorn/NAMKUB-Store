@@ -26,7 +26,8 @@
             <thead>
             <tr>   
                 <th>Date</th>
-                <th>OrderID</th>
+                <th>Username</th>
+                <th>Address</th>
                 <th>Product_Name</th>
                 <th>Quantity</th>
                 <th>Total</th>
@@ -36,11 +37,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let order of order | async">
-                    <td>{{ order.Order_Date }}</td>
-                    <td>{{ order.Order_ID}}</td>
+                  <td>{{ order.Order_Date | date: 'MM/dd/yyyy, hh:mm a' }}</td>
+                    <td>{{ order.username}}</td>
+                    <td>{{ order.Cus_Address}}</td>
                     <td>{{ order.Product_Name}}</td>
                     <td>{{ order.Order_Quantity}} </td>
-                    <td>{{ order.Total_Price}}</td>
+                    <td>{{ order.Subtotal_Price}}</td>
 
                     
                 

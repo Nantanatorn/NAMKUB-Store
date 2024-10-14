@@ -1,4 +1,3 @@
-
 const sql = require("mssql");
 const config = require("../config");
 
@@ -90,15 +89,12 @@ module.exports.AddOrder = async (req, res) => {
   }
 };
 
+
 module.exports.GetOrder = async (req, res) => {
   try {
       var pool = await sql.connect(config);
 
-      const result = await pool.request().query(`SELECT dbo.tbl_Order.Order_Date, dbo.Product.Product_Name, dbo.tbl_OrderDetails.Order_Quantity, dbo.tbl_Order.Total_Price
-                  FROM     dbo.tbl_OrderDetails INNER JOIN
-                  dbo.tbl_Order ON dbo.tbl_OrderDetails.Order_ID = dbo.tbl_Order.Order_ID INNER JOIN
-                  dbo.Product ON dbo.tbl_OrderDetails.Product_ID = dbo.Product.Product_ID CROSS JOIN
-                  dbo.Users`);
+      const result = await pool.request().query(`SELECT * from OrderView`);
 
       
 
@@ -108,3 +104,55 @@ module.exports.GetOrder = async (req, res) => {
       res.status(500).send('Internal Server Error');
   }   
 };
+
+  module.exports.GetSummary = async (req, res) => {
+    try {
+        var pool = await sql.connect(config);
+
+        const result = await pool.request().query(`SELECT 
+              ROW_NUMBER() OVER (ORDER BY product_name) AS No,
+              DATENAME(month, Order_Date)AS Month,
+              product_name as Product, 
+              SUM(Order_Quantity) AS Quantity, 
+              SUM(Subtotal_Price) AS Income,
+              SUM(Sup_Unitprice * Order_Quantity) AS Capital,
+              SUM(Subtotal_Price - (Sup_Unitprice * Order_Quantity)) as Profit
+              FROM 
+                  Summary
+              GROUP BY 
+                  product_name,
+                  DATENAME(month, Order_Date)
+              ORDER BY 
+                  product_name;`);
+
+        
+
+        res.status(200).json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }   
+  };
+
+
+  module.exports.GetAllsum = async (req, res) => {
+    try {
+        var pool = await sql.connect(config);
+  
+        const result = await pool.request().query(`select 
+            SUM(Order_Quantity) AS Quantity, 
+              SUM(Subtotal_Price) AS Income,
+              SUM(Sup_Unitprice * Order_Quantity) AS Capital,
+              SUM(Subtotal_Price - (Sup_Unitprice * Order_Quantity)) as Profit
+            FROM 
+              Summary`);
+  
+        
+  
+        res.status(200).json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }   
+  };
+  

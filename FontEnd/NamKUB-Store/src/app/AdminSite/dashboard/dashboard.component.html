@@ -42,66 +42,50 @@
     <div class="showvalue">
         <div class="col">
             <div class="showdetail">
-                <h5>Total income</h5>
-                <p>--???--</p>
+                <h5>Total Income</h5>
+                <h6>{{ AlltimeSum?.[0]?.Income }}.-</h6>
             </div>
         </div>
         <div class="col">
             <div class="showdetail">
-                <h5>Amount</h5>
-                <p>--???--</p>
+                <h5>Total Profit</h5>
+                <h6>{{ AlltimeSum?.[0]?.Profit }}.-</h6>
             </div>
         </div>
         <div class="col">
             <div class="showdetail">
-                <h5>Product quantity</h5>
-                <p>--???--</p>
+                <h5>Product Sale</h5>
+                <h6>{{ AlltimeSum?.[0]?.Quantity }}</h6>
             </div>
         </div>
     </div>
+    
 
     <div class="showtable">
         <table class="table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Product Name</th>
-                    <th>Size</th>
-                    <th>Amount</th>
-                    <th>Unit Price</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>Size</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>50</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>name</td>
-                    <td>Size</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>50</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>name</td>
-                    <td>Size</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>50</td>
-                </tr>
-            </tbody>
-            
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Month</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Income</th>
+              <th>Capital</th>
+              <th>Profit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sum of summaries">
+              <td>{{ sum.No }}</td>
+              <td>{{ sum.Month }}</td>
+              <td>{{ sum.Product }}</td>
+              <td>{{ sum.Quantity }}</td>
+              <td>{{ sum.Income }}</td>
+              <td>{{ sum.Capital }}</td>
+              <td>{{ sum.Profit }}</td>
+            </tr>
+          </tbody>
         </table>
-        
-    </div>
+      </div>
 </div>
 </div>
