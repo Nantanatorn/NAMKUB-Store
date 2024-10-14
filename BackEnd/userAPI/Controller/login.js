@@ -30,7 +30,12 @@ module.exports.loginUser = async(req,res)=>{
                     user: {
                         username:user.username,
                         role:user.role,
-                        picture:user.picture
+                        picture:user.picture,
+                        firstname:user.firstname,
+                        lastname:user.lastname,
+                        phone:user.phone,
+                        email:user.email,
+
                     }
                 }
                 jwt.sign(payload, 'jwtsecret', { expiresIn: '1h' }, (err, token) => {

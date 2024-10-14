@@ -37,7 +37,7 @@ onSubmit(){
       username:this.editprofileform.value.username,
       email:this.editprofileform.value.email
     };
-    this.http.post('http://localhost:3000/users', formData).subscribe({
+    this.http.put('http://localhost:3000/users', formData).subscribe({
     next:(response)=> {
       console.log('Profile saved successfully!',response);
       this.saveProfile();
@@ -55,17 +55,21 @@ onSubmit(){
     console.log(this.editprofileform.value);
   }
 }
-@Input() users: { firstname?: string; lastname?: string; phone?: string; username?: string; email?: string } = {}; 
-@Output() onConfirm = new EventEmitter<any>(); 
+  @Input() users: { firstname?: string; lastname?: string; phone?: string; username?: string; email?: string } = {}; 
+  @Output() onConfirm = new EventEmitter<any>(); 
 
-saveProfile(){
-  if (this.users.firstname && this.users.lastname && this.users.phone && this.users.username && this.users.email) {
-    this.onConfirm.emit(this.users);
-}
-}
-resetForm(){
-  this.editprofileform.reset;
-}
+  saveProfile(){
+    if (this.users.firstname && this.users.lastname && this.users.phone && this.users.username && this.users.email) {
+      this.onConfirm.emit(this.users);
+  }
+  }
+  resetForm(){
+    this.editprofileform.reset;
+  }
+
+  editprofile(){
+    
+  }
 }
 
   

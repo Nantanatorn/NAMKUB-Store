@@ -221,4 +221,26 @@ module.exports.GetOrder = async (req, res) => {
   }
   
 
+  module.exports.FindOrder = async (req, res) => {
+    try {
+      const pool = await sql.connect(config);
+      const search = req.query.q;
+  
+      const result = await pool.request()
+        .input('search', sql.VarChar, search) // กำหนดค่าที่จะใช้ในการค้นหา
+        .query(`
+          SELECT * 
+          FROM OrderView 
+          WHERE username LIKE '%' + @search + '%' 
+          OR Product_Name LIKE '%' + @search + '%'
+          OR Cus_Address LIKE '%' + @search + '%'
+        `);
+  
+      res.status(200).json(result.recordset);
+  
+    } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).send('No Content in Table or Server Error');
+    }
+  };
   

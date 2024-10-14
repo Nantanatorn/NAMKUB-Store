@@ -15,8 +15,8 @@
           </select>
         </div>
         
-        <input type="text"  placeholder="Search by Product Name" class="search-input">
-        <button class="search-btn" >Search</button> 
+        <input type="text" [(ngModel)]="searchQuery1" placeholder="Search by Name" class="search-input" (keyup.enter)="searchMember()">
+        <button class="search-btn" (click)="searchMember()">Search</button>
       </div>
       
       

@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MemberlistComponent {
   user = new BehaviorSubject<Users[]>([]);
+  searchQuery1: any;
 
         constructor( private apiservice: NAMKUBAPIService,
                      private http : HttpClient
@@ -26,6 +27,20 @@ export class MemberlistComponent {
           })
         }
         
+        searchMember(){
+          console.log(`Searching for Member : ${this.searchQuery1}`);
+          this.http.get<Users[]>(`http://localhost:3000/sreachuser?q=${this.searchQuery1}`)
+            .subscribe({
+              next: (response: Users[]) => {
+                console.log('Search result:', response);
+                this.user.next(response);
+              },
+              error: (error) => {
+                console.error('Error fetching products:', error);  
+              }
+            });
+      
+        }
 
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Alltime, BestSale, Orders, Products, Restock, Stock, Summary, Users } from '../model/products';
+import { Alltime, BestSale, Orders, Products, Restock, Stock, Summary, Supplier, Users } from '../model/products';
 
 const api_URL = 'http://localhost:3000'; 
 
@@ -42,6 +42,12 @@ export class NAMKUBAPIService {
   getBestSale():Observable<BestSale[]>{
     return this.httpClient.get<BestSale[]>(`${api_URL}/GetBestSale`);
   }
+  getSuppliers():Observable<Supplier[]>{
+    return this.httpClient.get<Supplier[]>(`${api_URL}/getSupplier`);
+  }
+
+
+
 
 }
 

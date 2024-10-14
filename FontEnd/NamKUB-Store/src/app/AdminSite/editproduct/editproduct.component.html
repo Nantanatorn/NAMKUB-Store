@@ -4,6 +4,7 @@
     <h2 class="hehe ">Product Editor </h2>
     
     <button class="add-product-btn" (click)="openAddProductModal()">Add Product</button>
+    <button class="add-supplier-btn" (click)="openAddSupplierModal()">Add Supplier</button>
   
     <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
@@ -67,12 +68,11 @@
                         <!-- Sup_ID -->
                         <div class="form-group">
                           <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
-                          <select id="Sup_ID" formControlName="Sup_ID" class="form-select"  aria-label="Default select example">
-                            <option selected>Select Supplier</option>
-                            <option value="1">Sermsuk (Crystal)</option>
-                            <option value="2">Singha Corporation</option>
-                            <option value="3">Mineré Thailand</option>
-                            <option value="4">Nestle Thailand</option>
+                          <select id="Sup_ID" formControlName="Sup_ID" class="form-select" aria-label="Default select example">
+                            <option value=""  selected>Select Supplier</option>
+                            <option *ngFor="let supplier of suppliers$ | async" [value]="supplier.Sup_ID">
+                              {{ supplier.Sup_Name }}
+                            </option>
                           </select>
                         </div>
 
@@ -169,12 +169,11 @@
                       <!-- Sup_ID -->
                       <div class="form-group">
                         <!-- <label for="Sup_ID" class="form-label">รหัส Supplier:</label> -->
-                        <select id="Sup_ID" formControlName="Sup_ID" class="form-select"  aria-label="Default select example">
-                          <option selected>Select Supplier</option>
-                          <option value="1">Sermsuk (Crystal)</option>
-                          <option value="2">Singha Corporation</option>
-                          <option value="3">Mineré Thailand</option>
-                          <option value="4">Nestle Thailand</option>
+                        <select id="Sup_ID" formControlName="Sup_ID" class="form-select" aria-label="Default select example">
+                          <option value="" disabled selected>Select Supplier</option>
+                          <option *ngFor="let supplier of suppliers$ | async" [value]="supplier.Sup_ID">
+                            {{ supplier.Sup_Name }}
+                          </option>
                         </select>
                       </div>
                       <div class="form-group">
@@ -196,6 +195,45 @@
           <!-- Form ends here -->
       </div>
   </div>
+
+  <div class="modal" *ngIf="isModalOpen2">
+    <div class="modal-content">
+        <span class="close-btn" (click)="closeModal2()">&times;</span>
+        <h3>Add Supplier</h3>
+
+        <!-- Form starts here -->
+        <form 
+              [formGroup]="AddSupplierform"
+              (ngSubmit)="onSupplier()"
+              class="needs-validation"
+              novalidate
+        > 
+            <div class="modal-body">
+                <div class="form-section" style="padding-right: 5rem;">
+                    <!-- Product Name -->
+                    <div class="form-group" style="width: 100%;">
+                      <!-- <label for="Product_Name" class="form-label">ชื่อสินค้า :</label> -->
+                      <input id="Sup_Name" type="text" formControlName="Sup_Name" class="form-control" placeholder="ชื่อผู้ผลิต"
+                        [ngClass]="{
+                          'is-invalid': AddSupplierform.get('Sup_Name').invalid && AddSupplierform.get('Sup_Name').touched
+                        }">
+                      <div class="invalid-feedback"
+                        *ngIf="AddSupplierform.get('Sup_Name').invalid && AddSupplierform.get('Sup_Name').touched">
+                        Please fill Supplier_Name
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="modal-footer">
+                <button type="submit" class="confirm-btn">Add it!</button>
+            </div>
+        </form> 
+        <!-- Form ends here -->
+    </div>
+</div>
+
   </div>
   
 

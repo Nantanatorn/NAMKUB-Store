@@ -8,5 +8,6 @@ const order =require('../Controller/order')
     router.get('/AlltimeSUM',order.GetAllsum)
     router.get('/GetBestSale',order.GetBestSale)
     router.get('/findMonth',order.FindMonth);
+    router.get('/findOrder',order.FindOrder);
 
 module.exports =router;

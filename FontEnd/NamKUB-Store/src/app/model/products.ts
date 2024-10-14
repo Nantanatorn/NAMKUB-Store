@@ -74,3 +74,7 @@ export interface BestSale {
   Capital: number;
   Profit: number;
 }
+export interface Supplier {
+  Sup_ID: number;
+  Sup_Name: string;
+}

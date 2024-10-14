@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Products } from '../../model/products'; 
+import { Products, Supplier } from '../../model/products'; 
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,9 +17,10 @@ export class EditproductComponent {
   products$ = new BehaviorSubject<Products[]>([]);
   addproductform: FormGroup;
   UpdateProductform: FormGroup;
+  AddSupplierform : FormGroup;
   selectedProductId: number | null = null;
   searchQuery: string = '';
-  
+  suppliers$: Observable<Supplier[]>;
   
   constructor(private fb: FormBuilder, 
               private http: HttpClient, 
@@ -44,6 +45,9 @@ export class EditproductComponent {
       Product_status : [null]
       
     });
+    this.AddSupplierform = this.fb.group({
+      Sup_Name: ['', Validators.required]
+    });
   }
   showPopup() {
     Swal.fire({
@@ -59,6 +63,13 @@ export class EditproductComponent {
       icon: "success"
     });
   }
+  showPopup2() {
+    Swal.fire({
+      title: "Nice!",
+      text: "Supplier Add Successfully!",
+      icon: "success"
+    });
+  }
 
   closeModal() {
     this.addproductform.reset();
@@ -69,6 +80,12 @@ export class EditproductComponent {
     this.addproductform.reset();
     this.onClose.emit();
     this.isModalOpen1 = false;
+  }
+
+  closeModal2() {
+    this.AddSupplierform.reset();
+    this.onClose.emit();
+    this.isModalOpen2 = false;
   }
   
   onSubmit() {
@@ -106,6 +123,7 @@ export class EditproductComponent {
 
   @Input() isModalOpen: boolean = false;
   @Input() isModalOpen1: boolean = false;
+  @Input() isModalOpen2: boolean = false;
   @Input() product: { Product_Name?: string; Product_Size?: string; Product_Price?: number; Sup_ID?: number; Product_Picture?: File | null } = {}; 
 
   @Output() onClose = new EventEmitter<void>(); 
@@ -113,6 +131,7 @@ export class EditproductComponent {
 
   ngOnInit(): void {
     this.reloadProducts();
+    this.loadSuppliers();
   }
 
   openAddProductModal() {
@@ -288,6 +307,41 @@ export class EditproductComponent {
     });
   }
   
+
+  loadSuppliers() {
+    this.suppliers$ = this.productService.getSuppliers(); // ดึงข้อมูล Supplier จาก API และเก็บไว้ใน Observable
+  }
+
+  openAddSupplierModal(){
+    this.isModalOpen2 = true;
+  }
+
+  onSupplier(){
+    if (this.AddSupplierform.valid) {
+      const formData = {
+        
+        Sup_Name : this.AddSupplierform.value.Sup_Name
+      };
+    
+      this.http.post('http://localhost:3000/addsupplier', formData).subscribe({
+        next: (response) => {
+          console.log('Supplier added successfully:', response);
+          this.showPopup2(); // เรียกใช้ฟังก์ชันแสดงผลสำเร็จ
+          this.closeModal2();
+          this.loadSuppliers();
+        },
+        error: (error) => {
+          console.error('Error adding supplier:', error);
+          console.log(this.AddSupplierform.errors);
+          console.log(this.AddSupplierform.value);
+        }
+      });
+    } else {
+      console.log('Form is not valid');
+      console.log(this.AddSupplierform.errors);
+      console.log(this.AddSupplierform.value);
+    }
+  }
 
 }
 

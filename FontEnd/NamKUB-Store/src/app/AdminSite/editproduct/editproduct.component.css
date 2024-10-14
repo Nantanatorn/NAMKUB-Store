@@ -20,6 +20,17 @@ h2{
     cursor: pointer;
 }
 
+.add-supplier-btn{
+  background-color: orange;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 5rem;
+}
+
 .product-card {
     /* background-color: #ffffff; */
     display: flex;
