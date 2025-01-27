@@ -12,7 +12,9 @@ import { CartServiceService } from '../../../Service/cart-service.service';
 export class ProductBoxComponent {
   products: Observable<Products[]> | undefined;
 
-  constructor(private productService: NAMKUBAPIService,private router:Router,private cartService:CartServiceService) { }
+  constructor(private productService: NAMKUBAPIService,
+              private router:Router,
+              private cartService:CartServiceService) { }
 
   ngOnInit(): void {
     this.products = this.productService.getActiveProducts();

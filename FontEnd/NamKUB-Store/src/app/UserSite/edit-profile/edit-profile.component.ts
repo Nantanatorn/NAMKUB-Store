@@ -1,11 +1,13 @@
 import { Router } from '@angular/router';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, PLATFORM_ID } from '@angular/core';
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import { BehaviorSubject } from 'rxjs';
 import { Users } from '../../model/products';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../auth.service';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -16,10 +18,14 @@ import Swal from 'sweetalert2';
 export class EditProfileComponent {
   user = new BehaviorSubject<Users[]>([]);
   editprofileform:FormGroup;
+  username: string | null = null;
 
   constructor( private apiservice: NAMKUBAPIService,
                 private http : HttpClient,
-                private router:Router,private fb: FormBuilder){
+                private router:Router
+                ,private fb: FormBuilder,
+                private authService: AuthService,
+                @Inject(PLATFORM_ID) private platformId: any,){
     this.editprofileform = this.fb.group({
       firstname: ['', [Validators.required, Validators.maxLength(50)]],
       lastname: ['', [Validators.required, Validators.maxLength(50)]],
@@ -29,6 +35,16 @@ export class EditProfileComponent {
       picture: [null], 
     });
 }
+
+ngOnInit(): void {
+  // ตรวจสอบว่ากำลังทำงานในเบราว์เซอร์
+  if (isPlatformBrowser(this.platformId)) {
+    this.username = this.authService.getUsername();
+    
+
+  }
+}
+
 onSubmit(){
   if(this.editprofileform.value){
     const formData = {
@@ -76,7 +92,7 @@ onSubmit(){
       firstname: this.users.firstname,
       lastname: this.users.lastname,
       phone: this.users.phone,
-      username: this.users.username,
+      username: this.username,
       email: this.users.email,
       
     });

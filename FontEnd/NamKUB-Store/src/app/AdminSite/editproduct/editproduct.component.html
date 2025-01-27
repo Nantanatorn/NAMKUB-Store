@@ -242,6 +242,7 @@
     
     <button (click)="searchProducts()">Search</button>
   </div>
+  
   <div *ngIf="products$ | async as products">
     <div *ngIf="products.length > 0; else noData">
       <div class="product-card" *ngFor="let product of products">
