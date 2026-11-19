@@ -1,8 +1,9 @@
-
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service'; // นำเข้า AuthService
+import { NAMKUBAPIService } from '../../Service/namkub-api.service';
+import { AuthService } from '../../auth.service';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-user-login',
@@ -13,24 +14,38 @@ export class UserLoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
-  userRole: string | null = null; // ประกาศตัวแปร userRole
+  userRole: string | null = null;
+  isLoading: boolean = true;
 
   type: string = "password";
   isText: boolean = false;
   eyeIcon: string = "bi bi-eye-slash-fill";
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private apiService: NAMKUBAPIService,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
 
   ngOnInit(): void {
-    // ตรวจสอบว่า login ไว้หรือยัง
+    if (!isPlatformBrowser(this.platformId)) {
+      this.isLoading = false;
+      return;
+    }
+
     const token = localStorage.getItem('token');
     if (token) {
       this.userRole = this.authService.getRole();
       if (this.userRole === 'admin') {
-        this.router.navigate(['/AdminHome']);
+        this.router.navigate(['/dashboard']);
       } else if (this.userRole === 'customer') {
         this.router.navigate(['/home']);
+      } else {
+        this.isLoading = false;
       }
+    } else {
+      this.isLoading = false;
     }
   }
 
@@ -42,19 +57,16 @@ export class UserLoginComponent implements OnInit {
 
     const loginData = { username: this.username, password: this.password };
 
-    this.http.post<{ token: string }>('http://localhost:3000/login', loginData)
+    this.apiService.login(loginData.username, loginData.password)
       .subscribe({
         next: (response) => {
           console.log('API Response:', response);
           if (response.token) {
-            // ใช้ AuthService ในการจัดการ token
             this.authService.login(response.token);
 
-            // ดึง role จาก token ที่ถอดรหัสแล้ว
             this.userRole = this.authService.getRole();
             console.log('User Role:', this.userRole);
 
-            // Navigate based on the user's role
             if (this.userRole === 'admin') {
               this.router.navigate(['/dashboard']);
             } else if (this.userRole === 'customer') {

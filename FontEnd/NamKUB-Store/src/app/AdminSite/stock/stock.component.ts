@@ -5,6 +5,7 @@ import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class StockComponent {
 
   constructor( private apiservice: NAMKUBAPIService,
                private fb : FormBuilder,
-               private http : HttpClient
+               private http : HttpClient,
+               private route: ActivatedRoute
   ){
     this.RestockForm = this.fb.group({
       Restock_Quantity: [null, [Validators.required]],
@@ -41,6 +43,10 @@ export class StockComponent {
   ngOnInit(): void{
     this.reloadStocks();
     this.reloadRestock();
+    this.route.queryParamMap.subscribe(params => {
+      this.searchQuery1 = params.get('q') || '';
+      this.searchQuery1 ? this.searchstock() : this.reloadStocks();
+    });
   }
 
   @Input() isModalOpen: boolean = false;
@@ -82,7 +88,7 @@ export class StockComponent {
         Restock_Unitprice: this.RestockForm.value.Restock_Unitprice,
         Stock_ID: this.RestockForm.value.Stock_ID
       };
-      this.http.post('http://localhost:3000/restock', formData).subscribe({
+      this.apiservice.addRestock(formData).subscribe({
         next: (response) => {
           console.log('Restock successfully:', response);
           this.showPopup(); 
@@ -112,7 +118,7 @@ export class StockComponent {
 
   searchRestock(){
     console.log(`Searching for RestockHistory : ${this.searchQuery}`);
-    this.http.get<Restock[]>(`http://localhost:3000/sreachrestock?q=${this.searchQuery}&date=${this.searchdate}`)
+    this.apiservice.searchRestocks(this.searchQuery, this.searchdate)
       .subscribe({
         next: (response: Restock[]) => {
           console.log('Search result:', response);
@@ -127,7 +133,7 @@ export class StockComponent {
 
   searchstock(){
     console.log(`Searching for StockHistory : ${this.searchQuery1}`);
-    this.http.get<Stock[]>(`http://localhost:3000/sreachstock?q=${this.searchQuery1}`)
+    this.apiservice.searchStocks(this.searchQuery1)
       .subscribe({
         next: (response: Stock[]) => {
           console.log('Search result:', response);

@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Users } from '../../model/products';
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
+import { CartServiceService } from '../../Service/cart-service.service';
 
 
 
@@ -20,20 +21,29 @@ export class HeaderUserComponent implements OnInit {
   isProfilePopupVisible = false;
   user = new BehaviorSubject<Users[]>([]);
   picture: string | null;
+  cartCount$: Observable<number>;
+  defaultProfileImage = 'anya.jpg';
+  searchTerm = '';
 
   constructor(
     private router: Router,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: any, 
     private authService: AuthService,
-    private userapi : NAMKUBAPIService
-  ) { }
+    private userapi : NAMKUBAPIService,
+    private cartService: CartServiceService
+  ) {
+    this.cartCount$ = this.cartService.cartCount$;
+  }
 
   ngOnInit(): void {
     // ตรวจสอบว่ากำลังทำงานในเบราว์เซอร์
     if (isPlatformBrowser(this.platformId)) {
       this.username = this.authService.getUsername();
-      this.picture = this.authService.getPicture();
+      this.picture = this.authService.getPicture() || this.defaultProfileImage;
+      this.authService.picture.subscribe((picture) => {
+        this.picture = picture || this.defaultProfileImage;
+      });
 
       // ตรวจสอบว่ามีการเรียกใช้งาน localStorage ได้หรือไม่
       const storedTheme = localStorage.getItem('theme');
@@ -65,7 +75,7 @@ export class HeaderUserComponent implements OnInit {
         this.renderer.removeClass(document.body, 'dark-mode');
         localStorage.setItem('theme', 'light');
       }
-      this.refresh();
+      window.dispatchEvent(new CustomEvent('themeChange', { detail: { darkMode: this.isDarkMode } }));
       // อัปเดตสีพื้นหลังของ navbar และ profile popup
       this.updateNavbarColor();
       this.updateProfilePopupBackground(); // เปลี่ยนสีพื้นหลัง popup ทันที
@@ -77,9 +87,9 @@ export class HeaderUserComponent implements OnInit {
     const navbar = document.querySelector('.navbar') as HTMLElement;
     if (navbar) {
       if (this.isDarkMode) {
-        navbar.style.background = 'linear-gradient(120deg, #001f3f, #5b2c6f, #000)';
+        navbar.style.background = 'linear-gradient(120deg, #07172d, #24153f, #14091f)';
       } else {
-        navbar.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
+        navbar.style.background = 'linear-gradient(120deg, #72bee9, #0d83d9, #5966f4)';
       }
     }
   }
@@ -112,10 +122,10 @@ export class HeaderUserComponent implements OnInit {
     if (profilePopup) {
       if (this.isDarkMode) {
         // เปลี่ยนเป็นสีโหมดมืด
-        profilePopup.style.background = 'linear-gradient(120deg, #001f3f, #5b2c6f, #000)';
+        profilePopup.style.background = 'linear-gradient(120deg, #07172d, #24153f, #14091f)';
       } else {
         // เปลี่ยนเป็นสีโหมดสว่าง
-        profilePopup.style.background = 'linear-gradient(120deg, #AFD5F0, #0074D9, #6b6bfd)';
+        profilePopup.style.background = 'linear-gradient(120deg, #72bee9, #0d83d9, #5966f4)';
       }
     } else {
       console.error("Element 'profilePopup' not found in DOM when updating background");
@@ -133,7 +143,26 @@ export class HeaderUserComponent implements OnInit {
   editProfile(): void {
     this.router.navigate(['/edit-profile']);
   }
-  refresh(): void {
-    window.location.reload();
-}
+
+  searchProducts(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm = input.value;
+    this.router.navigate([this.getSearchTargetRoute()], {
+      queryParams: this.searchTerm.trim() ? { q: this.searchTerm.trim() } : {}
+    });
+  }
+
+  submitSearch(): void {
+    this.router.navigate([this.getSearchTargetRoute()], {
+      queryParams: this.searchTerm.trim() ? { q: this.searchTerm.trim() } : {}
+    });
+  }
+
+  private getSearchTargetRoute(): string {
+    return this.router.url.startsWith('/home') ? '/home' : '/products';
+  }
+
+  useDefaultProfileImage(): void {
+    this.picture = this.defaultProfileImage;
+  }
 }

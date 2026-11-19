@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Users } from '../../model/products';
 import { NAMKUBAPIService } from '../../Service/namkub-api.service';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-memberlist',
@@ -14,11 +15,15 @@ export class MemberlistComponent {
   searchQuery1: any;
 
         constructor( private apiservice: NAMKUBAPIService,
-                     private http : HttpClient
+                     private http : HttpClient,
+                     private route: ActivatedRoute
         ){}
         
         ngOnInit(): void{
-          this.reloadUsers();
+          this.route.queryParamMap.subscribe(params => {
+            this.searchQuery1 = params.get('q') || '';
+            this.searchQuery1 ? this.searchMember() : this.reloadUsers();
+          });
         }
 
         reloadUsers(){
@@ -29,7 +34,7 @@ export class MemberlistComponent {
         
         searchMember(){
           console.log(`Searching for Member : ${this.searchQuery1}`);
-          this.http.get<Users[]>(`http://localhost:3000/sreachuser?q=${this.searchQuery1}`)
+          this.apiservice.searchUsers(this.searchQuery1)
             .subscribe({
               next: (response: Users[]) => {
                 console.log('Search result:', response);
